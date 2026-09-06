@@ -13,7 +13,10 @@ public class Err {
     public static final int SUCCESS        =  0;
     public static final int FAIL           = -1;
     public static final int BAD_REQUEST    = -1003;   // caller sent something invalid
-    public static final int NOT_EXIST      = -1004;   // query matched zero rows
+    public static final int NOT_FOUND      = -1004;   // query matched zero rows
+    public static final int UNAUTHORIZED   = -1005;
+    public static final int FORBIDDEN      = -1006;
+    public static final int CONFLICT       = -1007;
     public static final int NO_CONNECTION  = -1001;   // could not borrow / could not reach
     public static final int BAD_CONNECTION = -1002;   // reached it, failed after all retries
 
@@ -21,7 +24,7 @@ public class Err {
 
     public static boolean isSuccess(long e) { return e >= 0; }
     public static boolean isFail(long e)    { return e <  0; }
-    public static boolean isNotExist(long e) { return e == NOT_EXIST; }
+    public static boolean isNotFound(long e) { return e == NOT_FOUND; }
 
     /**
      * A transport/connection failure, as opposed to "the row is not there".

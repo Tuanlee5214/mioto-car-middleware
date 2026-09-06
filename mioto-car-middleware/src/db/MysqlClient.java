@@ -64,7 +64,7 @@ public class MysqlClient {
                     ResultSet rs = prst.executeQuery();
                     try {
                         if (!rs.next()) {
-                            return Err.NOT_EXIST;      // zero rows is a CODE, not an empty list
+                            return Err.NOT_FOUND;      // zero rows is a CODE, not an empty list
                         }
                         if (listener != null) {
                             do {
