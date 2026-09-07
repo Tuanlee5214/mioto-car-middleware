@@ -32,21 +32,11 @@ public class CarServiceHandler implements MiotoCarService.Iface {
 
     @Override
     public TLoginResult signup(OpHandle handle, TSignUpRequest request, TLoginInfo loginInfo) throws TException {
-        TLoginResult result = new TLoginResult();
-        ValueResult<TLoginResult> ret = AuthModel.Instance.signup(handle, request, loginInfo);
         try {
-            if (Err.isFail(ret.error)) {
-                result.setError((int) ret.error);
-                result.setMessage(ret.message);
-                return result;
-            }
-            return ret.value;
-
+           return AuthModel.Instance.signup(handle, request, loginInfo);
         } catch (Exception e) {
-            _Logger.error("Sign up phone = " + request.phone, e);
-            result.setError((int) ret.error);
-            result.setMessage("Lỗi hệ thống");
-            return result;
+            _Logger.error("Sign up phone = " + request.phone + " , src= " + handle.source, e);
+            return new TLoginResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
 
