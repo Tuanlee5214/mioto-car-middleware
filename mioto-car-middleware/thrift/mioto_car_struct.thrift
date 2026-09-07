@@ -20,6 +20,20 @@ struct TUser {
     22:optional i64    timeUpdated,
 }
 
+struct TSignUpRequest {
+    1:required string phone,
+    2:required string pwd,
+    3:required string displayName,
+    4:optional string email,
+}
+
+struct TUserPwd {
+    1:optional TUserID userId,
+    2:optional string  pwdHash,
+    3:optional string  salt,
+    20:optional i64     timeUpdated,
+}   
+
 struct TLoginInfo {
     1:optional string userAgent,
     2:optional string userIP,
@@ -29,6 +43,8 @@ struct TLoginInfo {
 struct TSession {
     1:optional TSessionID sessionId,
     2:optional TUserID    userId,
+    3:optional string     userAgent,
+    4:optional string     userIP,
     20:optional i64       timeCreated,
     21:optional i64       timeExpired,
 }
@@ -45,10 +61,9 @@ struct TUserResult {
 }
 
 struct TLoginResult {
-    1:required i32        error,
-    2:optional TUser      user,
-    3:optional TSessionID sessionId,
-    4:optional i64        timeExpired,
+    1:optional TUser      user,
+    2:optional TSessionID sessionId,
+    3:optional i64        timeExpired,
 }
 
 struct TSessionResult {
