@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS Users (
   UNIQUE KEY uk_users_phone (phone)      
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS UserPwd (
+CREATE TABLE IF NOT EXISTS UserPwds (
   userId       INT          NOT NULL,
   pwdHash      VARCHAR(128) NOT NULL,
   salt         VARCHAR(32)  NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS UserPwd (
   PRIMARY KEY (userId)
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS Session (
+CREATE TABLE IF NOT EXISTS Sessions (
   sessionId    BIGINT       NOT NULL,               
   userId       INT          NOT NULL,
   userAgent    VARCHAR(255) NOT NULL DEFAULT '',
