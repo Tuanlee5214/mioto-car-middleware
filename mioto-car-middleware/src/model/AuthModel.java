@@ -81,9 +81,11 @@ public class AuthModel {
         loginResult.setUser(user);
         loginResult.setSessionId(sessionId);
         loginResult.setTimeExpired(timeExpired);
+        loginResult.setError(Err.SUCCESS);
+        loginResult.setMessage("Đăng kí thành công");
         
         //Return value
-        ValueResult<TLoginResult> finalResult = new ValueResult<TLoginResult>(Err.SUCCESS, loginResult);
+        ValueResult<TLoginResult> finalResult = new ValueResult<TLoginResult>(Err.SUCCESS, loginResult, "Đăng kí thành công");
         return finalResult;
     }
 }

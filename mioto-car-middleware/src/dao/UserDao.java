@@ -69,12 +69,14 @@ public class UserDao {
         return ret;
     }
     
-    public int updateUser(TUser user)
+    public ValueResult<Integer> updateUser(TUser user)
     {
+        ValueResult<Integer> ret = new ValueResult<Integer>(Err.FAIL);
         String sql = "UPDATE " + TABLE
                 + " SET email=?,displayName=?,status=?,timeUpdated=?"
                 + " WHERE " + KEY + "=?";
-        return _cli.executeUpdate(sql, user.getEmail(), user.getDisplayName(), user.getStatus(), System.currentTimeMillis());
+        ret.error = _cli.executeUpdate(sql, user.getEmail(), user.getDisplayName(), user.getStatus(), System.currentTimeMillis());
+        return ret;
     }
 
     private TUser map(ResultSet rs) throws SQLException

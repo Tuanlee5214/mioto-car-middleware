@@ -15,9 +15,9 @@ import thrift.TUserPwd;
 public class UserPwdModel {
    
     private static final Logger _Logger = Logger.getLogger(UserPwdModel.class);
-    
     public static final UserPwdModel Instance = new UserPwdModel();
     private final UserPwdDao _dao = new UserPwdDao("mioto");
+    
     private UserPwdModel() {}
     
     public UserPwdDao getDao() { return _dao; }

@@ -4,12 +4,22 @@
  */
 package thrift.handler;
 
+import error.Err;
+import error.ValueResult;
+import model.AuthModel;
+import model.SessionModel;
+import model.UserModel;
+import org.apache.log4j.Logger;
 import org.apache.thrift.TException;
 import thrift.MiotoCarService;
 import thrift.OpHandle;
 import thrift.TLoginInfo;
+import thrift.TLoginRequest;
 import thrift.TLoginResult;
+import thrift.TSession;
 import thrift.TSessionResult;
+import thrift.TSignUpRequest;
+import thrift.TUpdateUserResult;
 import thrift.TUser;
 import thrift.TUserResult;
 
@@ -18,14 +28,30 @@ import thrift.TUserResult;
  * @author tuanlee
  */
 public class CarServiceHandler implements MiotoCarService.Iface {
+    private static final Logger _Logger = Logger.getLogger(CarServiceHandler.class);
 
     @Override
-    public TLoginResult signup(OpHandle handle, String phone, String pwd, String displayName, TLoginInfo loginInfo) throws TException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public TLoginResult signup(OpHandle handle, TSignUpRequest request, TLoginInfo loginInfo) throws TException {
+        TLoginResult result = new TLoginResult();
+        ValueResult<TLoginResult> ret = AuthModel.Instance.signup(handle, request, loginInfo);
+        try {
+            if (Err.isFail(ret.error)) {
+                result.setError((int) ret.error);
+                result.setMessage(ret.message);
+                return result;
+            }
+            return ret.value;
+
+        } catch (Exception e) {
+            _Logger.error("Sign up phone = " + request.phone, e);
+            result.setError((int) ret.error);
+            result.setMessage("Lỗi hệ thống");
+            return result;
+        }
     }
 
     @Override
-    public TLoginResult login(OpHandle handle, String phone, String pwd, TLoginInfo loginInfo) throws TException {
+    public TLoginResult login(OpHandle handle, TLoginRequest request, TLoginInfo loginInfo) throws TException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -36,17 +62,33 @@ public class CarServiceHandler implements MiotoCarService.Iface {
 
     @Override
     public TSessionResult getSession(OpHandle handle, long sessionId) throws TException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            return SessionModel.Instance.getSession(sessionId);
+        } catch (Exception e) {
+            _Logger.error("getSession sessionId=" + sessionId + " src= " + handle.source, e);
+            return new TSessionResult(Err.FAIL, "Lỗi hệ thống");
+        }
     }
 
     @Override
     public TUserResult getUser(OpHandle handle, int userId) throws TException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            return UserModel.Instance.getUser(userId);
+        } catch (Exception e) {
+            _Logger.error("getUser userId=" + userId + " src= " + handle.source, e);
+            return new TUserResult(Err.FAIL, "Lỗi hệ thống");
+        }
     }
 
     @Override
-    public int updateUser(OpHandle handle, TUser user) throws TException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public TUpdateUserResult updateUser(OpHandle handle, TUser user) throws TException {
+        try{
+            return UserModel.Instance.updateUser(user);
+        }
+        catch(Exception e)
+        {
+            _Logger.error("updateUser userId= " + userId + " src= " + handle.source, e);
+            return new TUpdateUserResult(Err.FAIL, "Lỗi hệ thống");
+        }
     }
-    
 }

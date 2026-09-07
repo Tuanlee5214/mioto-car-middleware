@@ -12,18 +12,21 @@ public class TUserResult implements org.apache.thrift.TBase<TUserResult, TUserRe
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("TUserResult");
 
   private static final org.apache.thrift.protocol.TField ERROR_FIELD_DESC = new org.apache.thrift.protocol.TField("error", org.apache.thrift.protocol.TType.I32, (short)1);
-  private static final org.apache.thrift.protocol.TField VALUE_FIELD_DESC = new org.apache.thrift.protocol.TField("value", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+  private static final org.apache.thrift.protocol.TField MESSAGE_FIELD_DESC = new org.apache.thrift.protocol.TField("message", org.apache.thrift.protocol.TType.STRING, (short)2);
+  private static final org.apache.thrift.protocol.TField VALUE_FIELD_DESC = new org.apache.thrift.protocol.TField("value", org.apache.thrift.protocol.TType.STRUCT, (short)3);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TUserResultStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TUserResultTupleSchemeFactory();
 
   public int error; // required
+  public @org.apache.thrift.annotation.Nullable java.lang.String message; // required
   public @org.apache.thrift.annotation.Nullable TUser value; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     ERROR((short)1, "error"),
-    VALUE((short)2, "value");
+    MESSAGE((short)2, "message"),
+    VALUE((short)3, "value");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -41,7 +44,9 @@ public class TUserResult implements org.apache.thrift.TBase<TUserResult, TUserRe
       switch(fieldId) {
         case 1: // ERROR
           return ERROR;
-        case 2: // VALUE
+        case 2: // MESSAGE
+          return MESSAGE;
+        case 3: // VALUE
           return VALUE;
         default:
           return null;
@@ -92,6 +97,8 @@ public class TUserResult implements org.apache.thrift.TBase<TUserResult, TUserRe
     java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
     tmpMap.put(_Fields.ERROR, new org.apache.thrift.meta_data.FieldMetaData("error", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+    tmpMap.put(_Fields.MESSAGE, new org.apache.thrift.meta_data.FieldMetaData("message", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.VALUE, new org.apache.thrift.meta_data.FieldMetaData("value", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TUser.class)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
@@ -102,11 +109,13 @@ public class TUserResult implements org.apache.thrift.TBase<TUserResult, TUserRe
   }
 
   public TUserResult(
-    int error)
+    int error,
+    java.lang.String message)
   {
     this();
     this.error = error;
     setErrorIsSet(true);
+    this.message = message;
   }
 
   /**
@@ -115,6 +124,9 @@ public class TUserResult implements org.apache.thrift.TBase<TUserResult, TUserRe
   public TUserResult(TUserResult other) {
     __isset_bitfield = other.__isset_bitfield;
     this.error = other.error;
+    if (other.isSetMessage()) {
+      this.message = other.message;
+    }
     if (other.isSetValue()) {
       this.value = new TUser(other.value);
     }
@@ -128,6 +140,7 @@ public class TUserResult implements org.apache.thrift.TBase<TUserResult, TUserRe
   public void clear() {
     setErrorIsSet(false);
     this.error = 0;
+    this.message = null;
     this.value = null;
   }
 
@@ -152,6 +165,31 @@ public class TUserResult implements org.apache.thrift.TBase<TUserResult, TUserRe
 
   public void setErrorIsSet(boolean value) {
     __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __ERROR_ISSET_ID, value);
+  }
+
+  @org.apache.thrift.annotation.Nullable
+  public java.lang.String getMessage() {
+    return this.message;
+  }
+
+  public TUserResult setMessage(@org.apache.thrift.annotation.Nullable java.lang.String message) {
+    this.message = message;
+    return this;
+  }
+
+  public void unsetMessage() {
+    this.message = null;
+  }
+
+  /** Returns true if field message is set (has been assigned a value) and false otherwise */
+  public boolean isSetMessage() {
+    return this.message != null;
+  }
+
+  public void setMessageIsSet(boolean value) {
+    if (!value) {
+      this.message = null;
+    }
   }
 
   @org.apache.thrift.annotation.Nullable
@@ -189,6 +227,14 @@ public class TUserResult implements org.apache.thrift.TBase<TUserResult, TUserRe
       }
       break;
 
+    case MESSAGE:
+      if (value == null) {
+        unsetMessage();
+      } else {
+        setMessage((java.lang.String)value);
+      }
+      break;
+
     case VALUE:
       if (value == null) {
         unsetValue();
@@ -206,6 +252,9 @@ public class TUserResult implements org.apache.thrift.TBase<TUserResult, TUserRe
     case ERROR:
       return getError();
 
+    case MESSAGE:
+      return getMessage();
+
     case VALUE:
       return getValue();
 
@@ -222,6 +271,8 @@ public class TUserResult implements org.apache.thrift.TBase<TUserResult, TUserRe
     switch (field) {
     case ERROR:
       return isSetError();
+    case MESSAGE:
+      return isSetMessage();
     case VALUE:
       return isSetValue();
     }
@@ -252,6 +303,15 @@ public class TUserResult implements org.apache.thrift.TBase<TUserResult, TUserRe
         return false;
     }
 
+    boolean this_present_message = true && this.isSetMessage();
+    boolean that_present_message = true && that.isSetMessage();
+    if (this_present_message || that_present_message) {
+      if (!(this_present_message && that_present_message))
+        return false;
+      if (!this.message.equals(that.message))
+        return false;
+    }
+
     boolean this_present_value = true && this.isSetValue();
     boolean that_present_value = true && that.isSetValue();
     if (this_present_value || that_present_value) {
@@ -269,6 +329,10 @@ public class TUserResult implements org.apache.thrift.TBase<TUserResult, TUserRe
     int hashCode = 1;
 
     hashCode = hashCode * 8191 + error;
+
+    hashCode = hashCode * 8191 + ((isSetMessage()) ? 131071 : 524287);
+    if (isSetMessage())
+      hashCode = hashCode * 8191 + message.hashCode();
 
     hashCode = hashCode * 8191 + ((isSetValue()) ? 131071 : 524287);
     if (isSetValue())
@@ -291,6 +355,16 @@ public class TUserResult implements org.apache.thrift.TBase<TUserResult, TUserRe
     }
     if (isSetError()) {
       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.error, other.error);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = java.lang.Boolean.valueOf(isSetMessage()).compareTo(other.isSetMessage());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetMessage()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.message, other.message);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -329,6 +403,14 @@ public class TUserResult implements org.apache.thrift.TBase<TUserResult, TUserRe
     sb.append("error:");
     sb.append(this.error);
     first = false;
+    if (!first) sb.append(", ");
+    sb.append("message:");
+    if (this.message == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.message);
+    }
+    first = false;
     if (isSetValue()) {
       if (!first) sb.append(", ");
       sb.append("value:");
@@ -346,6 +428,9 @@ public class TUserResult implements org.apache.thrift.TBase<TUserResult, TUserRe
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
     // alas, we cannot check 'error' because it's a primitive and you chose the non-beans generator.
+    if (message == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'message' was not present! Struct: " + toString());
+    }
     // check for sub-struct validity
     if (value != null) {
       value.validate();
@@ -396,7 +481,15 @@ public class TUserResult implements org.apache.thrift.TBase<TUserResult, TUserRe
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 2: // VALUE
+          case 2: // MESSAGE
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.message = iprot.readString();
+              struct.setMessageIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 3: // VALUE
             if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
               struct.value = new TUser();
               struct.value.read(iprot);
@@ -426,6 +519,11 @@ public class TUserResult implements org.apache.thrift.TBase<TUserResult, TUserRe
       oprot.writeFieldBegin(ERROR_FIELD_DESC);
       oprot.writeI32(struct.error);
       oprot.writeFieldEnd();
+      if (struct.message != null) {
+        oprot.writeFieldBegin(MESSAGE_FIELD_DESC);
+        oprot.writeString(struct.message);
+        oprot.writeFieldEnd();
+      }
       if (struct.value != null) {
         if (struct.isSetValue()) {
           oprot.writeFieldBegin(VALUE_FIELD_DESC);
@@ -451,6 +549,7 @@ public class TUserResult implements org.apache.thrift.TBase<TUserResult, TUserRe
     public void write(org.apache.thrift.protocol.TProtocol prot, TUserResult struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
       oprot.writeI32(struct.error);
+      oprot.writeString(struct.message);
       java.util.BitSet optionals = new java.util.BitSet();
       if (struct.isSetValue()) {
         optionals.set(0);
@@ -466,6 +565,8 @@ public class TUserResult implements org.apache.thrift.TBase<TUserResult, TUserRe
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
       struct.error = iprot.readI32();
       struct.setErrorIsSet(true);
+      struct.message = iprot.readString();
+      struct.setMessageIsSet(true);
       java.util.BitSet incoming = iprot.readBitSet(1);
       if (incoming.get(0)) {
         struct.value = new TUser();

@@ -9,7 +9,9 @@ import dao.UserDao;
 import error.Err;
 import error.ValueResult;
 import org.apache.log4j.Logger;
+import thrift.TUpdateUserResult;
 import thrift.TUser;
+import thrift.TUserResult;
 
 /**
  *
@@ -20,9 +22,9 @@ public class UserModel {
     private static final Logger _Logger = Logger.getLogger(UserModel.class);
     
     public static final UserModel Instance = new UserModel();
-    
     private final UserDao _dao = new UserDao("mioto");
     private final SimpleCache<Integer, TUser> _cache = new SimpleCache<Integer, TUser>("user");
+    
     private UserModel(){}
     
     public UserDao getDao() { return _dao;}
@@ -41,27 +43,58 @@ public class UserModel {
         return id;
     }
     
-    public ValueResult<TUser> getUser(long userId)
+    public TUserResult getUser(long userId)
     {
+        long now = System.currentTimeMillis();
+        TUserResult result = new TUserResult(Err.FAIL, "");
         TUser cached = _cache.get((int)userId);
         if(cached != null) 
         {
-            return new ValueResult<TUser>(Err.SUCCESS, new TUser(cached));    
+            if(_cache.getExpired() < now)
+            {
+                _cache.remove((int)userId);
+                return new TUserResult(Err.NOT_FOUND, "Phiên đăng nhập hết hạn");
+            }
+            result.setError(Err.SUCCESS);
+            result.setMessage("Lấy dữ liệu người dùng thành công");
+            result.setValue(new TUser(cached));
+            return result;
         }
         
         ValueResult<TUser> ret = _dao.getUser(userId);
+        if(Err.isNetworkError(ret.error)) 
+        {
+            return new TUserResult((int) ret.error, "Lỗi kết nối mạng");
+        }
+        
+        if(Err.isNotFound(ret.error)) 
+        {
+            return new TUserResult((int) ret.error, "Không tìm thấy người dùng");
+        }
+
         if(ret.isSuccess() && ret.value != null)
         {
             _cache.put((int) userId, new TUser(ret.value));
+            result.setError(Err.SUCCESS);
+            result.setMessage("Lấy dữ liệu người dùng thành công");
+            result.setValue(ret.value);
         }
-        
-        return ret;
+        return result;
     }
     
-    public int updateUser(TUser user)
+    public TUpdateUserResult updateUser(TUser user)
     {
-        int ret = _dao.updateUser(user);
+        ValueResult<Integer> ret = _dao.updateUser(user);
+        TUpdateUserResult result = new TUpdateUserResult(Err.FAIL, "");
+        if(Err.isNetworkError(ret.error)) 
+        {
+            return new TUpdateUserResult((int) ret.error, "Lỗi kết nối mạng");
+        }
+        
+        result.setError((int) ret.error);
+        result.setMessage("Cập nhật thành công");
+        result.setValue(ret.value);
         _cache.remove(user.getUserId());
-        return ret;
+        return result;
     }
 }

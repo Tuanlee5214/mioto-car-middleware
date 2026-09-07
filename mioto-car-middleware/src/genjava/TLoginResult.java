@@ -11,22 +11,28 @@ package thrift;
 public class TLoginResult implements org.apache.thrift.TBase<TLoginResult, TLoginResult._Fields>, java.io.Serializable, Cloneable, Comparable<TLoginResult> {
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("TLoginResult");
 
-  private static final org.apache.thrift.protocol.TField USER_FIELD_DESC = new org.apache.thrift.protocol.TField("user", org.apache.thrift.protocol.TType.STRUCT, (short)1);
-  private static final org.apache.thrift.protocol.TField SESSION_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("sessionId", org.apache.thrift.protocol.TType.I64, (short)2);
-  private static final org.apache.thrift.protocol.TField TIME_EXPIRED_FIELD_DESC = new org.apache.thrift.protocol.TField("timeExpired", org.apache.thrift.protocol.TType.I64, (short)3);
+  private static final org.apache.thrift.protocol.TField ERROR_FIELD_DESC = new org.apache.thrift.protocol.TField("error", org.apache.thrift.protocol.TType.I32, (short)1);
+  private static final org.apache.thrift.protocol.TField MESSAGE_FIELD_DESC = new org.apache.thrift.protocol.TField("message", org.apache.thrift.protocol.TType.STRING, (short)2);
+  private static final org.apache.thrift.protocol.TField USER_FIELD_DESC = new org.apache.thrift.protocol.TField("user", org.apache.thrift.protocol.TType.STRUCT, (short)3);
+  private static final org.apache.thrift.protocol.TField SESSION_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("sessionId", org.apache.thrift.protocol.TType.I64, (short)4);
+  private static final org.apache.thrift.protocol.TField TIME_EXPIRED_FIELD_DESC = new org.apache.thrift.protocol.TField("timeExpired", org.apache.thrift.protocol.TType.I64, (short)5);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TLoginResultStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TLoginResultTupleSchemeFactory();
 
+  public int error; // required
+  public @org.apache.thrift.annotation.Nullable java.lang.String message; // required
   public @org.apache.thrift.annotation.Nullable TUser user; // optional
   public long sessionId; // optional
   public long timeExpired; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-    USER((short)1, "user"),
-    SESSION_ID((short)2, "sessionId"),
-    TIME_EXPIRED((short)3, "timeExpired");
+    ERROR((short)1, "error"),
+    MESSAGE((short)2, "message"),
+    USER((short)3, "user"),
+    SESSION_ID((short)4, "sessionId"),
+    TIME_EXPIRED((short)5, "timeExpired");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -42,11 +48,15 @@ public class TLoginResult implements org.apache.thrift.TBase<TLoginResult, TLogi
     @org.apache.thrift.annotation.Nullable
     public static _Fields findByThriftId(int fieldId) {
       switch(fieldId) {
-        case 1: // USER
+        case 1: // ERROR
+          return ERROR;
+        case 2: // MESSAGE
+          return MESSAGE;
+        case 3: // USER
           return USER;
-        case 2: // SESSION_ID
+        case 4: // SESSION_ID
           return SESSION_ID;
-        case 3: // TIME_EXPIRED
+        case 5: // TIME_EXPIRED
           return TIME_EXPIRED;
         default:
           return null;
@@ -89,13 +99,18 @@ public class TLoginResult implements org.apache.thrift.TBase<TLoginResult, TLogi
   }
 
   // isset id assignments
-  private static final int __SESSIONID_ISSET_ID = 0;
-  private static final int __TIMEEXPIRED_ISSET_ID = 1;
+  private static final int __ERROR_ISSET_ID = 0;
+  private static final int __SESSIONID_ISSET_ID = 1;
+  private static final int __TIMEEXPIRED_ISSET_ID = 2;
   private byte __isset_bitfield = 0;
   private static final _Fields optionals[] = {_Fields.USER,_Fields.SESSION_ID,_Fields.TIME_EXPIRED};
   public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+    tmpMap.put(_Fields.ERROR, new org.apache.thrift.meta_data.FieldMetaData("error", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+    tmpMap.put(_Fields.MESSAGE, new org.apache.thrift.meta_data.FieldMetaData("message", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.USER, new org.apache.thrift.meta_data.FieldMetaData("user", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TUser.class)));
     tmpMap.put(_Fields.SESSION_ID, new org.apache.thrift.meta_data.FieldMetaData("sessionId", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
@@ -109,11 +124,25 @@ public class TLoginResult implements org.apache.thrift.TBase<TLoginResult, TLogi
   public TLoginResult() {
   }
 
+  public TLoginResult(
+    int error,
+    java.lang.String message)
+  {
+    this();
+    this.error = error;
+    setErrorIsSet(true);
+    this.message = message;
+  }
+
   /**
    * Performs a deep copy on <i>other</i>.
    */
   public TLoginResult(TLoginResult other) {
     __isset_bitfield = other.__isset_bitfield;
+    this.error = other.error;
+    if (other.isSetMessage()) {
+      this.message = other.message;
+    }
     if (other.isSetUser()) {
       this.user = new TUser(other.user);
     }
@@ -127,11 +156,62 @@ public class TLoginResult implements org.apache.thrift.TBase<TLoginResult, TLogi
 
   @Override
   public void clear() {
+    setErrorIsSet(false);
+    this.error = 0;
+    this.message = null;
     this.user = null;
     setSessionIdIsSet(false);
     this.sessionId = 0;
     setTimeExpiredIsSet(false);
     this.timeExpired = 0;
+  }
+
+  public int getError() {
+    return this.error;
+  }
+
+  public TLoginResult setError(int error) {
+    this.error = error;
+    setErrorIsSet(true);
+    return this;
+  }
+
+  public void unsetError() {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __ERROR_ISSET_ID);
+  }
+
+  /** Returns true if field error is set (has been assigned a value) and false otherwise */
+  public boolean isSetError() {
+    return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __ERROR_ISSET_ID);
+  }
+
+  public void setErrorIsSet(boolean value) {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __ERROR_ISSET_ID, value);
+  }
+
+  @org.apache.thrift.annotation.Nullable
+  public java.lang.String getMessage() {
+    return this.message;
+  }
+
+  public TLoginResult setMessage(@org.apache.thrift.annotation.Nullable java.lang.String message) {
+    this.message = message;
+    return this;
+  }
+
+  public void unsetMessage() {
+    this.message = null;
+  }
+
+  /** Returns true if field message is set (has been assigned a value) and false otherwise */
+  public boolean isSetMessage() {
+    return this.message != null;
+  }
+
+  public void setMessageIsSet(boolean value) {
+    if (!value) {
+      this.message = null;
+    }
   }
 
   @org.apache.thrift.annotation.Nullable
@@ -207,6 +287,22 @@ public class TLoginResult implements org.apache.thrift.TBase<TLoginResult, TLogi
 
   public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
     switch (field) {
+    case ERROR:
+      if (value == null) {
+        unsetError();
+      } else {
+        setError((java.lang.Integer)value);
+      }
+      break;
+
+    case MESSAGE:
+      if (value == null) {
+        unsetMessage();
+      } else {
+        setMessage((java.lang.String)value);
+      }
+      break;
+
     case USER:
       if (value == null) {
         unsetUser();
@@ -237,6 +333,12 @@ public class TLoginResult implements org.apache.thrift.TBase<TLoginResult, TLogi
   @org.apache.thrift.annotation.Nullable
   public java.lang.Object getFieldValue(_Fields field) {
     switch (field) {
+    case ERROR:
+      return getError();
+
+    case MESSAGE:
+      return getMessage();
+
     case USER:
       return getUser();
 
@@ -257,6 +359,10 @@ public class TLoginResult implements org.apache.thrift.TBase<TLoginResult, TLogi
     }
 
     switch (field) {
+    case ERROR:
+      return isSetError();
+    case MESSAGE:
+      return isSetMessage();
     case USER:
       return isSetUser();
     case SESSION_ID:
@@ -281,6 +387,24 @@ public class TLoginResult implements org.apache.thrift.TBase<TLoginResult, TLogi
       return false;
     if (this == that)
       return true;
+
+    boolean this_present_error = true;
+    boolean that_present_error = true;
+    if (this_present_error || that_present_error) {
+      if (!(this_present_error && that_present_error))
+        return false;
+      if (this.error != that.error)
+        return false;
+    }
+
+    boolean this_present_message = true && this.isSetMessage();
+    boolean that_present_message = true && that.isSetMessage();
+    if (this_present_message || that_present_message) {
+      if (!(this_present_message && that_present_message))
+        return false;
+      if (!this.message.equals(that.message))
+        return false;
+    }
 
     boolean this_present_user = true && this.isSetUser();
     boolean that_present_user = true && that.isSetUser();
@@ -316,6 +440,12 @@ public class TLoginResult implements org.apache.thrift.TBase<TLoginResult, TLogi
   public int hashCode() {
     int hashCode = 1;
 
+    hashCode = hashCode * 8191 + error;
+
+    hashCode = hashCode * 8191 + ((isSetMessage()) ? 131071 : 524287);
+    if (isSetMessage())
+      hashCode = hashCode * 8191 + message.hashCode();
+
     hashCode = hashCode * 8191 + ((isSetUser()) ? 131071 : 524287);
     if (isSetUser())
       hashCode = hashCode * 8191 + user.hashCode();
@@ -339,6 +469,26 @@ public class TLoginResult implements org.apache.thrift.TBase<TLoginResult, TLogi
 
     int lastComparison = 0;
 
+    lastComparison = java.lang.Boolean.valueOf(isSetError()).compareTo(other.isSetError());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetError()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.error, other.error);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = java.lang.Boolean.valueOf(isSetMessage()).compareTo(other.isSetMessage());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetMessage()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.message, other.message);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     lastComparison = java.lang.Boolean.valueOf(isSetUser()).compareTo(other.isSetUser());
     if (lastComparison != 0) {
       return lastComparison;
@@ -390,7 +540,19 @@ public class TLoginResult implements org.apache.thrift.TBase<TLoginResult, TLogi
     java.lang.StringBuilder sb = new java.lang.StringBuilder("TLoginResult(");
     boolean first = true;
 
+    sb.append("error:");
+    sb.append(this.error);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("message:");
+    if (this.message == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.message);
+    }
+    first = false;
     if (isSetUser()) {
+      if (!first) sb.append(", ");
       sb.append("user:");
       if (this.user == null) {
         sb.append("null");
@@ -417,6 +579,10 @@ public class TLoginResult implements org.apache.thrift.TBase<TLoginResult, TLogi
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
+    // alas, we cannot check 'error' because it's a primitive and you chose the non-beans generator.
+    if (message == null) {
+      throw new org.apache.thrift.protocol.TProtocolException("Required field 'message' was not present! Struct: " + toString());
+    }
     // check for sub-struct validity
     if (user != null) {
       user.validate();
@@ -459,7 +625,23 @@ public class TLoginResult implements org.apache.thrift.TBase<TLoginResult, TLogi
           break;
         }
         switch (schemeField.id) {
-          case 1: // USER
+          case 1: // ERROR
+            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+              struct.error = iprot.readI32();
+              struct.setErrorIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 2: // MESSAGE
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.message = iprot.readString();
+              struct.setMessageIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 3: // USER
             if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
               struct.user = new TUser();
               struct.user.read(iprot);
@@ -468,7 +650,7 @@ public class TLoginResult implements org.apache.thrift.TBase<TLoginResult, TLogi
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 2: // SESSION_ID
+          case 4: // SESSION_ID
             if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
               struct.sessionId = iprot.readI64();
               struct.setSessionIdIsSet(true);
@@ -476,7 +658,7 @@ public class TLoginResult implements org.apache.thrift.TBase<TLoginResult, TLogi
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 3: // TIME_EXPIRED
+          case 5: // TIME_EXPIRED
             if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
               struct.timeExpired = iprot.readI64();
               struct.setTimeExpiredIsSet(true);
@@ -492,6 +674,9 @@ public class TLoginResult implements org.apache.thrift.TBase<TLoginResult, TLogi
       iprot.readStructEnd();
 
       // check for required fields of primitive type, which can't be checked in the validate method
+      if (!struct.isSetError()) {
+        throw new org.apache.thrift.protocol.TProtocolException("Required field 'error' was not found in serialized data! Struct: " + toString());
+      }
       struct.validate();
     }
 
@@ -499,6 +684,14 @@ public class TLoginResult implements org.apache.thrift.TBase<TLoginResult, TLogi
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
+      oprot.writeFieldBegin(ERROR_FIELD_DESC);
+      oprot.writeI32(struct.error);
+      oprot.writeFieldEnd();
+      if (struct.message != null) {
+        oprot.writeFieldBegin(MESSAGE_FIELD_DESC);
+        oprot.writeString(struct.message);
+        oprot.writeFieldEnd();
+      }
       if (struct.user != null) {
         if (struct.isSetUser()) {
           oprot.writeFieldBegin(USER_FIELD_DESC);
@@ -533,6 +726,8 @@ public class TLoginResult implements org.apache.thrift.TBase<TLoginResult, TLogi
     @Override
     public void write(org.apache.thrift.protocol.TProtocol prot, TLoginResult struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+      oprot.writeI32(struct.error);
+      oprot.writeString(struct.message);
       java.util.BitSet optionals = new java.util.BitSet();
       if (struct.isSetUser()) {
         optionals.set(0);
@@ -558,6 +753,10 @@ public class TLoginResult implements org.apache.thrift.TBase<TLoginResult, TLogi
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TLoginResult struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+      struct.error = iprot.readI32();
+      struct.setErrorIsSet(true);
+      struct.message = iprot.readString();
+      struct.setMessageIsSet(true);
       java.util.BitSet incoming = iprot.readBitSet(3);
       if (incoming.get(0)) {
         struct.user = new TUser();
