@@ -4,7 +4,7 @@
  */
 package model;
 
-import db.UserPwdDao;
+import dao.UserPwdDao;
 import org.apache.log4j.Logger;
 import thrift.TUserPwd;
 

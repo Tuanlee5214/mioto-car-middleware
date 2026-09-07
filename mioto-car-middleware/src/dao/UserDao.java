@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package db;
+package dao;
 
+import db.MysqlClient;
 import error.Err;
 import error.ValueResult;
 import java.sql.ResultSet;
@@ -68,6 +69,13 @@ public class UserDao {
         return ret;
     }
     
+    public int updateUser(TUser user)
+    {
+        String sql = "UPDATE " + TABLE
+                + " SET email=?,displayName=?,status=?,timeUpdated=?"
+                + " WHERE " + KEY + "=?";
+        return _cli.executeUpdate(sql, user.getEmail(), user.getDisplayName(), user.getStatus(), System.currentTimeMillis());
+    }
 
     private TUser map(ResultSet rs) throws SQLException
     {

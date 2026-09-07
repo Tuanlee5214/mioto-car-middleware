@@ -5,7 +5,7 @@
 package model;
 
 import cache.SimpleCache;
-import db.SessionDao;
+import dao.SessionDao;
 import error.Err;
 import error.ValueResult;
 import org.apache.log4j.Logger;

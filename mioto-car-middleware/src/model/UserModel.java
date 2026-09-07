@@ -5,7 +5,7 @@
 package model;
 
 import cache.SimpleCache;
-import db.UserDao;
+import dao.UserDao;
 import error.Err;
 import error.ValueResult;
 import org.apache.log4j.Logger;
@@ -55,6 +55,13 @@ public class UserModel {
             _cache.put((int) userId, new TUser(ret.value));
         }
         
+        return ret;
+    }
+    
+    public int updateUser(TUser user)
+    {
+        int ret = _dao.updateUser(user);
+        _cache.remove(user.getUserId());
         return ret;
     }
 }
