@@ -13,7 +13,7 @@ mioto_car_struct.TLoginResult signup(
         2:required mioto_car_struct.TLoginRequest request
         3:required mioto_car_struct.TLoginInfo loginInfo);
 
-    i32 logout(
+    mioto_car_struct.TLogoutResult logout(
         1:required mioto_car_struct.OpHandle   handle
         2:required mioto_car_struct.TSessionID sessionId);
 

@@ -15,6 +15,7 @@ import thrift.OpHandle;
 import thrift.TLoginInfo;
 import thrift.TLoginRequest;
 import thrift.TLoginResult;
+import thrift.TLogoutResult;
 import thrift.TSessionResult;
 import thrift.TSignUpRequest;
 import thrift.TUpdateUserResult;
@@ -50,8 +51,16 @@ public class CarServiceHandler implements MiotoCarService.Iface {
     }
 
     @Override
-    public int logout(OpHandle handle, long sessionId) throws TException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public TLogoutResult logout(OpHandle handle, long sessionId) throws TException {
+        try
+        {
+            return AuthModel.Instance.logout(handle, sessionId);
+        }
+        catch(Exception e)
+        {
+            _Logger.error("Logout with sessionId = " + sessionId + " , src= " + handle.source, e);
+            return new TLogoutResult(Err.FAIL, "Lỗi hệ thống");
+        }
     }
 
     @Override

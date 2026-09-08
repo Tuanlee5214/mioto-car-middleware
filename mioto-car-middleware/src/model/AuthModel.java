@@ -10,7 +10,9 @@ import thrift.OpHandle;
 import thrift.TLoginInfo;
 import thrift.TLoginRequest;
 import thrift.TLoginResult;
+import thrift.TLogoutResult;
 import thrift.TSession;
+import thrift.TSessionResult;
 import thrift.TSignUpRequest;
 import thrift.TUser;
 import thrift.TUserPwd;
@@ -132,5 +134,14 @@ public class AuthModel {
 
         return loginResult;
 
+    }
+    
+    public TLogoutResult logout(OpHandle handle, long sessionId)
+    {
+        if(sessionId <= 0) return new TLogoutResult(Err.BAD_REQUEST, "sessionId không hợp lệ");
+        TSessionResult ret = SessionModel.Instance.deleteSession(sessionId);
+        
+        if(Err.isFail(ret.error)) return new TLogoutResult(ret.error, ret.message);
+        return new TLogoutResult(Err.SUCCESS, "Đăng xuất thành công");
     }
 }

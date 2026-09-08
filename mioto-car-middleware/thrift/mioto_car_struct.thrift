@@ -72,6 +72,11 @@ struct TUserPwdResult {
     3:optional TUserPwd value,
 }
 
+struct TLogoutResult {
+    1:required i32   error,
+    2:required string message,
+}
+
 struct TUpdateUserResult {
     1:required i32   error,
     2:required string message,

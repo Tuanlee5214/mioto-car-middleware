@@ -58,6 +58,13 @@ public class SessionDao {
         return ret;
     }
     
+    public ValueResult<Integer> deleteSession(long sessionId)
+    {
+        ValueResult<Integer> result = new ValueResult<Integer>(Err.FAIL, "");
+        result.value = _cli.executeUpdate("DELETE FROM " + TABLE + " WHERE " + KEY + "=?", sessionId);
+        return result;
+    }
+    
     private TSession map(ResultSet rs) throws SQLException
     {
         TSession session = new TSession();
