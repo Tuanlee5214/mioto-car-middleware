@@ -49,10 +49,8 @@ public class UserDao {
         String sql = "INSERT INTO " + TABLE 
                 + " (phone,email,displayName,status,timeCreated,timeUpdated)"
                 + " VALUES (?,?,?,?,?,?)";
-        long now = System.currentTimeMillis();
-        TUserStatus status = TUserStatus.TUS_ACTIVE;
         return _cli.executeInsertAndReturnKey(sql, user.getPhone(), user.getEmail(), user.getDisplayName(),
-                status, now, now);
+                user.getStatus(), user.getTimeCreated(), user.getTimeUpdated());
     }
     
     public ValueResult<TUser> getUser(long userId)

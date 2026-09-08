@@ -37,8 +37,7 @@ public class UserPwdDao {
         String sql = "INSERT INTO " + TABLE
                 + " (userId,pwdHash,salt,timeUpdated)"
                 + " VALUES (?,?,?,?)";
-        long now = System.currentTimeMillis();
-        return _cli.executeInsertAndReturnKey(sql, userPwd.getUserId(), userPwd.getPwdHash(), userPwd.getSalt(), now);
+        return _cli.executeInsertAndReturnKey(sql, userPwd.getUserId(), userPwd.getPwdHash(), userPwd.getSalt(), userPwd.getTimeUpdated());
     }
 }
     

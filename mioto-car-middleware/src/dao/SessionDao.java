@@ -20,7 +20,6 @@ import thrift.TSession;
 public class SessionDao {
     
     private static final Logger _Logger = Logger.getLogger(SessionDao.class);
-    public static final long SESSION_TTL_MS = 30L * 24 * 60 * 60 * 1000;
     
     private static final String TABLE = "Sessions";
     private static final String KEY   = "sessionId";
@@ -43,9 +42,7 @@ public class SessionDao {
         String sql = "INSERT INTO " + TABLE
                 + " (sessionId,userId,userAgent,userIP,timeCreated,timeExpired)"
                 + " VALUES (?,?,?,?,?,?)";
-        long now = System.currentTimeMillis();
-        long expiredTime = now + SESSION_TTL_MS;     
-        return _cli.executeInsertAndReturnKey(sql, session.getSessionId(), session.getUserId(), loginInfo.getUserAgent(), loginInfo.getUserIP(), now, expiredTime);
+        return _cli.executeInsertAndReturnKey(sql, session.getSessionId(), session.getUserId(), loginInfo.getUserAgent(), loginInfo.getUserIP(), session.getTimeCreated(), session.getTimeExpired());
     }
     
     public ValueResult<TSession> getSession(long sessionId)

@@ -13,6 +13,7 @@ import thrift.TSession;
 import thrift.TSignUpRequest;
 import thrift.TUser;
 import thrift.TUserPwd;
+import thrift.TUserStatus;
 import util.PwdUtil;
 
 /**
@@ -22,7 +23,8 @@ import util.PwdUtil;
 public class AuthModel {
     
     private static final Logger _Logger = Logger.getLogger(AuthModel.class);
-    private static final long SESSION_TTL_MS = 30L * 24 * 60 * 60 * 1000;
+    private static final long DAYS_30 = 30L * 24 * 60 * 60 * 1000;
+    private static final long HOURS_24 = 24 * 60 * 60 * 1000;
 
     
     public static final AuthModel Instance = new AuthModel();  
@@ -48,6 +50,9 @@ public class AuthModel {
         user.setDisplayName(request.getDisplayName().trim());
         user.setPhone(request.getPhone().trim());
         user.setEmail(request.getEmail().trim());
+        user.setStatus((byte) TUserStatus.TUS_ACTIVE.getValue());
+        user.setTimeCreated(System.currentTimeMillis());
+        user.setTimeUpdated(System.currentTimeMillis());
         long userId = UserModel.Instance.createUser(user);
         if(Err.isFail(userId)) return new TLoginResult((int) userId, "Tạo người dùng thất bại");
         user.setUserId((int) userId);
@@ -59,7 +64,8 @@ public class AuthModel {
         TUserPwd userPwd = new TUserPwd();
         userPwd.setUserId((int) userId);
         userPwd.setSalt(salt);
-        userPwd.setPwdHash(pwdHash);    
+        userPwd.setPwdHash(pwdHash);  
+        userPwd.setTimeUpdated(System.currentTimeMillis());
         long userPwdResult = UserPwdModel.Instance.createUserPwd(userPwd);
         if(Err.isFail(userPwdResult)) return new TLoginResult((int) userPwdResult, "Tạo nơi lưu mật khẩu thất bại");
         
@@ -68,10 +74,12 @@ public class AuthModel {
         TSession session = new TSession();
         session.setSessionId(sessionId);
         session.setUserId((int) userId);
+        session.setTimeCreated(System.currentTimeMillis());
+        long timeExpired = System.currentTimeMillis() + (loginInfo.longSession ? DAYS_30 : HOURS_24);
+        session.setTimeExpired(timeExpired);
         long sessionResult = SessionModel.Instance.createSession(session, loginInfo);
         if(Err.isFail(sessionResult)) return new TLoginResult((int) sessionResult, "Tạo phiên đăng nhập thất bại");
         
-        long timeExpired = System.currentTimeMillis() + SESSION_TTL_MS;
         
         //Set up result
         TLoginResult loginResult = new TLoginResult();
