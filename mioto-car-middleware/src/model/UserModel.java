@@ -23,7 +23,8 @@ public class UserModel {
     
     public static final UserModel Instance = new UserModel();
     private final UserDao _dao = new UserDao("mioto");
-    private final SimpleCache<Integer, TUser> _cache = new SimpleCache<Integer, TUser>("user");
+    private final SimpleCache<Integer, TUser> _cacheId = new SimpleCache<Integer, TUser>("user");
+    private final SimpleCache<String, TUser> _cachePhone = new SimpleCache<String, TUser>("user");
     
     private UserModel(){}
     
@@ -39,22 +40,17 @@ public class UserModel {
     {
         long id = _dao.createUser(user);
         if (Err.isFail(id)) return id;
-        _cache.remove((int) id);
+        _cacheId.remove((int) id);
+        _cachePhone.remove(user.getPhone());
         return id;
     }
     
     public TUserResult getUser(long userId)
     {
-        long now = System.currentTimeMillis();
         TUserResult result = new TUserResult(Err.FAIL, "");
-        TUser cached = _cache.get((int)userId);
+        TUser cached = _cacheId.get((int)userId);
         if(cached != null) 
         {
-            if(_cache.getExpired() < now)
-            {
-                _cache.remove((int)userId);
-                return new TUserResult(Err.NOT_FOUND, "Phiên đăng nhập hết hạn");
-            }
             result.setError(Err.SUCCESS);
             result.setMessage("Lấy dữ liệu người dùng thành công");
             result.setValue(new TUser(cached));
@@ -74,10 +70,46 @@ public class UserModel {
 
         if(ret.isSuccess() && ret.value != null)
         {
-            _cache.put((int) userId, new TUser(ret.value));
+            _cacheId.put((int) userId, new TUser(ret.value));
+            _cachePhone.put(ret.value.getPhone(), new TUser(ret.value));
             result.setError(Err.SUCCESS);
             result.setMessage("Lấy dữ liệu người dùng thành công");
             result.setValue(ret.value);
+        }
+        return result;
+    }
+    
+    public TUserResult getUserByPhone(String phone)
+    {
+        if(phone == null) return new TUserResult(Err.BAD_REQUEST, "Số điện thoại không được để trống");
+        String clearPhone = phone.trim();
+        long now = System.currentTimeMillis();
+        TUserResult result = new TUserResult(Err.FAIL, "");
+        TUser cached = _cachePhone.get(clearPhone);
+        if(cached != null)
+        {
+            result.setError(Err.SUCCESS);
+            result.setMessage("Lấy dữ liệu người dùng thành công");
+            result.setValue(new TUser(cached));
+            return result;
+        }
+        
+        ValueResult<TUser> ret = _dao.getUserByPhone(clearPhone);
+        if(Err.isNetworkError(ret.error))
+        {
+            return new TUserResult((int) ret.error, "Lỗi kết nối mạng");
+        }
+        if(Err.isNotFound(ret.error))
+        {
+            return new TUserResult((int) ret.error, "Không tìm thấy người dùng");
+        }
+        if(Err.isSuccess(ret.error))
+        {
+            _cacheId.put((int)ret.value.getUserId(), new TUser(ret.value));
+            _cachePhone.put(clearPhone, new TUser(ret.value));
+            result.setError(Err.SUCCESS);
+            result.setMessage("Lấy thông tin người dùng thành công");
+            result.setValue(new TUser(ret.value));
         }
         return result;
     }
@@ -94,7 +126,8 @@ public class UserModel {
         result.setError((int) ret.error);
         result.setMessage("Cập nhật thành công");
         result.setValue(ret.value);
-        _cache.remove(user.getUserId());
+        _cacheId.remove(user.getUserId());
+        _cachePhone.remove(user.getPhone());
         return result;
     }
 }

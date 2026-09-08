@@ -67,6 +67,20 @@ public class UserDao {
         return ret;
     }
     
+    public ValueResult<TUser> getUserByPhone(String phone)
+    {
+        final ValueResult<TUser> ret = new ValueResult<TUser>(Err.FAIL);
+        String sql = "SELECT " + COLS + " FROM " + TABLE + " WHERE phone=?";
+        ret.error = _cli.executeQuery(new MysqlClient.IRowListener() {
+            @Override
+            public void onRow(ResultSet rs) throws SQLException {
+                ret.value = map(rs);
+            }
+        }, sql, phone);
+        
+        return ret;
+    }
+    
     public ValueResult<Integer> updateUser(TUser user)
     {
         ValueResult<Integer> ret = new ValueResult<Integer>(Err.FAIL);

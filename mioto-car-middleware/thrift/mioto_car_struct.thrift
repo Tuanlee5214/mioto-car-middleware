@@ -66,6 +66,12 @@ struct TUserResult {
     3:optional TUser value,
 }
 
+struct TUserPwdResult {
+    1:required i32   error,
+    2:required string message,
+    3:optional TUserPwd value,
+}
+
 struct TUpdateUserResult {
     1:required i32   error,
     2:required string message,

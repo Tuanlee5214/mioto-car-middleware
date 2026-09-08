@@ -8,11 +8,14 @@ import error.Err;
 import org.apache.log4j.Logger;
 import thrift.OpHandle;
 import thrift.TLoginInfo;
+import thrift.TLoginRequest;
 import thrift.TLoginResult;
 import thrift.TSession;
 import thrift.TSignUpRequest;
 import thrift.TUser;
 import thrift.TUserPwd;
+import thrift.TUserPwdResult;
+import thrift.TUserResult;
 import thrift.TUserStatus;
 import util.PwdUtil;
 
@@ -91,5 +94,43 @@ public class AuthModel {
         
         //Return value
         return loginResult;
+    }
+    
+    public TLoginResult login(OpHandle handle, TLoginRequest request, TLoginInfo loginInfo)
+    {
+        if (request.getPwd().length() < 6) {
+            return new TLoginResult(Err.BAD_REQUEST, "Mật khẩu phải có từ 6 kí tự trở lên");
+        }
+
+        TUserResult u = UserModel.Instance.getUserByPhone(request.getPhone());
+        if(Err.isFail(u.error) || u.value == null)
+            return new TLoginResult(Err.FAIL, "Tài khoản hoặc mật khẩu không đúng");
+        
+        if(u.getValue().getStatus() != TUserStatus.TUS_ACTIVE.getValue())
+            return new TLoginResult(Err.FORBIDDEN, "Tài khoản của bạn đã bị khóa");
+                
+        TUserPwdResult up = UserPwdModel.Instance.getUserPwdByUserId(u.value.getUserId());
+        if(Err.isFail(up.error) || up.value == null 
+                || !PwdUtil.matches(request.getPwd(), up.value.getSalt(), up.value.getPwdHash()))
+            return new TLoginResult(Err.FAIL, "Tài khoản hoặc mật khẩu không đúng");
+        
+        long now = System.currentTimeMillis();
+        TSession session = new TSession();
+        session.setSessionId(PwdUtil.newSessionId());
+        session.setUserId(u.value.getUserId());
+        session.setTimeCreated(now);
+        session.setTimeExpired(now + (loginInfo.longSession ? DAYS_30 : HOURS_24));
+        long sessionResult = SessionModel.Instance.createSession(session, loginInfo);
+        if(Err.isFail(sessionResult)) return new TLoginResult((int) sessionResult, "Tạo phiên đăng nhập thất bại");
+        
+        TLoginResult loginResult = new TLoginResult();
+        loginResult.setUser(u.value);
+        loginResult.setSessionId(session.getSessionId());
+        loginResult.setTimeExpired(session.getTimeExpired());
+        loginResult.setError(Err.SUCCESS);
+        loginResult.setMessage("Đăng nhập thành công");
+
+        return loginResult;
+
     }
 }

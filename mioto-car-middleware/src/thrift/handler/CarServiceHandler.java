@@ -5,7 +5,6 @@
 package thrift.handler;
 
 import error.Err;
-import error.ValueResult;
 import model.AuthModel;
 import model.SessionModel;
 import model.UserModel;
@@ -16,7 +15,6 @@ import thrift.OpHandle;
 import thrift.TLoginInfo;
 import thrift.TLoginRequest;
 import thrift.TLoginResult;
-import thrift.TSession;
 import thrift.TSessionResult;
 import thrift.TSignUpRequest;
 import thrift.TUpdateUserResult;
@@ -35,14 +33,20 @@ public class CarServiceHandler implements MiotoCarService.Iface {
         try {
            return AuthModel.Instance.signup(handle, request, loginInfo);
         } catch (Exception e) {
-            _Logger.error("Sign up phone = " + request.phone + " , src= " + handle.source, e);
+            _Logger.error("Sign up with phone = " + request.phone + " , src= " + handle.source, e);
             return new TLoginResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
 
     @Override
     public TLoginResult login(OpHandle handle, TLoginRequest request, TLoginInfo loginInfo) throws TException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            return AuthModel.Instance.login(handle, request, loginInfo);
+        }
+        catch(Exception e){
+            _Logger.error("Login with phone = " + request.phone + " , src= " + handle.source, e);
+            return new TLoginResult(Err.FAIL, "Lỗi hệ thống");
+        }
     }
 
     @Override

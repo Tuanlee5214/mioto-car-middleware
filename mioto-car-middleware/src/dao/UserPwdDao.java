@@ -5,6 +5,10 @@
 package dao;
 
 import db.MysqlClient;
+import error.Err;
+import error.ValueResult;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import org.apache.log4j.Logger;
 import thrift.TUserPwd;
 
@@ -38,6 +42,30 @@ public class UserPwdDao {
                 + " (userId,pwdHash,salt,timeUpdated)"
                 + " VALUES (?,?,?,?)";
         return _cli.executeInsertAndReturnKey(sql, userPwd.getUserId(), userPwd.getPwdHash(), userPwd.getSalt(), userPwd.getTimeUpdated());
+    }
+    
+    public ValueResult<TUserPwd> getUserPwdByUserId(long userId)
+    {
+        ValueResult<TUserPwd> ret = new ValueResult<TUserPwd>(Err.FAIL, "");
+        String sql = "SELECT " + COLS + " FROM " + TABLE + " WHERE " + KEY + "=?";
+        ret.error = _cli.executeQuery(new MysqlClient.IRowListener() {
+            @Override
+            public void onRow(ResultSet rs) throws SQLException {
+                ret.value = map(rs);
+            }
+        }, sql, userId);
+        return ret;
+    }
+    
+    private TUserPwd map(ResultSet rs) throws SQLException
+    {
+        TUserPwd userPwd = new TUserPwd();
+        int i = 0;
+        userPwd.setUserId(rs.getInt(++i));
+        userPwd.setPwdHash(rs.getString(++i));
+        userPwd.setSalt(rs.getString(++i));
+        userPwd.setTimeUpdated(rs.getLong(++i));
+        return userPwd;
     }
 }
     
