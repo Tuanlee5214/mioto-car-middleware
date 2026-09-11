@@ -25,3 +25,4 @@ conf/*.local.ini
 *.key
 /mioto-car-middleware/JavaApplication7/nbproject/private/
 /mioto-car-middleware/nbproject/private/
+/mioto-car-webservice/nbproject/private/

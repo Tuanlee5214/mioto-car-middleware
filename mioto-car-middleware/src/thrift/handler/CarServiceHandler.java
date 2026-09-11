@@ -90,7 +90,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
         }
         catch(Exception e)
         {
-            _Logger.error("updateUser userId= " + userId + " src= " + handle.source, e);
+            _Logger.error("updateUser userId= " + user.getUserId() + " src= " + handle.source, e);
             return new TUpdateUserResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
