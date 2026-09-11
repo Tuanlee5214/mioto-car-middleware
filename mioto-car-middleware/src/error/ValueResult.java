@@ -42,6 +42,11 @@ public class ValueResult<V> {
     public boolean isFail() {
         return Err.isFail(error);
     }
+    
+    public void setMessage(String message)
+    {
+        this.message = message;
+    }
 
     @Override
     public String toString() {

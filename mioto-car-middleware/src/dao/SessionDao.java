@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package db;
+package dao;
 
+import db.MysqlClient;
 import error.Err;
 import error.ValueResult;
 import java.sql.ResultSet;
@@ -19,7 +20,6 @@ import thrift.TSession;
 public class SessionDao {
     
     private static final Logger _Logger = Logger.getLogger(SessionDao.class);
-    public static final long SESSION_TTL_MS = 30L * 24 * 60 * 60 * 1000;
     
     private static final String TABLE = "Sessions";
     private static final String KEY   = "sessionId";
@@ -42,9 +42,7 @@ public class SessionDao {
         String sql = "INSERT INTO " + TABLE
                 + " (sessionId,userId,userAgent,userIP,timeCreated,timeExpired)"
                 + " VALUES (?,?,?,?,?,?)";
-        long now = System.currentTimeMillis();
-        long expiredTime = now + SESSION_TTL_MS;     
-        return _cli.executeInsertAndReturnKey(sql, session.getSessionId(), session.getUserId(), loginInfo.getUserAgent(), loginInfo.getUserIP(), now, expiredTime);
+        return _cli.executeInsertAndReturnKey(sql, session.getSessionId(), session.getUserId(), loginInfo.getUserAgent(), loginInfo.getUserIP(), session.getTimeCreated(), session.getTimeExpired());
     }
     
     public ValueResult<TSession> getSession(long sessionId)
@@ -58,6 +56,13 @@ public class SessionDao {
             }
         }, sql, sessionId);
         return ret;
+    }
+    
+    public ValueResult<Integer> deleteSession(long sessionId)
+    {
+        ValueResult<Integer> result = new ValueResult<Integer>(Err.FAIL, "");
+        result.value = _cli.executeUpdate("DELETE FROM " + TABLE + " WHERE " + KEY + "=?", sessionId);
+        return result;
     }
     
     private TSession map(ResultSet rs) throws SQLException

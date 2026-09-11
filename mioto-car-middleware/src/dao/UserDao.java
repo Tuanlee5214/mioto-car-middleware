@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package db;
+package dao;
 
+import db.MysqlClient;
 import error.Err;
 import error.ValueResult;
 import java.sql.ResultSet;
@@ -48,10 +49,8 @@ public class UserDao {
         String sql = "INSERT INTO " + TABLE 
                 + " (phone,email,displayName,status,timeCreated,timeUpdated)"
                 + " VALUES (?,?,?,?,?,?)";
-        long now = System.currentTimeMillis();
-        TUserStatus status = TUserStatus.TUS_ACTIVE;
         return _cli.executeInsertAndReturnKey(sql, user.getPhone(), user.getEmail(), user.getDisplayName(),
-                status, now, now);
+                user.getStatus(), user.getTimeCreated(), user.getTimeUpdated());
     }
     
     public ValueResult<TUser> getUser(long userId)
@@ -68,6 +67,29 @@ public class UserDao {
         return ret;
     }
     
+    public ValueResult<TUser> getUserByPhone(String phone)
+    {
+        final ValueResult<TUser> ret = new ValueResult<TUser>(Err.FAIL);
+        String sql = "SELECT " + COLS + " FROM " + TABLE + " WHERE phone=?";
+        ret.error = _cli.executeQuery(new MysqlClient.IRowListener() {
+            @Override
+            public void onRow(ResultSet rs) throws SQLException {
+                ret.value = map(rs);
+            }
+        }, sql, phone);
+        
+        return ret;
+    }
+    
+    public ValueResult<Integer> updateUser(TUser user)
+    {
+        ValueResult<Integer> ret = new ValueResult<Integer>(Err.FAIL);
+        String sql = "UPDATE " + TABLE
+                + " SET email=?,displayName=?,status=?,timeUpdated=?"
+                + " WHERE " + KEY + "=?";
+        ret.error = _cli.executeUpdate(sql, user.getEmail(), user.getDisplayName(), user.getStatus(), System.currentTimeMillis());
+        return ret;
+    }
 
     private TUser map(ResultSet rs) throws SQLException
     {
