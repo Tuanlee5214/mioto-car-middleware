@@ -45,6 +45,11 @@ public class SessionModel {
         
         if(cached != null)
         {
+            if(cached.getTimeExpired() < now)
+            {
+                _cache.remove((int)sessionId);
+                return new TSessionResult(Err.NOT_FOUND, "Phiên đăng nhập hết hạn");
+            }
             result.setError(Err.SUCCESS);
             result.setMessage("Lấy dữ liệu thành công");
             result.setValue(new TSession(cached));
