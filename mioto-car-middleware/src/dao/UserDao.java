@@ -87,7 +87,7 @@ public class UserDao {
         String sql = "UPDATE " + TABLE
                 + " SET email=?,displayName=?,status=?,timeUpdated=?"
                 + " WHERE " + KEY + "=?";
-        ret.error = _cli.executeUpdate(sql, user.getEmail(), user.getDisplayName(), user.getStatus(), System.currentTimeMillis());
+        ret.error = _cli.executeUpdate(sql, user.getEmail(), user.getDisplayName(), user.getStatus(), System.currentTimeMillis(), user.getUserId());
         return ret;
     }
 

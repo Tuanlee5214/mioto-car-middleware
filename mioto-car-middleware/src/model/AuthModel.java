@@ -36,17 +36,7 @@ public class AuthModel {
     private AuthModel() {}
     
     public TLoginResult signup(OpHandle handle, TSignUpRequest request, TLoginInfo loginInfo)
-    {
-        //Validate input
-        if(request.getPhone() == null || request.getPhone().trim().isEmpty()) 
-            return new TLoginResult(Err.BAD_REQUEST, "Số điện thoại không được để trống");
-        
-        if(request.getPwd() == null) 
-            return new TLoginResult(Err.BAD_REQUEST, "Mật khẩu không được để trống");
-        
-        if(request.getPwd().length() < 6) 
-            return new TLoginResult(Err.BAD_REQUEST, "Mật khẩu phải có ít nhất từ 6 kí tự trở lên");
-            
+    {            
         if(UserModel.Instance.isPhoneExisted(request.getPhone()))
             return new TLoginResult(Err.CONFLICT, "Số điện thoại đã tồn tại trong hệ thống");
         
