@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.atomic.AtomicLong;
+import org.apache.log4j.Logger;
 import util.Config;
 
 /**
@@ -18,6 +19,9 @@ import util.Config;
  * @author tuanlee
  */
 public class SimpleConnectionPool {
+
+    private static final Logger _Logger = Logger.getLogger(SimpleConnectionPool.class);
+
     // ---- immutable config ----
     private final String _driver, _url, _user, _pwd, _dbName;
     private final int _maxConn;
@@ -52,9 +56,16 @@ public class SimpleConnectionPool {
              + "&connectTimeout=" + _connTimeoutMs
              + "&socketTimeout=" + (_connTimeoutMs * 4);
 
+        // Log ngay khi khởi tạo, KHÔNG log password.
+        _Logger.info("Initializing SimpleConnectionPool[" + name + "] -> url=" + _url
+                + " user=" + _user + " maxConn=" + _maxConn
+                + " connTimeoutMs=" + _connTimeoutMs + " waitTimeoutMs=" + _waitTimeoutMs);
+
         try {
             Class.forName(_driver);        // once, here, not on every open
+            _Logger.info("JDBC driver loaded: " + _driver);
         } catch (ClassNotFoundException ex) {
+            _Logger.error("JDBC driver not on the classpath: " + _driver, ex);
             throw new IllegalStateException("JDBC driver not on the classpath: " + _driver, ex);
         }
     }
@@ -75,6 +86,7 @@ public class SimpleConnectionPool {
                         _borrowed.incrementAndGet();
                         return conn;
                     }
+                    _Logger.warn("Discarding dead idle connection (total was " + _total + ")");
                     closeQuietly(conn);      // dead: close it and stop counting it
                     _total--;
                     _discarded.incrementAndGet();
@@ -89,6 +101,8 @@ public class SimpleConnectionPool {
                 // (c) at capacity: wait, with a deadline
                 long remain = deadline - System.currentTimeMillis();
                 if (remain <= 0) {
+                    _Logger.warn("Pool exhausted: borrow() timed out waiting for a slot. "
+                            + stats());
                     _timeouts.incrementAndGet();
                     return null;
                 }
@@ -96,6 +110,7 @@ public class SimpleConnectionPool {
                     _lock.wait(remain);      // releases the monitor; woken by giveBack()
                 } catch (InterruptedException ie) {
                     Thread.currentThread().interrupt();   // restore the flag, always
+                    _Logger.warn("borrow() interrupted while waiting for a free slot", ie);
                     return null;
                 }
             }
@@ -103,11 +118,14 @@ public class SimpleConnectionPool {
 
         // (d) open OUTSIDE the lock - this does network I/O and can take seconds
         try {
+            _Logger.info("Open a new connection");
             Connection conn = open();
             _created.incrementAndGet();
             _borrowed.incrementAndGet();
             return conn;
         } catch (SQLException ex) {
+            _Logger.error("Failed to open DB connection: url=" + _url + " user=" + _user
+                    + " sqlState=" + ex.getSQLState() + " errorCode=" + ex.getErrorCode(), ex);
             synchronized (_lock) {
                 _total--;                    // give the claimed slot back
                 _lock.notifyAll();           // ... and let a waiter try
@@ -129,6 +147,7 @@ public class SimpleConnectionPool {
             if (ok) {
                 _idle.add(conn);
             } else {
+                _Logger.warn("giveBack(ok=false): discarding suspect connection. " + stats());
                 closeQuietly(conn);
                 _total--;
                 _discarded.incrementAndGet();
@@ -139,7 +158,7 @@ public class SimpleConnectionPool {
 
     private Connection open() throws SQLException {
         Connection conn = DriverManager.getConnection(_url, _user, _pwd);
-        // per-session charset, so Vietnamese text and emoji survive
+        
         PreparedStatement prst = conn.prepareStatement("SET NAMES 'utf8mb4'");
         try {
             prst.execute();
@@ -154,6 +173,7 @@ public class SimpleConnectionPool {
         try {
             return conn != null && !conn.isClosed() && conn.isValid(1);
         } catch (SQLException ex) {
+            _Logger.warn("isAlive() check failed, treating connection as dead", ex);
             return false;
         }
     }
@@ -162,17 +182,20 @@ public class SimpleConnectionPool {
         try {
             conn.close();
         } catch (SQLException ex) {
+            _Logger.warn("closeQuietly() failed to close connection cleanly", ex);
         }
     }
 
     /** Close everything. Called from the shutdown hook. */
     public void shutdown() {
+        _Logger.info("Shutting down connection pool. " + stats());
         synchronized (_lock) {
             while (!_idle.isEmpty()) {
                 closeQuietly(_idle.poll());
                 _total--;
             }
         }
+        _Logger.info("Connection pool shut down.");
     }
 
     // ---- observability: a pool you cannot see into is a pool you cannot debug ----

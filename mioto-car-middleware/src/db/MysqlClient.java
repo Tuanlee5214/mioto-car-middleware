@@ -128,6 +128,7 @@ public class MysqlClient {
         for (int retry = 0; retry < _nretry; ++retry) {
             Connection conn = _pool.borrow();
             if (conn == null) {
+                _Logger.error("No connection when insert");
                 return Err.NO_CONNECTION;
             }
             boolean ok = true;

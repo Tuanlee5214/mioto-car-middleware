@@ -27,12 +27,14 @@ import thrift.TUserResult;
  * @author tuanlee
  */
 public class CarServiceHandler implements MiotoCarService.Iface {
+
     private static final Logger _Logger = Logger.getLogger(CarServiceHandler.class);
 
     @Override
     public TLoginResult signup(OpHandle handle, TSignUpRequest request, TLoginInfo loginInfo) throws TException {
         try {
-           return AuthModel.Instance.signup(handle, request, loginInfo);
+            _Logger.info("Call signup in mw handler");
+            return AuthModel.Instance.signup(handle, request, loginInfo);
         } catch (Exception e) {
             _Logger.error("Sign up with phone = " + request.phone + " , src= " + handle.source, e);
             return new TLoginResult(Err.FAIL, "Lỗi hệ thống");
@@ -43,8 +45,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
     public TLoginResult login(OpHandle handle, TLoginRequest request, TLoginInfo loginInfo) throws TException {
         try {
             return AuthModel.Instance.login(handle, request, loginInfo);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             _Logger.error("Login with phone = " + request.phone + " , src= " + handle.source, e);
             return new TLoginResult(Err.FAIL, "Lỗi hệ thống");
         }
@@ -52,12 +53,9 @@ public class CarServiceHandler implements MiotoCarService.Iface {
 
     @Override
     public TLogoutResult logout(OpHandle handle, long sessionId) throws TException {
-        try
-        {
+        try {
             return AuthModel.Instance.logout(handle, sessionId);
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             _Logger.error("Logout with sessionId = " + sessionId + " , src= " + handle.source, e);
             return new TLogoutResult(Err.FAIL, "Lỗi hệ thống");
         }
@@ -85,13 +83,21 @@ public class CarServiceHandler implements MiotoCarService.Iface {
 
     @Override
     public TUpdateUserResult updateUser(OpHandle handle, TUser user) throws TException {
-        try{
+        try {
             return UserModel.Instance.updateUser(user);
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             _Logger.error("updateUser userId= " + user.getUserId() + " src= " + handle.source, e);
             return new TUpdateUserResult(Err.FAIL, "Lỗi hệ thống");
+        }
+    }
+
+    @Override
+    public TUserResult getUserBySession(OpHandle handle, long sessionId) throws TException {
+        try {
+            return UserModel.Instance.getUserBySessionId(sessionId);
+        } catch (Exception e) {
+            _Logger.error("getUser by sessionId= " + sessionId + " src= " + handle.source, e);
+            return new TUserResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
 }

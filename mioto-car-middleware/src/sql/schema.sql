@@ -35,5 +35,5 @@ CREATE TABLE IF NOT EXISTS Sessions (
 ) ENGINE=InnoDB;
 
 CREATE USER IF NOT EXISTS 'tuanlee'@'localhost' IDENTIFIED BY 'tuanlee@5678';
-GRANT SELECT, INSERT, UPDATE, DELETE ON mioto_final_project.* TO 'mioto'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON mioto_final_project.* TO 'tuanlee'@'localhost';
 FLUSH PRIVILEGES;

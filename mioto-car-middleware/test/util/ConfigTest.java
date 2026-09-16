@@ -16,11 +16,16 @@ import static org.junit.Assert.*;
  * @author tuanlee
  */
 public class ConfigTest {
-    public static class DummyThriftServer {}
-    public static class DummySimpleConnectionPool {}
-    public static class DummyMysqlClient {}
-    
-    
+
+    public static class DummyThriftServer {
+    }
+
+    public static class DummySimpleConnectionPool {
+    }
+
+    public static class DummyMysqlClient {
+    }
+
     @Test
     public void readsValuesFromSection() {
         assertEquals(10100, Config.getInt(DummyThriftServer.class, "mioto", "port", 0));
@@ -31,6 +36,6 @@ public class ConfigTest {
 
     @Test
     public void fallsBackWhenKeyOrSectionMissing() {
-        assertEquals(4,  Config.getInt(DummySimpleConnectionPool.class, "mioto", "max-conn", 4));
+        assertEquals(4, Config.getInt(DummySimpleConnectionPool.class, "mioto", "max-conn", 4));
     }
 }

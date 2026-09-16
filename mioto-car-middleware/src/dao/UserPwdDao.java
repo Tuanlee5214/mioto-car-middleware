@@ -41,7 +41,8 @@ public class UserPwdDao {
         String sql = "INSERT INTO " + TABLE
                 + " (userId,pwdHash,salt,timeUpdated)"
                 + " VALUES (?,?,?,?)";
-        return _cli.executeInsertAndReturnKey(sql, userPwd.getUserId(), userPwd.getPwdHash(), userPwd.getSalt(), userPwd.getTimeUpdated());
+        int result = _cli.executeUpdate(sql, userPwd.getUserId(), userPwd.getPwdHash(), userPwd.getSalt(), userPwd.getTimeUpdated());
+        return result == 1 ? Err.SUCCESS : Err.FAIL;
     }
     
     public ValueResult<TUserPwd> getUserPwdByUserId(long userId)

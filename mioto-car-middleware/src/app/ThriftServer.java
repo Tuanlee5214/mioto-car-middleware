@@ -27,7 +27,7 @@ public class ThriftServer {
     private Thread  _thread;
 
     public ThriftServer() {
-        _port      = Config.getInt(ThriftServer.class, "thrift", "port", 10100);
+        _port      = Config.getInt(ThriftServer.class, "thrift", "port", 10101);
         _numThread = Config.getInt(ThriftServer.class, "thrift", "num-thread", 4);
     }
 
