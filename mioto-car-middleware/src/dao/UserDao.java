@@ -78,9 +78,9 @@ public class UserDao {
     public ValueResult<Integer> updateUser(TUser user) {
         ValueResult<Integer> ret = new ValueResult<Integer>(Err.FAIL);
         String sql = "UPDATE " + TABLE
-                + " SET email=?,displayName=?,status=?,timeUpdated=?"
+                + " SET email=?,displayName=?,timeUpdated=?"
                 + " WHERE " + KEY + "=?";
-        ret.error = _cli.executeUpdate(sql, user.getEmail(), user.getDisplayName(), user.getStatus(), System.currentTimeMillis(), user.getUserId());
+        ret.error = _cli.executeUpdate(sql, user.getEmail(), user.getDisplayName(), System.currentTimeMillis(), user.getUserId());
         return ret;
     }
 
