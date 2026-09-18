@@ -133,9 +133,10 @@ public class UserModel {
         if (Err.isNetworkError(ret.error)) {
             return new TUpdateUserResult((int) ret.error, "Lỗi kết nối mạng");
         }
-
+        
         result.setError((int) ret.error);
         result.setMessage("Cập nhật thành công");
+        result.setValue(new TUser(user));
         _cacheId.remove(user.getUserId());
         return result;
     }
