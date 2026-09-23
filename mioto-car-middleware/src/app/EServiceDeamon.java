@@ -1,5 +1,5 @@
+package app;
 
-import app.ThriftServer;
 import java.io.File;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
