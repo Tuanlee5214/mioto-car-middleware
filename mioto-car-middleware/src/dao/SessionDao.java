@@ -42,7 +42,8 @@ public class SessionDao {
         String sql = "INSERT INTO " + TABLE
                 + " (sessionId,userId,userAgent,userIP,timeCreated,timeExpired)"
                 + " VALUES (?,?,?,?,?,?)";
-        return _cli.executeInsertAndReturnKey(sql, session.getSessionId(), session.getUserId(), loginInfo.getUserAgent(), loginInfo.getUserIP(), session.getTimeCreated(), session.getTimeExpired());
+        int result = _cli.executeUpdate(sql, session.getSessionId(), session.getUserId(), loginInfo.getUserAgent(), loginInfo.getUserIP(), session.getTimeCreated(), session.getTimeExpired());
+        return result == 1 ? Err.SUCCESS : Err.FAIL;
     }
     
     public ValueResult<TSession> getSession(long sessionId)
@@ -58,6 +59,7 @@ public class SessionDao {
         return ret;
     }
     
+       
     public ValueResult<Integer> deleteSession(long sessionId)
     {
         ValueResult<Integer> result = new ValueResult<Integer>(Err.FAIL, "");

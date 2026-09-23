@@ -80,7 +80,7 @@ struct TLogoutResult {
 struct TUpdateUserResult {
     1:required i32   error,
     2:required string message,
-    3:optional i32   value,
+    3:optional TUser   value,
 }
 
 struct TLoginResult {

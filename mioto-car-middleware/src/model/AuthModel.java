@@ -36,25 +36,15 @@ public class AuthModel {
     private AuthModel() {}
     
     public TLoginResult signup(OpHandle handle, TSignUpRequest request, TLoginInfo loginInfo)
-    {
-        //Validate input
-        if(request.getPhone() == null || request.getPhone().trim().isEmpty()) 
-            return new TLoginResult(Err.BAD_REQUEST, "Số điện thoại không được để trống");
-        
-        if(request.getPwd() == null) 
-            return new TLoginResult(Err.BAD_REQUEST, "Mật khẩu không được để trống");
-        
-        if(request.getPwd().length() < 6) 
-            return new TLoginResult(Err.BAD_REQUEST, "Mật khẩu phải có ít nhất từ 6 kí tự trở lên");
-            
+    {            
         if(UserModel.Instance.isPhoneExisted(request.getPhone()))
             return new TLoginResult(Err.CONFLICT, "Số điện thoại đã tồn tại trong hệ thống");
         
         //Create user
         TUser user = new TUser();
-        user.setDisplayName(request.getDisplayName().trim());
-        user.setPhone(request.getPhone().trim());
-        user.setEmail(request.getEmail().trim());
+        user.setDisplayName(request.getDisplayName().trim() == null ? "" : request.getDisplayName().trim());
+        user.setPhone(request.getPhone().trim() == null ? "" : request.getPhone().trim());
+        user.setEmail(request.getEmail().trim() == null ? "" : request.getEmail().trim());
         user.setStatus((byte) TUserStatus.TUS_ACTIVE.getValue());
         user.setTimeCreated(System.currentTimeMillis());
         user.setTimeUpdated(System.currentTimeMillis());
@@ -84,7 +74,7 @@ public class AuthModel {
         session.setTimeExpired(timeExpired);
         long sessionResult = SessionModel.Instance.createSession(session, loginInfo);
         if(Err.isFail(sessionResult)) return new TLoginResult((int) sessionResult, "Tạo phiên đăng nhập thất bại");
-        
+        //put sessionId into index cache
         
         //Set up result
         TLoginResult loginResult = new TLoginResult();
@@ -124,7 +114,7 @@ public class AuthModel {
         session.setTimeExpired(now + (loginInfo.longSession ? DAYS_30 : HOURS_24));
         long sessionResult = SessionModel.Instance.createSession(session, loginInfo);
         if(Err.isFail(sessionResult)) return new TLoginResult((int) sessionResult, "Tạo phiên đăng nhập thất bại");
-        
+                
         TLoginResult loginResult = new TLoginResult();
         loginResult.setUser(u.value);
         loginResult.setSessionId(session.getSessionId());
