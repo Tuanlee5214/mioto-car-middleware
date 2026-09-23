@@ -1,6 +1,5 @@
 package app;
 
-
 import java.io.File;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -34,6 +33,7 @@ public class EServiceDeamon {
             public void run() {
                 server.stop();
             }
-        }); 
+        });
+
     }
 }
