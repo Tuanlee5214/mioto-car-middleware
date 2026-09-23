@@ -117,7 +117,7 @@ public class AuthModel {
             return new TLoginResult(Err.FAIL, "Tài khoản hoặc mật khẩu không đúng");
         
         long now = System.currentTimeMillis();
-        TSession session = new TSession();
+        TSession session     = new TSession();
         session.setSessionId(PwdUtil.newSessionId());
         session.setUserId(u.value.getUserId());
         session.setTimeCreated(now);
