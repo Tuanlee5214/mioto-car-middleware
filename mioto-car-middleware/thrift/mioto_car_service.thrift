@@ -34,5 +34,6 @@ service MiotoCarService {
     mioto_car_struct.TUserResult getUserBySession(
         1:required  mioto_car_struct.OpHandle handle
         2:required  mioto_car_struct.TSessionID sessionId
+        3:required  mioto_car_struct.TLoginInfo loginInfo
     );
 }

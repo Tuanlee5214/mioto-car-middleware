@@ -92,9 +92,9 @@ public class CarServiceHandler implements MiotoCarService.Iface {
     }
 
     @Override
-    public TUserResult getUserBySession(OpHandle handle, long sessionId) throws TException {
+    public TUserResult getUserBySession(OpHandle handle, long sessionId, TLoginInfo loginInfo) throws TException {
         try {
-            return UserModel.Instance.getUserBySessionId(sessionId);
+            return UserModel.Instance.getUserBySessionId(sessionId, loginInfo);
         } catch (Exception e) {
             _Logger.error("getUser by sessionId= " + sessionId + " src= " + handle.source, e);
             return new TUserResult(Err.FAIL, "Lỗi hệ thống");

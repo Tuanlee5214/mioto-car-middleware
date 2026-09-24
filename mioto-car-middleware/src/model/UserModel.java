@@ -9,6 +9,7 @@ import dao.UserDao;
 import error.Err;
 import error.ValueResult;
 import org.apache.log4j.Logger;
+import thrift.TLoginInfo;
 import thrift.TSessionResult;
 import thrift.TUpdateUserResult;
 import thrift.TUser;
@@ -98,18 +99,24 @@ public class UserModel {
         return result;
     }
 
-    public TUserResult getUserBySessionId(long sessionId) {
+    public TUserResult getUserBySessionId(long sessionId, TLoginInfo loginInfo) {
         long now = System.currentTimeMillis();
         TUserResult result = new TUserResult();
         TSessionResult sessionResult = SessionModel.Instance.getSession(sessionId);
-        if(Err.isFail(sessionResult.getError()))
+        if(Err.isFail(sessionResult.getError()) || sessionResult.getValue() == null)
         {
             if(Err.isNetworkError(sessionResult.getError()))
                 return new TUserResult(sessionResult.getError(), "Lỗi kết nối mạng");
             else return new TUserResult(sessionResult.getError(), "Phiên đăng nhập hết hạn");
         }
-        long timeExpired = sessionResult.value.getTimeExpired();
+        long timeExpired = sessionResult.getValue().getTimeExpired();
         if(timeExpired < now) return new TUserResult(Err.NOT_FOUND, "Phiên đăng nhập hết hạn");
+        String userAgentFromDB = sessionResult.getValue().getUserAgent() == null ? " " : sessionResult.getValue().getUserAgent();
+        String userAgentFromCli = loginInfo.getUserAgent();
+        if(!userAgentFromDB.equals(userAgentFromCli))
+        {
+            return new TUserResult(Err.NOT_FOUND, "Phiên đăng nhập hết hạn");
+        }
         
         TUserResult ret = this.getUser(sessionResult.value.getUserId());
         if (Err.isNetworkError(ret.error)) {
