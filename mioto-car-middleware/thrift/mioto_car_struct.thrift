@@ -2,7 +2,7 @@ namespace java thrift
 
 typedef i32 TUserID
 typedef i64 TSessionID
-
+    
 enum TUserStatus {
     TUS_NULL    = 0,
     TUS_ACTIVE  = 1,
@@ -127,7 +127,7 @@ struct TFeature {
     21:optional i64    updatedAt,
 }
 
-struct TFeatureRequest {
+struct TFeatureRequest {                                                                                                                                                                                                                                                                                                                                                                                                                                               
     1:required string nameFeature,
 }
 

@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS Features (
   createdAt     BIGINT       NOT NULL DEFAULT 0,
   updatedAt     BIGINT       NOT NULL DEFAULT 0,
   PRIMARY KEY (id)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB;    
 
 CREATE TABLE IF NOT EXISTS FeePolicies (
   feePolicyId   INT            NOT NULL AUTO_INCREMENT,
@@ -121,8 +121,8 @@ CREATE TABLE IF NOT EXISTS Vouchers (
   imageUrl        VARCHAR(255)   NOT NULL DEFAULT '',
   publicId        VARCHAR(100)   NOT NULL,
   body            TEXT,
-  discountPercent DECIMAL(5, 2)  NOT NULL DEFAULT 0.00, -- % Giảm
-  maxDiscount     DECIMAL(15, 2) NOT NULL DEFAULT 0.00, -- Số tiền giảm tối đa
+  discountPercent DECIMAL(5, 2)  NOT NULL DEFAULT 0.00, -- SANG INT 
+  maxDiscount     DECIMAL(15, 2) NOT NULL DEFAULT 0.00, -- SANG INT
   startDate       BIGINT         NOT NULL DEFAULT 0,
   endDate         BIGINT         NOT NULL DEFAULT 0,
   createdAt       BIGINT         NOT NULL DEFAULT 0,
