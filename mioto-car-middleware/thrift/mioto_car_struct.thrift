@@ -68,7 +68,13 @@ struct TFeePolicyRequest {
 struct TFeePolicyResult { 
     1:required i32        error,
     2:required string     message,
-    3:required TFeePolicy value,
+    3:optional TFeePolicy value,
+}
+
+struct TListFeePolicyResult {
+    1:required i32        error,
+    2:required string     message,
+    3:optional list<TFeePolicy> value,
 }
 
 struct TProvince {
@@ -83,7 +89,13 @@ struct TProvinceRequest {
 struct TProvinceResult { 
     1:required i32       error,
     2:required string    message,
-    3:required TProvince value,
+    3:optional TProvince value,
+}
+
+struct TListProvinceResult {
+    1:required i32       error,
+    2:required string    message,
+    3:optional list<TProvince> value,
 }
 
 struct TDistrict {
@@ -100,7 +112,13 @@ struct TDistrictRequest {
 struct TDistrictResult {
     1:required i32       error,
     2:required string    message,
-    3:required TDistrict value,
+    3:optional TDistrict value,
+}
+
+struct TListDistrictResult {
+    1:required i32       error,
+    2:required string    message,
+    3:optional list<TDistrict> value,
 }
 
 struct TCarBrand {
@@ -117,7 +135,13 @@ struct TCarBrandRequest {
 struct TCarBrandResult {
     1:required i32  error,
     2:required string message,
-    3:required TCarBrand value,
+    3:optional TCarBrand value,
+}
+
+struct TListCarBrandResult {
+    1:required i32  error,
+    2:required string message,
+    3:optional list<TCarBrand> value,
 }
 
 struct TFeature {
@@ -134,7 +158,13 @@ struct TFeatureRequest {
 struct TFeatureResult {
     1:required i32  error,
     2:required string message,
-    3:required TFeature value,
+    3:optional TFeature value,
+}
+
+struct TListFeatureResult {
+    1:required i32  error,
+    2:required string message,
+    3:optional list<TFeature> value,
 }
 
 struct TFeedBack {
@@ -157,7 +187,13 @@ struct TFeedBackRequest {
 struct TFeedBackResult { 
     1:required  i32    error,
     2:required  string message,
-    3:required  TFeedBack value,
+    3:optional  TFeedBack value,
+}
+
+struct TListFeedBackResult {
+    1:required  i32    error,
+    2:required  string message,
+    3:optional  list<TFeedBack> value,
 }
 
 struct TVoucher {
@@ -189,7 +225,13 @@ struct TVoucherRequest {
 struct TVoucherResult {
     1 :required i32      error, 
     2 :required string   message, 
-    3 :required TVoucher value
+    3 :optional TVoucher value
+}
+
+struct TListVoucherResult {
+    1 :required i32      error, 
+    2 :required string   message, 
+    3 :optional list<TVoucher> value
 }
 
 struct TLoginRequest {

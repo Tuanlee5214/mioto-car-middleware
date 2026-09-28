@@ -44,7 +44,7 @@ public class FeePolicyDao {
                 + " (nameFeePolicy,percentFee,isActive)"
                 + " VALUES (?,?,?)";
         return _cli.executeInsertAndReturnKey(sql, feePolicy.getName(), feePolicy.getPercentFee(), feePolicy.isIsActive());
-    }
+    }       
     
     public long updateFeePolicy(TFeePolicy feePolicy)
     {
