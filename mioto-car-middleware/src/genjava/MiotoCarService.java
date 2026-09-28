@@ -34,7 +34,7 @@ public class MiotoCarService {
 
     public thrift.TFeePolicyResult updateFeePolicy(thrift.OpHandle handle, thrift.TFeePolicy feePolicy) throws org.apache.thrift.TException;
 
-    public thrift.TFeePolicyResult getFeePolicy(thrift.OpHandle handle, java.lang.String name) throws org.apache.thrift.TException;
+    public thrift.TListFeePolicyResult getFeePolicy(thrift.OpHandle handle, java.lang.String name, int count, int offset) throws org.apache.thrift.TException;
 
     public thrift.TFeePolicyResult getFeePolicyById(thrift.OpHandle handle, int feePolicyId) throws org.apache.thrift.TException;
 
@@ -44,7 +44,7 @@ public class MiotoCarService {
 
     public thrift.TProvinceResult updateProvince(thrift.OpHandle handle, thrift.TProvince province) throws org.apache.thrift.TException;
 
-    public thrift.TProvinceResult getProvince(thrift.OpHandle handle, java.lang.String provinceName) throws org.apache.thrift.TException;
+    public thrift.TListProvinceResult getProvince(thrift.OpHandle handle, java.lang.String provinceName, int count, int offset) throws org.apache.thrift.TException;
 
     public thrift.TProvinceResult getProvinceById(thrift.OpHandle handle, int provinceId) throws org.apache.thrift.TException;
 
@@ -54,7 +54,7 @@ public class MiotoCarService {
 
     public thrift.TDistrictResult updateDistrict(thrift.OpHandle handle, thrift.TDistrict district) throws org.apache.thrift.TException;
 
-    public thrift.TDistrictResult getDistrict(thrift.OpHandle handle, int provinceId) throws org.apache.thrift.TException;
+    public thrift.TListDistrictResult getDistrict(thrift.OpHandle handle, int provinceId, int count, int offset) throws org.apache.thrift.TException;
 
     public thrift.TDistrictResult getDistrictById(thrift.OpHandle handle, int districtId) throws org.apache.thrift.TException;
 
@@ -64,7 +64,7 @@ public class MiotoCarService {
 
     public thrift.TCarBrandResult updateCarBrand(thrift.OpHandle handle, thrift.TCarBrand carBrand) throws org.apache.thrift.TException;
 
-    public thrift.TCarBrandResult getCarBrand(thrift.OpHandle handle, java.lang.String nameBrand) throws org.apache.thrift.TException;
+    public thrift.TListCarBrandResult getCarBrand(thrift.OpHandle handle, java.lang.String nameBrand, int count, int offset) throws org.apache.thrift.TException;
 
     public thrift.TCarBrandResult getCarBrandById(thrift.OpHandle handle, int carBrandId) throws org.apache.thrift.TException;
 
@@ -74,7 +74,7 @@ public class MiotoCarService {
 
     public thrift.TFeatureResult updateFeature(thrift.OpHandle handle, thrift.TFeature feature) throws org.apache.thrift.TException;
 
-    public thrift.TFeatureResult getFeature(thrift.OpHandle handle, java.lang.String nameFeature) throws org.apache.thrift.TException;
+    public thrift.TListFeatureResult getFeature(thrift.OpHandle handle, java.lang.String nameFeature, int count, int offset) throws org.apache.thrift.TException;
 
     public thrift.TFeatureResult getFeatureById(thrift.OpHandle handle, int featureId) throws org.apache.thrift.TException;
 
@@ -84,7 +84,7 @@ public class MiotoCarService {
 
     public thrift.TFeedBackResult updateFeedBack(thrift.OpHandle handle, thrift.TFeedBack feedback) throws org.apache.thrift.TException;
 
-    public thrift.TFeedBackResult getFeedBack(thrift.OpHandle handle, thrift.TFeedBackRequest request) throws org.apache.thrift.TException;
+    public thrift.TListFeedBackResult getFeedBack(thrift.OpHandle handle, int receiverId, int count, int offset) throws org.apache.thrift.TException;
 
     public thrift.TFeedBackResult deleteFeedBack(thrift.OpHandle handle, int feedBackId) throws org.apache.thrift.TException;
 
@@ -92,7 +92,7 @@ public class MiotoCarService {
 
     public thrift.TVoucherResult updateVoucher(thrift.OpHandle handle, thrift.TVoucher voucher) throws org.apache.thrift.TException;
 
-    public thrift.TVoucherResult getVoucher(thrift.OpHandle handle, java.lang.String title) throws org.apache.thrift.TException;
+    public thrift.TListVoucherResult getVoucher(thrift.OpHandle handle, java.lang.String title, int count, int offset) throws org.apache.thrift.TException;
 
     public thrift.TVoucherResult getVoucherById(thrift.OpHandle handle, int voucherId) throws org.apache.thrift.TException;
 
@@ -120,7 +120,7 @@ public class MiotoCarService {
 
     public void updateFeePolicy(thrift.OpHandle handle, thrift.TFeePolicy feePolicy, org.apache.thrift.async.AsyncMethodCallback<thrift.TFeePolicyResult> resultHandler) throws org.apache.thrift.TException;
 
-    public void getFeePolicy(thrift.OpHandle handle, java.lang.String name, org.apache.thrift.async.AsyncMethodCallback<thrift.TFeePolicyResult> resultHandler) throws org.apache.thrift.TException;
+    public void getFeePolicy(thrift.OpHandle handle, java.lang.String name, int count, int offset, org.apache.thrift.async.AsyncMethodCallback<thrift.TListFeePolicyResult> resultHandler) throws org.apache.thrift.TException;
 
     public void getFeePolicyById(thrift.OpHandle handle, int feePolicyId, org.apache.thrift.async.AsyncMethodCallback<thrift.TFeePolicyResult> resultHandler) throws org.apache.thrift.TException;
 
@@ -130,7 +130,7 @@ public class MiotoCarService {
 
     public void updateProvince(thrift.OpHandle handle, thrift.TProvince province, org.apache.thrift.async.AsyncMethodCallback<thrift.TProvinceResult> resultHandler) throws org.apache.thrift.TException;
 
-    public void getProvince(thrift.OpHandle handle, java.lang.String provinceName, org.apache.thrift.async.AsyncMethodCallback<thrift.TProvinceResult> resultHandler) throws org.apache.thrift.TException;
+    public void getProvince(thrift.OpHandle handle, java.lang.String provinceName, int count, int offset, org.apache.thrift.async.AsyncMethodCallback<thrift.TListProvinceResult> resultHandler) throws org.apache.thrift.TException;
 
     public void getProvinceById(thrift.OpHandle handle, int provinceId, org.apache.thrift.async.AsyncMethodCallback<thrift.TProvinceResult> resultHandler) throws org.apache.thrift.TException;
 
@@ -140,7 +140,7 @@ public class MiotoCarService {
 
     public void updateDistrict(thrift.OpHandle handle, thrift.TDistrict district, org.apache.thrift.async.AsyncMethodCallback<thrift.TDistrictResult> resultHandler) throws org.apache.thrift.TException;
 
-    public void getDistrict(thrift.OpHandle handle, int provinceId, org.apache.thrift.async.AsyncMethodCallback<thrift.TDistrictResult> resultHandler) throws org.apache.thrift.TException;
+    public void getDistrict(thrift.OpHandle handle, int provinceId, int count, int offset, org.apache.thrift.async.AsyncMethodCallback<thrift.TListDistrictResult> resultHandler) throws org.apache.thrift.TException;
 
     public void getDistrictById(thrift.OpHandle handle, int districtId, org.apache.thrift.async.AsyncMethodCallback<thrift.TDistrictResult> resultHandler) throws org.apache.thrift.TException;
 
@@ -150,7 +150,7 @@ public class MiotoCarService {
 
     public void updateCarBrand(thrift.OpHandle handle, thrift.TCarBrand carBrand, org.apache.thrift.async.AsyncMethodCallback<thrift.TCarBrandResult> resultHandler) throws org.apache.thrift.TException;
 
-    public void getCarBrand(thrift.OpHandle handle, java.lang.String nameBrand, org.apache.thrift.async.AsyncMethodCallback<thrift.TCarBrandResult> resultHandler) throws org.apache.thrift.TException;
+    public void getCarBrand(thrift.OpHandle handle, java.lang.String nameBrand, int count, int offset, org.apache.thrift.async.AsyncMethodCallback<thrift.TListCarBrandResult> resultHandler) throws org.apache.thrift.TException;
 
     public void getCarBrandById(thrift.OpHandle handle, int carBrandId, org.apache.thrift.async.AsyncMethodCallback<thrift.TCarBrandResult> resultHandler) throws org.apache.thrift.TException;
 
@@ -160,7 +160,7 @@ public class MiotoCarService {
 
     public void updateFeature(thrift.OpHandle handle, thrift.TFeature feature, org.apache.thrift.async.AsyncMethodCallback<thrift.TFeatureResult> resultHandler) throws org.apache.thrift.TException;
 
-    public void getFeature(thrift.OpHandle handle, java.lang.String nameFeature, org.apache.thrift.async.AsyncMethodCallback<thrift.TFeatureResult> resultHandler) throws org.apache.thrift.TException;
+    public void getFeature(thrift.OpHandle handle, java.lang.String nameFeature, int count, int offset, org.apache.thrift.async.AsyncMethodCallback<thrift.TListFeatureResult> resultHandler) throws org.apache.thrift.TException;
 
     public void getFeatureById(thrift.OpHandle handle, int featureId, org.apache.thrift.async.AsyncMethodCallback<thrift.TFeatureResult> resultHandler) throws org.apache.thrift.TException;
 
@@ -170,7 +170,7 @@ public class MiotoCarService {
 
     public void updateFeedBack(thrift.OpHandle handle, thrift.TFeedBack feedback, org.apache.thrift.async.AsyncMethodCallback<thrift.TFeedBackResult> resultHandler) throws org.apache.thrift.TException;
 
-    public void getFeedBack(thrift.OpHandle handle, thrift.TFeedBackRequest request, org.apache.thrift.async.AsyncMethodCallback<thrift.TFeedBackResult> resultHandler) throws org.apache.thrift.TException;
+    public void getFeedBack(thrift.OpHandle handle, int receiverId, int count, int offset, org.apache.thrift.async.AsyncMethodCallback<thrift.TListFeedBackResult> resultHandler) throws org.apache.thrift.TException;
 
     public void deleteFeedBack(thrift.OpHandle handle, int feedBackId, org.apache.thrift.async.AsyncMethodCallback<thrift.TFeedBackResult> resultHandler) throws org.apache.thrift.TException;
 
@@ -178,7 +178,7 @@ public class MiotoCarService {
 
     public void updateVoucher(thrift.OpHandle handle, thrift.TVoucher voucher, org.apache.thrift.async.AsyncMethodCallback<thrift.TVoucherResult> resultHandler) throws org.apache.thrift.TException;
 
-    public void getVoucher(thrift.OpHandle handle, java.lang.String title, org.apache.thrift.async.AsyncMethodCallback<thrift.TVoucherResult> resultHandler) throws org.apache.thrift.TException;
+    public void getVoucher(thrift.OpHandle handle, java.lang.String title, int count, int offset, org.apache.thrift.async.AsyncMethodCallback<thrift.TListVoucherResult> resultHandler) throws org.apache.thrift.TException;
 
     public void getVoucherById(thrift.OpHandle handle, int voucherId, org.apache.thrift.async.AsyncMethodCallback<thrift.TVoucherResult> resultHandler) throws org.apache.thrift.TException;
 
@@ -402,21 +402,23 @@ public class MiotoCarService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "updateFeePolicy failed: unknown result");
     }
 
-    public thrift.TFeePolicyResult getFeePolicy(thrift.OpHandle handle, java.lang.String name) throws org.apache.thrift.TException
+    public thrift.TListFeePolicyResult getFeePolicy(thrift.OpHandle handle, java.lang.String name, int count, int offset) throws org.apache.thrift.TException
     {
-      send_getFeePolicy(handle, name);
+      send_getFeePolicy(handle, name, count, offset);
       return recv_getFeePolicy();
     }
 
-    public void send_getFeePolicy(thrift.OpHandle handle, java.lang.String name) throws org.apache.thrift.TException
+    public void send_getFeePolicy(thrift.OpHandle handle, java.lang.String name, int count, int offset) throws org.apache.thrift.TException
     {
       getFeePolicy_args args = new getFeePolicy_args();
       args.setHandle(handle);
       args.setName(name);
+      args.setCount(count);
+      args.setOffset(offset);
       sendBase("getFeePolicy", args);
     }
 
-    public thrift.TFeePolicyResult recv_getFeePolicy() throws org.apache.thrift.TException
+    public thrift.TListFeePolicyResult recv_getFeePolicy() throws org.apache.thrift.TException
     {
       getFeePolicy_result result = new getFeePolicy_result();
       receiveBase(result, "getFeePolicy");
@@ -522,21 +524,23 @@ public class MiotoCarService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "updateProvince failed: unknown result");
     }
 
-    public thrift.TProvinceResult getProvince(thrift.OpHandle handle, java.lang.String provinceName) throws org.apache.thrift.TException
+    public thrift.TListProvinceResult getProvince(thrift.OpHandle handle, java.lang.String provinceName, int count, int offset) throws org.apache.thrift.TException
     {
-      send_getProvince(handle, provinceName);
+      send_getProvince(handle, provinceName, count, offset);
       return recv_getProvince();
     }
 
-    public void send_getProvince(thrift.OpHandle handle, java.lang.String provinceName) throws org.apache.thrift.TException
+    public void send_getProvince(thrift.OpHandle handle, java.lang.String provinceName, int count, int offset) throws org.apache.thrift.TException
     {
       getProvince_args args = new getProvince_args();
       args.setHandle(handle);
       args.setProvinceName(provinceName);
+      args.setCount(count);
+      args.setOffset(offset);
       sendBase("getProvince", args);
     }
 
-    public thrift.TProvinceResult recv_getProvince() throws org.apache.thrift.TException
+    public thrift.TListProvinceResult recv_getProvince() throws org.apache.thrift.TException
     {
       getProvince_result result = new getProvince_result();
       receiveBase(result, "getProvince");
@@ -642,21 +646,23 @@ public class MiotoCarService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "updateDistrict failed: unknown result");
     }
 
-    public thrift.TDistrictResult getDistrict(thrift.OpHandle handle, int provinceId) throws org.apache.thrift.TException
+    public thrift.TListDistrictResult getDistrict(thrift.OpHandle handle, int provinceId, int count, int offset) throws org.apache.thrift.TException
     {
-      send_getDistrict(handle, provinceId);
+      send_getDistrict(handle, provinceId, count, offset);
       return recv_getDistrict();
     }
 
-    public void send_getDistrict(thrift.OpHandle handle, int provinceId) throws org.apache.thrift.TException
+    public void send_getDistrict(thrift.OpHandle handle, int provinceId, int count, int offset) throws org.apache.thrift.TException
     {
       getDistrict_args args = new getDistrict_args();
       args.setHandle(handle);
       args.setProvinceId(provinceId);
+      args.setCount(count);
+      args.setOffset(offset);
       sendBase("getDistrict", args);
     }
 
-    public thrift.TDistrictResult recv_getDistrict() throws org.apache.thrift.TException
+    public thrift.TListDistrictResult recv_getDistrict() throws org.apache.thrift.TException
     {
       getDistrict_result result = new getDistrict_result();
       receiveBase(result, "getDistrict");
@@ -762,21 +768,23 @@ public class MiotoCarService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "updateCarBrand failed: unknown result");
     }
 
-    public thrift.TCarBrandResult getCarBrand(thrift.OpHandle handle, java.lang.String nameBrand) throws org.apache.thrift.TException
+    public thrift.TListCarBrandResult getCarBrand(thrift.OpHandle handle, java.lang.String nameBrand, int count, int offset) throws org.apache.thrift.TException
     {
-      send_getCarBrand(handle, nameBrand);
+      send_getCarBrand(handle, nameBrand, count, offset);
       return recv_getCarBrand();
     }
 
-    public void send_getCarBrand(thrift.OpHandle handle, java.lang.String nameBrand) throws org.apache.thrift.TException
+    public void send_getCarBrand(thrift.OpHandle handle, java.lang.String nameBrand, int count, int offset) throws org.apache.thrift.TException
     {
       getCarBrand_args args = new getCarBrand_args();
       args.setHandle(handle);
       args.setNameBrand(nameBrand);
+      args.setCount(count);
+      args.setOffset(offset);
       sendBase("getCarBrand", args);
     }
 
-    public thrift.TCarBrandResult recv_getCarBrand() throws org.apache.thrift.TException
+    public thrift.TListCarBrandResult recv_getCarBrand() throws org.apache.thrift.TException
     {
       getCarBrand_result result = new getCarBrand_result();
       receiveBase(result, "getCarBrand");
@@ -882,21 +890,23 @@ public class MiotoCarService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "updateFeature failed: unknown result");
     }
 
-    public thrift.TFeatureResult getFeature(thrift.OpHandle handle, java.lang.String nameFeature) throws org.apache.thrift.TException
+    public thrift.TListFeatureResult getFeature(thrift.OpHandle handle, java.lang.String nameFeature, int count, int offset) throws org.apache.thrift.TException
     {
-      send_getFeature(handle, nameFeature);
+      send_getFeature(handle, nameFeature, count, offset);
       return recv_getFeature();
     }
 
-    public void send_getFeature(thrift.OpHandle handle, java.lang.String nameFeature) throws org.apache.thrift.TException
+    public void send_getFeature(thrift.OpHandle handle, java.lang.String nameFeature, int count, int offset) throws org.apache.thrift.TException
     {
       getFeature_args args = new getFeature_args();
       args.setHandle(handle);
       args.setNameFeature(nameFeature);
+      args.setCount(count);
+      args.setOffset(offset);
       sendBase("getFeature", args);
     }
 
-    public thrift.TFeatureResult recv_getFeature() throws org.apache.thrift.TException
+    public thrift.TListFeatureResult recv_getFeature() throws org.apache.thrift.TException
     {
       getFeature_result result = new getFeature_result();
       receiveBase(result, "getFeature");
@@ -1002,21 +1012,23 @@ public class MiotoCarService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "updateFeedBack failed: unknown result");
     }
 
-    public thrift.TFeedBackResult getFeedBack(thrift.OpHandle handle, thrift.TFeedBackRequest request) throws org.apache.thrift.TException
+    public thrift.TListFeedBackResult getFeedBack(thrift.OpHandle handle, int receiverId, int count, int offset) throws org.apache.thrift.TException
     {
-      send_getFeedBack(handle, request);
+      send_getFeedBack(handle, receiverId, count, offset);
       return recv_getFeedBack();
     }
 
-    public void send_getFeedBack(thrift.OpHandle handle, thrift.TFeedBackRequest request) throws org.apache.thrift.TException
+    public void send_getFeedBack(thrift.OpHandle handle, int receiverId, int count, int offset) throws org.apache.thrift.TException
     {
       getFeedBack_args args = new getFeedBack_args();
       args.setHandle(handle);
-      args.setRequest(request);
+      args.setReceiverId(receiverId);
+      args.setCount(count);
+      args.setOffset(offset);
       sendBase("getFeedBack", args);
     }
 
-    public thrift.TFeedBackResult recv_getFeedBack() throws org.apache.thrift.TException
+    public thrift.TListFeedBackResult recv_getFeedBack() throws org.apache.thrift.TException
     {
       getFeedBack_result result = new getFeedBack_result();
       receiveBase(result, "getFeedBack");
@@ -1098,21 +1110,23 @@ public class MiotoCarService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "updateVoucher failed: unknown result");
     }
 
-    public thrift.TVoucherResult getVoucher(thrift.OpHandle handle, java.lang.String title) throws org.apache.thrift.TException
+    public thrift.TListVoucherResult getVoucher(thrift.OpHandle handle, java.lang.String title, int count, int offset) throws org.apache.thrift.TException
     {
-      send_getVoucher(handle, title);
+      send_getVoucher(handle, title, count, offset);
       return recv_getVoucher();
     }
 
-    public void send_getVoucher(thrift.OpHandle handle, java.lang.String title) throws org.apache.thrift.TException
+    public void send_getVoucher(thrift.OpHandle handle, java.lang.String title, int count, int offset) throws org.apache.thrift.TException
     {
       getVoucher_args args = new getVoucher_args();
       args.setHandle(handle);
       args.setTitle(title);
+      args.setCount(count);
+      args.setOffset(offset);
       sendBase("getVoucher", args);
     }
 
-    public thrift.TVoucherResult recv_getVoucher() throws org.apache.thrift.TException
+    public thrift.TListVoucherResult recv_getVoucher() throws org.apache.thrift.TException
     {
       getVoucher_result result = new getVoucher_result();
       receiveBase(result, "getVoucher");
@@ -1499,20 +1513,24 @@ public class MiotoCarService {
       }
     }
 
-    public void getFeePolicy(thrift.OpHandle handle, java.lang.String name, org.apache.thrift.async.AsyncMethodCallback<thrift.TFeePolicyResult> resultHandler) throws org.apache.thrift.TException {
+    public void getFeePolicy(thrift.OpHandle handle, java.lang.String name, int count, int offset, org.apache.thrift.async.AsyncMethodCallback<thrift.TListFeePolicyResult> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      getFeePolicy_call method_call = new getFeePolicy_call(handle, name, resultHandler, this, ___protocolFactory, ___transport);
+      getFeePolicy_call method_call = new getFeePolicy_call(handle, name, count, offset, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class getFeePolicy_call extends org.apache.thrift.async.TAsyncMethodCall<thrift.TFeePolicyResult> {
+    public static class getFeePolicy_call extends org.apache.thrift.async.TAsyncMethodCall<thrift.TListFeePolicyResult> {
       private thrift.OpHandle handle;
       private java.lang.String name;
-      public getFeePolicy_call(thrift.OpHandle handle, java.lang.String name, org.apache.thrift.async.AsyncMethodCallback<thrift.TFeePolicyResult> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private int count;
+      private int offset;
+      public getFeePolicy_call(thrift.OpHandle handle, java.lang.String name, int count, int offset, org.apache.thrift.async.AsyncMethodCallback<thrift.TListFeePolicyResult> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.handle = handle;
         this.name = name;
+        this.count = count;
+        this.offset = offset;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
@@ -1520,11 +1538,13 @@ public class MiotoCarService {
         getFeePolicy_args args = new getFeePolicy_args();
         args.setHandle(handle);
         args.setName(name);
+        args.setCount(count);
+        args.setOffset(offset);
         args.write(prot);
         prot.writeMessageEnd();
       }
 
-      public thrift.TFeePolicyResult getResult() throws org.apache.thrift.TException {
+      public thrift.TListFeePolicyResult getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
@@ -1674,20 +1694,24 @@ public class MiotoCarService {
       }
     }
 
-    public void getProvince(thrift.OpHandle handle, java.lang.String provinceName, org.apache.thrift.async.AsyncMethodCallback<thrift.TProvinceResult> resultHandler) throws org.apache.thrift.TException {
+    public void getProvince(thrift.OpHandle handle, java.lang.String provinceName, int count, int offset, org.apache.thrift.async.AsyncMethodCallback<thrift.TListProvinceResult> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      getProvince_call method_call = new getProvince_call(handle, provinceName, resultHandler, this, ___protocolFactory, ___transport);
+      getProvince_call method_call = new getProvince_call(handle, provinceName, count, offset, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class getProvince_call extends org.apache.thrift.async.TAsyncMethodCall<thrift.TProvinceResult> {
+    public static class getProvince_call extends org.apache.thrift.async.TAsyncMethodCall<thrift.TListProvinceResult> {
       private thrift.OpHandle handle;
       private java.lang.String provinceName;
-      public getProvince_call(thrift.OpHandle handle, java.lang.String provinceName, org.apache.thrift.async.AsyncMethodCallback<thrift.TProvinceResult> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private int count;
+      private int offset;
+      public getProvince_call(thrift.OpHandle handle, java.lang.String provinceName, int count, int offset, org.apache.thrift.async.AsyncMethodCallback<thrift.TListProvinceResult> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.handle = handle;
         this.provinceName = provinceName;
+        this.count = count;
+        this.offset = offset;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
@@ -1695,11 +1719,13 @@ public class MiotoCarService {
         getProvince_args args = new getProvince_args();
         args.setHandle(handle);
         args.setProvinceName(provinceName);
+        args.setCount(count);
+        args.setOffset(offset);
         args.write(prot);
         prot.writeMessageEnd();
       }
 
-      public thrift.TProvinceResult getResult() throws org.apache.thrift.TException {
+      public thrift.TListProvinceResult getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
@@ -1849,20 +1875,24 @@ public class MiotoCarService {
       }
     }
 
-    public void getDistrict(thrift.OpHandle handle, int provinceId, org.apache.thrift.async.AsyncMethodCallback<thrift.TDistrictResult> resultHandler) throws org.apache.thrift.TException {
+    public void getDistrict(thrift.OpHandle handle, int provinceId, int count, int offset, org.apache.thrift.async.AsyncMethodCallback<thrift.TListDistrictResult> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      getDistrict_call method_call = new getDistrict_call(handle, provinceId, resultHandler, this, ___protocolFactory, ___transport);
+      getDistrict_call method_call = new getDistrict_call(handle, provinceId, count, offset, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class getDistrict_call extends org.apache.thrift.async.TAsyncMethodCall<thrift.TDistrictResult> {
+    public static class getDistrict_call extends org.apache.thrift.async.TAsyncMethodCall<thrift.TListDistrictResult> {
       private thrift.OpHandle handle;
       private int provinceId;
-      public getDistrict_call(thrift.OpHandle handle, int provinceId, org.apache.thrift.async.AsyncMethodCallback<thrift.TDistrictResult> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private int count;
+      private int offset;
+      public getDistrict_call(thrift.OpHandle handle, int provinceId, int count, int offset, org.apache.thrift.async.AsyncMethodCallback<thrift.TListDistrictResult> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.handle = handle;
         this.provinceId = provinceId;
+        this.count = count;
+        this.offset = offset;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
@@ -1870,11 +1900,13 @@ public class MiotoCarService {
         getDistrict_args args = new getDistrict_args();
         args.setHandle(handle);
         args.setProvinceId(provinceId);
+        args.setCount(count);
+        args.setOffset(offset);
         args.write(prot);
         prot.writeMessageEnd();
       }
 
-      public thrift.TDistrictResult getResult() throws org.apache.thrift.TException {
+      public thrift.TListDistrictResult getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
@@ -2024,20 +2056,24 @@ public class MiotoCarService {
       }
     }
 
-    public void getCarBrand(thrift.OpHandle handle, java.lang.String nameBrand, org.apache.thrift.async.AsyncMethodCallback<thrift.TCarBrandResult> resultHandler) throws org.apache.thrift.TException {
+    public void getCarBrand(thrift.OpHandle handle, java.lang.String nameBrand, int count, int offset, org.apache.thrift.async.AsyncMethodCallback<thrift.TListCarBrandResult> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      getCarBrand_call method_call = new getCarBrand_call(handle, nameBrand, resultHandler, this, ___protocolFactory, ___transport);
+      getCarBrand_call method_call = new getCarBrand_call(handle, nameBrand, count, offset, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class getCarBrand_call extends org.apache.thrift.async.TAsyncMethodCall<thrift.TCarBrandResult> {
+    public static class getCarBrand_call extends org.apache.thrift.async.TAsyncMethodCall<thrift.TListCarBrandResult> {
       private thrift.OpHandle handle;
       private java.lang.String nameBrand;
-      public getCarBrand_call(thrift.OpHandle handle, java.lang.String nameBrand, org.apache.thrift.async.AsyncMethodCallback<thrift.TCarBrandResult> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private int count;
+      private int offset;
+      public getCarBrand_call(thrift.OpHandle handle, java.lang.String nameBrand, int count, int offset, org.apache.thrift.async.AsyncMethodCallback<thrift.TListCarBrandResult> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.handle = handle;
         this.nameBrand = nameBrand;
+        this.count = count;
+        this.offset = offset;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
@@ -2045,11 +2081,13 @@ public class MiotoCarService {
         getCarBrand_args args = new getCarBrand_args();
         args.setHandle(handle);
         args.setNameBrand(nameBrand);
+        args.setCount(count);
+        args.setOffset(offset);
         args.write(prot);
         prot.writeMessageEnd();
       }
 
-      public thrift.TCarBrandResult getResult() throws org.apache.thrift.TException {
+      public thrift.TListCarBrandResult getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
@@ -2199,20 +2237,24 @@ public class MiotoCarService {
       }
     }
 
-    public void getFeature(thrift.OpHandle handle, java.lang.String nameFeature, org.apache.thrift.async.AsyncMethodCallback<thrift.TFeatureResult> resultHandler) throws org.apache.thrift.TException {
+    public void getFeature(thrift.OpHandle handle, java.lang.String nameFeature, int count, int offset, org.apache.thrift.async.AsyncMethodCallback<thrift.TListFeatureResult> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      getFeature_call method_call = new getFeature_call(handle, nameFeature, resultHandler, this, ___protocolFactory, ___transport);
+      getFeature_call method_call = new getFeature_call(handle, nameFeature, count, offset, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class getFeature_call extends org.apache.thrift.async.TAsyncMethodCall<thrift.TFeatureResult> {
+    public static class getFeature_call extends org.apache.thrift.async.TAsyncMethodCall<thrift.TListFeatureResult> {
       private thrift.OpHandle handle;
       private java.lang.String nameFeature;
-      public getFeature_call(thrift.OpHandle handle, java.lang.String nameFeature, org.apache.thrift.async.AsyncMethodCallback<thrift.TFeatureResult> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private int count;
+      private int offset;
+      public getFeature_call(thrift.OpHandle handle, java.lang.String nameFeature, int count, int offset, org.apache.thrift.async.AsyncMethodCallback<thrift.TListFeatureResult> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.handle = handle;
         this.nameFeature = nameFeature;
+        this.count = count;
+        this.offset = offset;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
@@ -2220,11 +2262,13 @@ public class MiotoCarService {
         getFeature_args args = new getFeature_args();
         args.setHandle(handle);
         args.setNameFeature(nameFeature);
+        args.setCount(count);
+        args.setOffset(offset);
         args.write(prot);
         prot.writeMessageEnd();
       }
 
-      public thrift.TFeatureResult getResult() throws org.apache.thrift.TException {
+      public thrift.TListFeatureResult getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
@@ -2374,32 +2418,38 @@ public class MiotoCarService {
       }
     }
 
-    public void getFeedBack(thrift.OpHandle handle, thrift.TFeedBackRequest request, org.apache.thrift.async.AsyncMethodCallback<thrift.TFeedBackResult> resultHandler) throws org.apache.thrift.TException {
+    public void getFeedBack(thrift.OpHandle handle, int receiverId, int count, int offset, org.apache.thrift.async.AsyncMethodCallback<thrift.TListFeedBackResult> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      getFeedBack_call method_call = new getFeedBack_call(handle, request, resultHandler, this, ___protocolFactory, ___transport);
+      getFeedBack_call method_call = new getFeedBack_call(handle, receiverId, count, offset, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class getFeedBack_call extends org.apache.thrift.async.TAsyncMethodCall<thrift.TFeedBackResult> {
+    public static class getFeedBack_call extends org.apache.thrift.async.TAsyncMethodCall<thrift.TListFeedBackResult> {
       private thrift.OpHandle handle;
-      private thrift.TFeedBackRequest request;
-      public getFeedBack_call(thrift.OpHandle handle, thrift.TFeedBackRequest request, org.apache.thrift.async.AsyncMethodCallback<thrift.TFeedBackResult> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private int receiverId;
+      private int count;
+      private int offset;
+      public getFeedBack_call(thrift.OpHandle handle, int receiverId, int count, int offset, org.apache.thrift.async.AsyncMethodCallback<thrift.TListFeedBackResult> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.handle = handle;
-        this.request = request;
+        this.receiverId = receiverId;
+        this.count = count;
+        this.offset = offset;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getFeedBack", org.apache.thrift.protocol.TMessageType.CALL, 0));
         getFeedBack_args args = new getFeedBack_args();
         args.setHandle(handle);
-        args.setRequest(request);
+        args.setReceiverId(receiverId);
+        args.setCount(count);
+        args.setOffset(offset);
         args.write(prot);
         prot.writeMessageEnd();
       }
 
-      public thrift.TFeedBackResult getResult() throws org.apache.thrift.TException {
+      public thrift.TListFeedBackResult getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
@@ -2514,20 +2564,24 @@ public class MiotoCarService {
       }
     }
 
-    public void getVoucher(thrift.OpHandle handle, java.lang.String title, org.apache.thrift.async.AsyncMethodCallback<thrift.TVoucherResult> resultHandler) throws org.apache.thrift.TException {
+    public void getVoucher(thrift.OpHandle handle, java.lang.String title, int count, int offset, org.apache.thrift.async.AsyncMethodCallback<thrift.TListVoucherResult> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      getVoucher_call method_call = new getVoucher_call(handle, title, resultHandler, this, ___protocolFactory, ___transport);
+      getVoucher_call method_call = new getVoucher_call(handle, title, count, offset, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class getVoucher_call extends org.apache.thrift.async.TAsyncMethodCall<thrift.TVoucherResult> {
+    public static class getVoucher_call extends org.apache.thrift.async.TAsyncMethodCall<thrift.TListVoucherResult> {
       private thrift.OpHandle handle;
       private java.lang.String title;
-      public getVoucher_call(thrift.OpHandle handle, java.lang.String title, org.apache.thrift.async.AsyncMethodCallback<thrift.TVoucherResult> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private int count;
+      private int offset;
+      public getVoucher_call(thrift.OpHandle handle, java.lang.String title, int count, int offset, org.apache.thrift.async.AsyncMethodCallback<thrift.TListVoucherResult> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.handle = handle;
         this.title = title;
+        this.count = count;
+        this.offset = offset;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
@@ -2535,11 +2589,13 @@ public class MiotoCarService {
         getVoucher_args args = new getVoucher_args();
         args.setHandle(handle);
         args.setTitle(title);
+        args.setCount(count);
+        args.setOffset(offset);
         args.write(prot);
         prot.writeMessageEnd();
       }
 
-      public thrift.TVoucherResult getResult() throws org.apache.thrift.TException {
+      public thrift.TListVoucherResult getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
@@ -2934,7 +2990,7 @@ public class MiotoCarService {
 
       public getFeePolicy_result getResult(I iface, getFeePolicy_args args) throws org.apache.thrift.TException {
         getFeePolicy_result result = new getFeePolicy_result();
-        result.success = iface.getFeePolicy(args.handle, args.name);
+        result.success = iface.getFeePolicy(args.handle, args.name, args.count, args.offset);
         return result;
       }
     }
@@ -3059,7 +3115,7 @@ public class MiotoCarService {
 
       public getProvince_result getResult(I iface, getProvince_args args) throws org.apache.thrift.TException {
         getProvince_result result = new getProvince_result();
-        result.success = iface.getProvince(args.handle, args.provinceName);
+        result.success = iface.getProvince(args.handle, args.provinceName, args.count, args.offset);
         return result;
       }
     }
@@ -3184,7 +3240,7 @@ public class MiotoCarService {
 
       public getDistrict_result getResult(I iface, getDistrict_args args) throws org.apache.thrift.TException {
         getDistrict_result result = new getDistrict_result();
-        result.success = iface.getDistrict(args.handle, args.provinceId);
+        result.success = iface.getDistrict(args.handle, args.provinceId, args.count, args.offset);
         return result;
       }
     }
@@ -3309,7 +3365,7 @@ public class MiotoCarService {
 
       public getCarBrand_result getResult(I iface, getCarBrand_args args) throws org.apache.thrift.TException {
         getCarBrand_result result = new getCarBrand_result();
-        result.success = iface.getCarBrand(args.handle, args.nameBrand);
+        result.success = iface.getCarBrand(args.handle, args.nameBrand, args.count, args.offset);
         return result;
       }
     }
@@ -3434,7 +3490,7 @@ public class MiotoCarService {
 
       public getFeature_result getResult(I iface, getFeature_args args) throws org.apache.thrift.TException {
         getFeature_result result = new getFeature_result();
-        result.success = iface.getFeature(args.handle, args.nameFeature);
+        result.success = iface.getFeature(args.handle, args.nameFeature, args.count, args.offset);
         return result;
       }
     }
@@ -3559,7 +3615,7 @@ public class MiotoCarService {
 
       public getFeedBack_result getResult(I iface, getFeedBack_args args) throws org.apache.thrift.TException {
         getFeedBack_result result = new getFeedBack_result();
-        result.success = iface.getFeedBack(args.handle, args.request);
+        result.success = iface.getFeedBack(args.handle, args.receiverId, args.count, args.offset);
         return result;
       }
     }
@@ -3659,7 +3715,7 @@ public class MiotoCarService {
 
       public getVoucher_result getResult(I iface, getVoucher_args args) throws org.apache.thrift.TException {
         getVoucher_result result = new getVoucher_result();
-        result.success = iface.getVoucher(args.handle, args.title);
+        result.success = iface.getVoucher(args.handle, args.title, args.count, args.offset);
         return result;
       }
     }
@@ -4284,7 +4340,7 @@ public class MiotoCarService {
       }
     }
 
-    public static class getFeePolicy<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getFeePolicy_args, thrift.TFeePolicyResult> {
+    public static class getFeePolicy<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getFeePolicy_args, thrift.TListFeePolicyResult> {
       public getFeePolicy() {
         super("getFeePolicy");
       }
@@ -4293,10 +4349,10 @@ public class MiotoCarService {
         return new getFeePolicy_args();
       }
 
-      public org.apache.thrift.async.AsyncMethodCallback<thrift.TFeePolicyResult> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+      public org.apache.thrift.async.AsyncMethodCallback<thrift.TListFeePolicyResult> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new org.apache.thrift.async.AsyncMethodCallback<thrift.TFeePolicyResult>() { 
-          public void onComplete(thrift.TFeePolicyResult o) {
+        return new org.apache.thrift.async.AsyncMethodCallback<thrift.TListFeePolicyResult>() { 
+          public void onComplete(thrift.TListFeePolicyResult o) {
             getFeePolicy_result result = new getFeePolicy_result();
             result.success = o;
             try {
@@ -4340,8 +4396,8 @@ public class MiotoCarService {
         return false;
       }
 
-      public void start(I iface, getFeePolicy_args args, org.apache.thrift.async.AsyncMethodCallback<thrift.TFeePolicyResult> resultHandler) throws org.apache.thrift.TException {
-        iface.getFeePolicy(args.handle, args.name,resultHandler);
+      public void start(I iface, getFeePolicy_args args, org.apache.thrift.async.AsyncMethodCallback<thrift.TListFeePolicyResult> resultHandler) throws org.apache.thrift.TException {
+        iface.getFeePolicy(args.handle, args.name, args.count, args.offset,resultHandler);
       }
     }
 
@@ -4589,7 +4645,7 @@ public class MiotoCarService {
       }
     }
 
-    public static class getProvince<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getProvince_args, thrift.TProvinceResult> {
+    public static class getProvince<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getProvince_args, thrift.TListProvinceResult> {
       public getProvince() {
         super("getProvince");
       }
@@ -4598,10 +4654,10 @@ public class MiotoCarService {
         return new getProvince_args();
       }
 
-      public org.apache.thrift.async.AsyncMethodCallback<thrift.TProvinceResult> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+      public org.apache.thrift.async.AsyncMethodCallback<thrift.TListProvinceResult> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new org.apache.thrift.async.AsyncMethodCallback<thrift.TProvinceResult>() { 
-          public void onComplete(thrift.TProvinceResult o) {
+        return new org.apache.thrift.async.AsyncMethodCallback<thrift.TListProvinceResult>() { 
+          public void onComplete(thrift.TListProvinceResult o) {
             getProvince_result result = new getProvince_result();
             result.success = o;
             try {
@@ -4645,8 +4701,8 @@ public class MiotoCarService {
         return false;
       }
 
-      public void start(I iface, getProvince_args args, org.apache.thrift.async.AsyncMethodCallback<thrift.TProvinceResult> resultHandler) throws org.apache.thrift.TException {
-        iface.getProvince(args.handle, args.provinceName,resultHandler);
+      public void start(I iface, getProvince_args args, org.apache.thrift.async.AsyncMethodCallback<thrift.TListProvinceResult> resultHandler) throws org.apache.thrift.TException {
+        iface.getProvince(args.handle, args.provinceName, args.count, args.offset,resultHandler);
       }
     }
 
@@ -4894,7 +4950,7 @@ public class MiotoCarService {
       }
     }
 
-    public static class getDistrict<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getDistrict_args, thrift.TDistrictResult> {
+    public static class getDistrict<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getDistrict_args, thrift.TListDistrictResult> {
       public getDistrict() {
         super("getDistrict");
       }
@@ -4903,10 +4959,10 @@ public class MiotoCarService {
         return new getDistrict_args();
       }
 
-      public org.apache.thrift.async.AsyncMethodCallback<thrift.TDistrictResult> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+      public org.apache.thrift.async.AsyncMethodCallback<thrift.TListDistrictResult> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new org.apache.thrift.async.AsyncMethodCallback<thrift.TDistrictResult>() { 
-          public void onComplete(thrift.TDistrictResult o) {
+        return new org.apache.thrift.async.AsyncMethodCallback<thrift.TListDistrictResult>() { 
+          public void onComplete(thrift.TListDistrictResult o) {
             getDistrict_result result = new getDistrict_result();
             result.success = o;
             try {
@@ -4950,8 +5006,8 @@ public class MiotoCarService {
         return false;
       }
 
-      public void start(I iface, getDistrict_args args, org.apache.thrift.async.AsyncMethodCallback<thrift.TDistrictResult> resultHandler) throws org.apache.thrift.TException {
-        iface.getDistrict(args.handle, args.provinceId,resultHandler);
+      public void start(I iface, getDistrict_args args, org.apache.thrift.async.AsyncMethodCallback<thrift.TListDistrictResult> resultHandler) throws org.apache.thrift.TException {
+        iface.getDistrict(args.handle, args.provinceId, args.count, args.offset,resultHandler);
       }
     }
 
@@ -5199,7 +5255,7 @@ public class MiotoCarService {
       }
     }
 
-    public static class getCarBrand<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getCarBrand_args, thrift.TCarBrandResult> {
+    public static class getCarBrand<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getCarBrand_args, thrift.TListCarBrandResult> {
       public getCarBrand() {
         super("getCarBrand");
       }
@@ -5208,10 +5264,10 @@ public class MiotoCarService {
         return new getCarBrand_args();
       }
 
-      public org.apache.thrift.async.AsyncMethodCallback<thrift.TCarBrandResult> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+      public org.apache.thrift.async.AsyncMethodCallback<thrift.TListCarBrandResult> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new org.apache.thrift.async.AsyncMethodCallback<thrift.TCarBrandResult>() { 
-          public void onComplete(thrift.TCarBrandResult o) {
+        return new org.apache.thrift.async.AsyncMethodCallback<thrift.TListCarBrandResult>() { 
+          public void onComplete(thrift.TListCarBrandResult o) {
             getCarBrand_result result = new getCarBrand_result();
             result.success = o;
             try {
@@ -5255,8 +5311,8 @@ public class MiotoCarService {
         return false;
       }
 
-      public void start(I iface, getCarBrand_args args, org.apache.thrift.async.AsyncMethodCallback<thrift.TCarBrandResult> resultHandler) throws org.apache.thrift.TException {
-        iface.getCarBrand(args.handle, args.nameBrand,resultHandler);
+      public void start(I iface, getCarBrand_args args, org.apache.thrift.async.AsyncMethodCallback<thrift.TListCarBrandResult> resultHandler) throws org.apache.thrift.TException {
+        iface.getCarBrand(args.handle, args.nameBrand, args.count, args.offset,resultHandler);
       }
     }
 
@@ -5504,7 +5560,7 @@ public class MiotoCarService {
       }
     }
 
-    public static class getFeature<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getFeature_args, thrift.TFeatureResult> {
+    public static class getFeature<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getFeature_args, thrift.TListFeatureResult> {
       public getFeature() {
         super("getFeature");
       }
@@ -5513,10 +5569,10 @@ public class MiotoCarService {
         return new getFeature_args();
       }
 
-      public org.apache.thrift.async.AsyncMethodCallback<thrift.TFeatureResult> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+      public org.apache.thrift.async.AsyncMethodCallback<thrift.TListFeatureResult> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new org.apache.thrift.async.AsyncMethodCallback<thrift.TFeatureResult>() { 
-          public void onComplete(thrift.TFeatureResult o) {
+        return new org.apache.thrift.async.AsyncMethodCallback<thrift.TListFeatureResult>() { 
+          public void onComplete(thrift.TListFeatureResult o) {
             getFeature_result result = new getFeature_result();
             result.success = o;
             try {
@@ -5560,8 +5616,8 @@ public class MiotoCarService {
         return false;
       }
 
-      public void start(I iface, getFeature_args args, org.apache.thrift.async.AsyncMethodCallback<thrift.TFeatureResult> resultHandler) throws org.apache.thrift.TException {
-        iface.getFeature(args.handle, args.nameFeature,resultHandler);
+      public void start(I iface, getFeature_args args, org.apache.thrift.async.AsyncMethodCallback<thrift.TListFeatureResult> resultHandler) throws org.apache.thrift.TException {
+        iface.getFeature(args.handle, args.nameFeature, args.count, args.offset,resultHandler);
       }
     }
 
@@ -5809,7 +5865,7 @@ public class MiotoCarService {
       }
     }
 
-    public static class getFeedBack<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getFeedBack_args, thrift.TFeedBackResult> {
+    public static class getFeedBack<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getFeedBack_args, thrift.TListFeedBackResult> {
       public getFeedBack() {
         super("getFeedBack");
       }
@@ -5818,10 +5874,10 @@ public class MiotoCarService {
         return new getFeedBack_args();
       }
 
-      public org.apache.thrift.async.AsyncMethodCallback<thrift.TFeedBackResult> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+      public org.apache.thrift.async.AsyncMethodCallback<thrift.TListFeedBackResult> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new org.apache.thrift.async.AsyncMethodCallback<thrift.TFeedBackResult>() { 
-          public void onComplete(thrift.TFeedBackResult o) {
+        return new org.apache.thrift.async.AsyncMethodCallback<thrift.TListFeedBackResult>() { 
+          public void onComplete(thrift.TListFeedBackResult o) {
             getFeedBack_result result = new getFeedBack_result();
             result.success = o;
             try {
@@ -5865,8 +5921,8 @@ public class MiotoCarService {
         return false;
       }
 
-      public void start(I iface, getFeedBack_args args, org.apache.thrift.async.AsyncMethodCallback<thrift.TFeedBackResult> resultHandler) throws org.apache.thrift.TException {
-        iface.getFeedBack(args.handle, args.request,resultHandler);
+      public void start(I iface, getFeedBack_args args, org.apache.thrift.async.AsyncMethodCallback<thrift.TListFeedBackResult> resultHandler) throws org.apache.thrift.TException {
+        iface.getFeedBack(args.handle, args.receiverId, args.count, args.offset,resultHandler);
       }
     }
 
@@ -6053,7 +6109,7 @@ public class MiotoCarService {
       }
     }
 
-    public static class getVoucher<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getVoucher_args, thrift.TVoucherResult> {
+    public static class getVoucher<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getVoucher_args, thrift.TListVoucherResult> {
       public getVoucher() {
         super("getVoucher");
       }
@@ -6062,10 +6118,10 @@ public class MiotoCarService {
         return new getVoucher_args();
       }
 
-      public org.apache.thrift.async.AsyncMethodCallback<thrift.TVoucherResult> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+      public org.apache.thrift.async.AsyncMethodCallback<thrift.TListVoucherResult> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new org.apache.thrift.async.AsyncMethodCallback<thrift.TVoucherResult>() { 
-          public void onComplete(thrift.TVoucherResult o) {
+        return new org.apache.thrift.async.AsyncMethodCallback<thrift.TListVoucherResult>() { 
+          public void onComplete(thrift.TListVoucherResult o) {
             getVoucher_result result = new getVoucher_result();
             result.success = o;
             try {
@@ -6109,8 +6165,8 @@ public class MiotoCarService {
         return false;
       }
 
-      public void start(I iface, getVoucher_args args, org.apache.thrift.async.AsyncMethodCallback<thrift.TVoucherResult> resultHandler) throws org.apache.thrift.TException {
-        iface.getVoucher(args.handle, args.title,resultHandler);
+      public void start(I iface, getVoucher_args args, org.apache.thrift.async.AsyncMethodCallback<thrift.TListVoucherResult> resultHandler) throws org.apache.thrift.TException {
+        iface.getVoucher(args.handle, args.title, args.count, args.offset,resultHandler);
       }
     }
 
@@ -13233,17 +13289,23 @@ public class MiotoCarService {
 
     private static final org.apache.thrift.protocol.TField HANDLE_FIELD_DESC = new org.apache.thrift.protocol.TField("handle", org.apache.thrift.protocol.TType.STRUCT, (short)1);
     private static final org.apache.thrift.protocol.TField NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("name", org.apache.thrift.protocol.TType.STRING, (short)2);
+    private static final org.apache.thrift.protocol.TField COUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("count", org.apache.thrift.protocol.TType.I32, (short)3);
+    private static final org.apache.thrift.protocol.TField OFFSET_FIELD_DESC = new org.apache.thrift.protocol.TField("offset", org.apache.thrift.protocol.TType.I32, (short)4);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new getFeePolicy_argsStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new getFeePolicy_argsTupleSchemeFactory();
 
     public @org.apache.thrift.annotation.Nullable thrift.OpHandle handle; // required
     public @org.apache.thrift.annotation.Nullable java.lang.String name; // required
+    public int count; // required
+    public int offset; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
       HANDLE((short)1, "handle"),
-      NAME((short)2, "name");
+      NAME((short)2, "name"),
+      COUNT((short)3, "count"),
+      OFFSET((short)4, "offset");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -13263,6 +13325,10 @@ public class MiotoCarService {
             return HANDLE;
           case 2: // NAME
             return NAME;
+          case 3: // COUNT
+            return COUNT;
+          case 4: // OFFSET
+            return OFFSET;
           default:
             return null;
         }
@@ -13304,6 +13370,9 @@ public class MiotoCarService {
     }
 
     // isset id assignments
+    private static final int __COUNT_ISSET_ID = 0;
+    private static final int __OFFSET_ISSET_ID = 1;
+    private byte __isset_bitfield = 0;
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -13311,6 +13380,10 @@ public class MiotoCarService {
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, thrift.OpHandle.class)));
       tmpMap.put(_Fields.NAME, new org.apache.thrift.meta_data.FieldMetaData("name", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.COUNT, new org.apache.thrift.meta_data.FieldMetaData("count", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+      tmpMap.put(_Fields.OFFSET, new org.apache.thrift.meta_data.FieldMetaData("offset", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getFeePolicy_args.class, metaDataMap);
     }
@@ -13320,23 +13393,32 @@ public class MiotoCarService {
 
     public getFeePolicy_args(
       thrift.OpHandle handle,
-      java.lang.String name)
+      java.lang.String name,
+      int count,
+      int offset)
     {
       this();
       this.handle = handle;
       this.name = name;
+      this.count = count;
+      setCountIsSet(true);
+      this.offset = offset;
+      setOffsetIsSet(true);
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
     public getFeePolicy_args(getFeePolicy_args other) {
+      __isset_bitfield = other.__isset_bitfield;
       if (other.isSetHandle()) {
         this.handle = new thrift.OpHandle(other.handle);
       }
       if (other.isSetName()) {
         this.name = other.name;
       }
+      this.count = other.count;
+      this.offset = other.offset;
     }
 
     public getFeePolicy_args deepCopy() {
@@ -13347,6 +13429,10 @@ public class MiotoCarService {
     public void clear() {
       this.handle = null;
       this.name = null;
+      setCountIsSet(false);
+      this.count = 0;
+      setOffsetIsSet(false);
+      this.offset = 0;
     }
 
     @org.apache.thrift.annotation.Nullable
@@ -13399,6 +13485,52 @@ public class MiotoCarService {
       }
     }
 
+    public int getCount() {
+      return this.count;
+    }
+
+    public getFeePolicy_args setCount(int count) {
+      this.count = count;
+      setCountIsSet(true);
+      return this;
+    }
+
+    public void unsetCount() {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __COUNT_ISSET_ID);
+    }
+
+    /** Returns true if field count is set (has been assigned a value) and false otherwise */
+    public boolean isSetCount() {
+      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __COUNT_ISSET_ID);
+    }
+
+    public void setCountIsSet(boolean value) {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __COUNT_ISSET_ID, value);
+    }
+
+    public int getOffset() {
+      return this.offset;
+    }
+
+    public getFeePolicy_args setOffset(int offset) {
+      this.offset = offset;
+      setOffsetIsSet(true);
+      return this;
+    }
+
+    public void unsetOffset() {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __OFFSET_ISSET_ID);
+    }
+
+    /** Returns true if field offset is set (has been assigned a value) and false otherwise */
+    public boolean isSetOffset() {
+      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __OFFSET_ISSET_ID);
+    }
+
+    public void setOffsetIsSet(boolean value) {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __OFFSET_ISSET_ID, value);
+    }
+
     public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
       switch (field) {
       case HANDLE:
@@ -13417,6 +13549,22 @@ public class MiotoCarService {
         }
         break;
 
+      case COUNT:
+        if (value == null) {
+          unsetCount();
+        } else {
+          setCount((java.lang.Integer)value);
+        }
+        break;
+
+      case OFFSET:
+        if (value == null) {
+          unsetOffset();
+        } else {
+          setOffset((java.lang.Integer)value);
+        }
+        break;
+
       }
     }
 
@@ -13428,6 +13576,12 @@ public class MiotoCarService {
 
       case NAME:
         return getName();
+
+      case COUNT:
+        return getCount();
+
+      case OFFSET:
+        return getOffset();
 
       }
       throw new java.lang.IllegalStateException();
@@ -13444,6 +13598,10 @@ public class MiotoCarService {
         return isSetHandle();
       case NAME:
         return isSetName();
+      case COUNT:
+        return isSetCount();
+      case OFFSET:
+        return isSetOffset();
       }
       throw new java.lang.IllegalStateException();
     }
@@ -13481,6 +13639,24 @@ public class MiotoCarService {
           return false;
       }
 
+      boolean this_present_count = true;
+      boolean that_present_count = true;
+      if (this_present_count || that_present_count) {
+        if (!(this_present_count && that_present_count))
+          return false;
+        if (this.count != that.count)
+          return false;
+      }
+
+      boolean this_present_offset = true;
+      boolean that_present_offset = true;
+      if (this_present_offset || that_present_offset) {
+        if (!(this_present_offset && that_present_offset))
+          return false;
+        if (this.offset != that.offset)
+          return false;
+      }
+
       return true;
     }
 
@@ -13495,6 +13671,10 @@ public class MiotoCarService {
       hashCode = hashCode * 8191 + ((isSetName()) ? 131071 : 524287);
       if (isSetName())
         hashCode = hashCode * 8191 + name.hashCode();
+
+      hashCode = hashCode * 8191 + count;
+
+      hashCode = hashCode * 8191 + offset;
 
       return hashCode;
     }
@@ -13523,6 +13703,26 @@ public class MiotoCarService {
       }
       if (isSetName()) {
         lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.name, other.name);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetCount()).compareTo(other.isSetCount());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetCount()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.count, other.count);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetOffset()).compareTo(other.isSetOffset());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetOffset()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.offset, other.offset);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -13563,6 +13763,14 @@ public class MiotoCarService {
         sb.append(this.name);
       }
       first = false;
+      if (!first) sb.append(", ");
+      sb.append("count:");
+      sb.append(this.count);
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("offset:");
+      sb.append(this.offset);
+      first = false;
       sb.append(")");
       return sb.toString();
     }
@@ -13572,6 +13780,8 @@ public class MiotoCarService {
       if (handle == null) {
         throw new org.apache.thrift.protocol.TProtocolException("Required field 'handle' was not present! Struct: " + toString());
       }
+      // alas, we cannot check 'count' because it's a primitive and you chose the non-beans generator.
+      // alas, we cannot check 'offset' because it's a primitive and you chose the non-beans generator.
       // check for sub-struct validity
       if (handle != null) {
         handle.validate();
@@ -13588,6 +13798,8 @@ public class MiotoCarService {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
       try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -13629,6 +13841,22 @@ public class MiotoCarService {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
+            case 3: // COUNT
+              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+                struct.count = iprot.readI32();
+                struct.setCountIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 4: // OFFSET
+              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+                struct.offset = iprot.readI32();
+                struct.setOffsetIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -13637,6 +13865,12 @@ public class MiotoCarService {
         iprot.readStructEnd();
 
         // check for required fields of primitive type, which can't be checked in the validate method
+        if (!struct.isSetCount()) {
+          throw new org.apache.thrift.protocol.TProtocolException("Required field 'count' was not found in serialized data! Struct: " + toString());
+        }
+        if (!struct.isSetOffset()) {
+          throw new org.apache.thrift.protocol.TProtocolException("Required field 'offset' was not found in serialized data! Struct: " + toString());
+        }
         struct.validate();
       }
 
@@ -13654,6 +13888,12 @@ public class MiotoCarService {
           oprot.writeString(struct.name);
           oprot.writeFieldEnd();
         }
+        oprot.writeFieldBegin(COUNT_FIELD_DESC);
+        oprot.writeI32(struct.count);
+        oprot.writeFieldEnd();
+        oprot.writeFieldBegin(OFFSET_FIELD_DESC);
+        oprot.writeI32(struct.offset);
+        oprot.writeFieldEnd();
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
@@ -13672,6 +13912,8 @@ public class MiotoCarService {
       public void write(org.apache.thrift.protocol.TProtocol prot, getFeePolicy_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         struct.handle.write(oprot);
+        oprot.writeI32(struct.count);
+        oprot.writeI32(struct.offset);
         java.util.BitSet optionals = new java.util.BitSet();
         if (struct.isSetName()) {
           optionals.set(0);
@@ -13688,6 +13930,10 @@ public class MiotoCarService {
         struct.handle = new thrift.OpHandle();
         struct.handle.read(iprot);
         struct.setHandleIsSet(true);
+        struct.count = iprot.readI32();
+        struct.setCountIsSet(true);
+        struct.offset = iprot.readI32();
+        struct.setOffsetIsSet(true);
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
           struct.name = iprot.readString();
@@ -13709,7 +13955,7 @@ public class MiotoCarService {
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new getFeePolicy_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new getFeePolicy_resultTupleSchemeFactory();
 
-    public @org.apache.thrift.annotation.Nullable thrift.TFeePolicyResult success; // required
+    public @org.apache.thrift.annotation.Nullable thrift.TListFeePolicyResult success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -13776,7 +14022,7 @@ public class MiotoCarService {
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, thrift.TFeePolicyResult.class)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, thrift.TListFeePolicyResult.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getFeePolicy_result.class, metaDataMap);
     }
@@ -13785,7 +14031,7 @@ public class MiotoCarService {
     }
 
     public getFeePolicy_result(
-      thrift.TFeePolicyResult success)
+      thrift.TListFeePolicyResult success)
     {
       this();
       this.success = success;
@@ -13796,7 +14042,7 @@ public class MiotoCarService {
      */
     public getFeePolicy_result(getFeePolicy_result other) {
       if (other.isSetSuccess()) {
-        this.success = new thrift.TFeePolicyResult(other.success);
+        this.success = new thrift.TListFeePolicyResult(other.success);
       }
     }
 
@@ -13810,11 +14056,11 @@ public class MiotoCarService {
     }
 
     @org.apache.thrift.annotation.Nullable
-    public thrift.TFeePolicyResult getSuccess() {
+    public thrift.TListFeePolicyResult getSuccess() {
       return this.success;
     }
 
-    public getFeePolicy_result setSuccess(@org.apache.thrift.annotation.Nullable thrift.TFeePolicyResult success) {
+    public getFeePolicy_result setSuccess(@org.apache.thrift.annotation.Nullable thrift.TListFeePolicyResult success) {
       this.success = success;
       return this;
     }
@@ -13840,7 +14086,7 @@ public class MiotoCarService {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((thrift.TFeePolicyResult)value);
+          setSuccess((thrift.TListFeePolicyResult)value);
         }
         break;
 
@@ -14002,7 +14248,7 @@ public class MiotoCarService {
           switch (schemeField.id) {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.success = new thrift.TFeePolicyResult();
+                struct.success = new thrift.TListFeePolicyResult();
                 struct.success.read(iprot);
                 struct.setSuccessIsSet(true);
               } else { 
@@ -14061,7 +14307,7 @@ public class MiotoCarService {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.success = new thrift.TFeePolicyResult();
+          struct.success = new thrift.TListFeePolicyResult();
           struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }
@@ -17432,17 +17678,23 @@ public class MiotoCarService {
 
     private static final org.apache.thrift.protocol.TField HANDLE_FIELD_DESC = new org.apache.thrift.protocol.TField("handle", org.apache.thrift.protocol.TType.STRUCT, (short)1);
     private static final org.apache.thrift.protocol.TField PROVINCE_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("provinceName", org.apache.thrift.protocol.TType.STRING, (short)2);
+    private static final org.apache.thrift.protocol.TField COUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("count", org.apache.thrift.protocol.TType.I32, (short)3);
+    private static final org.apache.thrift.protocol.TField OFFSET_FIELD_DESC = new org.apache.thrift.protocol.TField("offset", org.apache.thrift.protocol.TType.I32, (short)4);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new getProvince_argsStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new getProvince_argsTupleSchemeFactory();
 
     public @org.apache.thrift.annotation.Nullable thrift.OpHandle handle; // required
     public @org.apache.thrift.annotation.Nullable java.lang.String provinceName; // required
+    public int count; // required
+    public int offset; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
       HANDLE((short)1, "handle"),
-      PROVINCE_NAME((short)2, "provinceName");
+      PROVINCE_NAME((short)2, "provinceName"),
+      COUNT((short)3, "count"),
+      OFFSET((short)4, "offset");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -17462,6 +17714,10 @@ public class MiotoCarService {
             return HANDLE;
           case 2: // PROVINCE_NAME
             return PROVINCE_NAME;
+          case 3: // COUNT
+            return COUNT;
+          case 4: // OFFSET
+            return OFFSET;
           default:
             return null;
         }
@@ -17503,13 +17759,20 @@ public class MiotoCarService {
     }
 
     // isset id assignments
+    private static final int __COUNT_ISSET_ID = 0;
+    private static final int __OFFSET_ISSET_ID = 1;
+    private byte __isset_bitfield = 0;
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.HANDLE, new org.apache.thrift.meta_data.FieldMetaData("handle", org.apache.thrift.TFieldRequirementType.REQUIRED, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, thrift.OpHandle.class)));
-      tmpMap.put(_Fields.PROVINCE_NAME, new org.apache.thrift.meta_data.FieldMetaData("provinceName", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+      tmpMap.put(_Fields.PROVINCE_NAME, new org.apache.thrift.meta_data.FieldMetaData("provinceName", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.COUNT, new org.apache.thrift.meta_data.FieldMetaData("count", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+      tmpMap.put(_Fields.OFFSET, new org.apache.thrift.meta_data.FieldMetaData("offset", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getProvince_args.class, metaDataMap);
     }
@@ -17519,23 +17782,32 @@ public class MiotoCarService {
 
     public getProvince_args(
       thrift.OpHandle handle,
-      java.lang.String provinceName)
+      java.lang.String provinceName,
+      int count,
+      int offset)
     {
       this();
       this.handle = handle;
       this.provinceName = provinceName;
+      this.count = count;
+      setCountIsSet(true);
+      this.offset = offset;
+      setOffsetIsSet(true);
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
     public getProvince_args(getProvince_args other) {
+      __isset_bitfield = other.__isset_bitfield;
       if (other.isSetHandle()) {
         this.handle = new thrift.OpHandle(other.handle);
       }
       if (other.isSetProvinceName()) {
         this.provinceName = other.provinceName;
       }
+      this.count = other.count;
+      this.offset = other.offset;
     }
 
     public getProvince_args deepCopy() {
@@ -17546,6 +17818,10 @@ public class MiotoCarService {
     public void clear() {
       this.handle = null;
       this.provinceName = null;
+      setCountIsSet(false);
+      this.count = 0;
+      setOffsetIsSet(false);
+      this.offset = 0;
     }
 
     @org.apache.thrift.annotation.Nullable
@@ -17598,6 +17874,52 @@ public class MiotoCarService {
       }
     }
 
+    public int getCount() {
+      return this.count;
+    }
+
+    public getProvince_args setCount(int count) {
+      this.count = count;
+      setCountIsSet(true);
+      return this;
+    }
+
+    public void unsetCount() {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __COUNT_ISSET_ID);
+    }
+
+    /** Returns true if field count is set (has been assigned a value) and false otherwise */
+    public boolean isSetCount() {
+      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __COUNT_ISSET_ID);
+    }
+
+    public void setCountIsSet(boolean value) {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __COUNT_ISSET_ID, value);
+    }
+
+    public int getOffset() {
+      return this.offset;
+    }
+
+    public getProvince_args setOffset(int offset) {
+      this.offset = offset;
+      setOffsetIsSet(true);
+      return this;
+    }
+
+    public void unsetOffset() {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __OFFSET_ISSET_ID);
+    }
+
+    /** Returns true if field offset is set (has been assigned a value) and false otherwise */
+    public boolean isSetOffset() {
+      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __OFFSET_ISSET_ID);
+    }
+
+    public void setOffsetIsSet(boolean value) {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __OFFSET_ISSET_ID, value);
+    }
+
     public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
       switch (field) {
       case HANDLE:
@@ -17616,6 +17938,22 @@ public class MiotoCarService {
         }
         break;
 
+      case COUNT:
+        if (value == null) {
+          unsetCount();
+        } else {
+          setCount((java.lang.Integer)value);
+        }
+        break;
+
+      case OFFSET:
+        if (value == null) {
+          unsetOffset();
+        } else {
+          setOffset((java.lang.Integer)value);
+        }
+        break;
+
       }
     }
 
@@ -17627,6 +17965,12 @@ public class MiotoCarService {
 
       case PROVINCE_NAME:
         return getProvinceName();
+
+      case COUNT:
+        return getCount();
+
+      case OFFSET:
+        return getOffset();
 
       }
       throw new java.lang.IllegalStateException();
@@ -17643,6 +17987,10 @@ public class MiotoCarService {
         return isSetHandle();
       case PROVINCE_NAME:
         return isSetProvinceName();
+      case COUNT:
+        return isSetCount();
+      case OFFSET:
+        return isSetOffset();
       }
       throw new java.lang.IllegalStateException();
     }
@@ -17680,6 +18028,24 @@ public class MiotoCarService {
           return false;
       }
 
+      boolean this_present_count = true;
+      boolean that_present_count = true;
+      if (this_present_count || that_present_count) {
+        if (!(this_present_count && that_present_count))
+          return false;
+        if (this.count != that.count)
+          return false;
+      }
+
+      boolean this_present_offset = true;
+      boolean that_present_offset = true;
+      if (this_present_offset || that_present_offset) {
+        if (!(this_present_offset && that_present_offset))
+          return false;
+        if (this.offset != that.offset)
+          return false;
+      }
+
       return true;
     }
 
@@ -17694,6 +18060,10 @@ public class MiotoCarService {
       hashCode = hashCode * 8191 + ((isSetProvinceName()) ? 131071 : 524287);
       if (isSetProvinceName())
         hashCode = hashCode * 8191 + provinceName.hashCode();
+
+      hashCode = hashCode * 8191 + count;
+
+      hashCode = hashCode * 8191 + offset;
 
       return hashCode;
     }
@@ -17722,6 +18092,26 @@ public class MiotoCarService {
       }
       if (isSetProvinceName()) {
         lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.provinceName, other.provinceName);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetCount()).compareTo(other.isSetCount());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetCount()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.count, other.count);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetOffset()).compareTo(other.isSetOffset());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetOffset()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.offset, other.offset);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -17762,6 +18152,14 @@ public class MiotoCarService {
         sb.append(this.provinceName);
       }
       first = false;
+      if (!first) sb.append(", ");
+      sb.append("count:");
+      sb.append(this.count);
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("offset:");
+      sb.append(this.offset);
+      first = false;
       sb.append(")");
       return sb.toString();
     }
@@ -17771,9 +18169,8 @@ public class MiotoCarService {
       if (handle == null) {
         throw new org.apache.thrift.protocol.TProtocolException("Required field 'handle' was not present! Struct: " + toString());
       }
-      if (provinceName == null) {
-        throw new org.apache.thrift.protocol.TProtocolException("Required field 'provinceName' was not present! Struct: " + toString());
-      }
+      // alas, we cannot check 'count' because it's a primitive and you chose the non-beans generator.
+      // alas, we cannot check 'offset' because it's a primitive and you chose the non-beans generator.
       // check for sub-struct validity
       if (handle != null) {
         handle.validate();
@@ -17790,6 +18187,8 @@ public class MiotoCarService {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
       try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -17831,6 +18230,22 @@ public class MiotoCarService {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
+            case 3: // COUNT
+              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+                struct.count = iprot.readI32();
+                struct.setCountIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 4: // OFFSET
+              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+                struct.offset = iprot.readI32();
+                struct.setOffsetIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -17839,6 +18254,12 @@ public class MiotoCarService {
         iprot.readStructEnd();
 
         // check for required fields of primitive type, which can't be checked in the validate method
+        if (!struct.isSetCount()) {
+          throw new org.apache.thrift.protocol.TProtocolException("Required field 'count' was not found in serialized data! Struct: " + toString());
+        }
+        if (!struct.isSetOffset()) {
+          throw new org.apache.thrift.protocol.TProtocolException("Required field 'offset' was not found in serialized data! Struct: " + toString());
+        }
         struct.validate();
       }
 
@@ -17856,6 +18277,12 @@ public class MiotoCarService {
           oprot.writeString(struct.provinceName);
           oprot.writeFieldEnd();
         }
+        oprot.writeFieldBegin(COUNT_FIELD_DESC);
+        oprot.writeI32(struct.count);
+        oprot.writeFieldEnd();
+        oprot.writeFieldBegin(OFFSET_FIELD_DESC);
+        oprot.writeI32(struct.offset);
+        oprot.writeFieldEnd();
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
@@ -17874,7 +18301,16 @@ public class MiotoCarService {
       public void write(org.apache.thrift.protocol.TProtocol prot, getProvince_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         struct.handle.write(oprot);
-        oprot.writeString(struct.provinceName);
+        oprot.writeI32(struct.count);
+        oprot.writeI32(struct.offset);
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetProvinceName()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetProvinceName()) {
+          oprot.writeString(struct.provinceName);
+        }
       }
 
       @Override
@@ -17883,8 +18319,15 @@ public class MiotoCarService {
         struct.handle = new thrift.OpHandle();
         struct.handle.read(iprot);
         struct.setHandleIsSet(true);
-        struct.provinceName = iprot.readString();
-        struct.setProvinceNameIsSet(true);
+        struct.count = iprot.readI32();
+        struct.setCountIsSet(true);
+        struct.offset = iprot.readI32();
+        struct.setOffsetIsSet(true);
+        java.util.BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.provinceName = iprot.readString();
+          struct.setProvinceNameIsSet(true);
+        }
       }
     }
 
@@ -17901,7 +18344,7 @@ public class MiotoCarService {
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new getProvince_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new getProvince_resultTupleSchemeFactory();
 
-    public @org.apache.thrift.annotation.Nullable thrift.TProvinceResult success; // required
+    public @org.apache.thrift.annotation.Nullable thrift.TListProvinceResult success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -17968,7 +18411,7 @@ public class MiotoCarService {
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, thrift.TProvinceResult.class)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, thrift.TListProvinceResult.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getProvince_result.class, metaDataMap);
     }
@@ -17977,7 +18420,7 @@ public class MiotoCarService {
     }
 
     public getProvince_result(
-      thrift.TProvinceResult success)
+      thrift.TListProvinceResult success)
     {
       this();
       this.success = success;
@@ -17988,7 +18431,7 @@ public class MiotoCarService {
      */
     public getProvince_result(getProvince_result other) {
       if (other.isSetSuccess()) {
-        this.success = new thrift.TProvinceResult(other.success);
+        this.success = new thrift.TListProvinceResult(other.success);
       }
     }
 
@@ -18002,11 +18445,11 @@ public class MiotoCarService {
     }
 
     @org.apache.thrift.annotation.Nullable
-    public thrift.TProvinceResult getSuccess() {
+    public thrift.TListProvinceResult getSuccess() {
       return this.success;
     }
 
-    public getProvince_result setSuccess(@org.apache.thrift.annotation.Nullable thrift.TProvinceResult success) {
+    public getProvince_result setSuccess(@org.apache.thrift.annotation.Nullable thrift.TListProvinceResult success) {
       this.success = success;
       return this;
     }
@@ -18032,7 +18475,7 @@ public class MiotoCarService {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((thrift.TProvinceResult)value);
+          setSuccess((thrift.TListProvinceResult)value);
         }
         break;
 
@@ -18194,7 +18637,7 @@ public class MiotoCarService {
           switch (schemeField.id) {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.success = new thrift.TProvinceResult();
+                struct.success = new thrift.TListProvinceResult();
                 struct.success.read(iprot);
                 struct.setSuccessIsSet(true);
               } else { 
@@ -18253,7 +18696,7 @@ public class MiotoCarService {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.success = new thrift.TProvinceResult();
+          struct.success = new thrift.TListProvinceResult();
           struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }
@@ -21624,17 +22067,23 @@ public class MiotoCarService {
 
     private static final org.apache.thrift.protocol.TField HANDLE_FIELD_DESC = new org.apache.thrift.protocol.TField("handle", org.apache.thrift.protocol.TType.STRUCT, (short)1);
     private static final org.apache.thrift.protocol.TField PROVINCE_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("provinceId", org.apache.thrift.protocol.TType.I32, (short)2);
+    private static final org.apache.thrift.protocol.TField COUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("count", org.apache.thrift.protocol.TType.I32, (short)3);
+    private static final org.apache.thrift.protocol.TField OFFSET_FIELD_DESC = new org.apache.thrift.protocol.TField("offset", org.apache.thrift.protocol.TType.I32, (short)4);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new getDistrict_argsStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new getDistrict_argsTupleSchemeFactory();
 
     public @org.apache.thrift.annotation.Nullable thrift.OpHandle handle; // required
     public int provinceId; // required
+    public int count; // required
+    public int offset; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
       HANDLE((short)1, "handle"),
-      PROVINCE_ID((short)2, "provinceId");
+      PROVINCE_ID((short)2, "provinceId"),
+      COUNT((short)3, "count"),
+      OFFSET((short)4, "offset");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -21654,6 +22103,10 @@ public class MiotoCarService {
             return HANDLE;
           case 2: // PROVINCE_ID
             return PROVINCE_ID;
+          case 3: // COUNT
+            return COUNT;
+          case 4: // OFFSET
+            return OFFSET;
           default:
             return null;
         }
@@ -21696,6 +22149,8 @@ public class MiotoCarService {
 
     // isset id assignments
     private static final int __PROVINCEID_ISSET_ID = 0;
+    private static final int __COUNT_ISSET_ID = 1;
+    private static final int __OFFSET_ISSET_ID = 2;
     private byte __isset_bitfield = 0;
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
@@ -21703,6 +22158,10 @@ public class MiotoCarService {
       tmpMap.put(_Fields.HANDLE, new org.apache.thrift.meta_data.FieldMetaData("handle", org.apache.thrift.TFieldRequirementType.REQUIRED, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, thrift.OpHandle.class)));
       tmpMap.put(_Fields.PROVINCE_ID, new org.apache.thrift.meta_data.FieldMetaData("provinceId", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+      tmpMap.put(_Fields.COUNT, new org.apache.thrift.meta_data.FieldMetaData("count", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+      tmpMap.put(_Fields.OFFSET, new org.apache.thrift.meta_data.FieldMetaData("offset", org.apache.thrift.TFieldRequirementType.REQUIRED, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getDistrict_args.class, metaDataMap);
@@ -21713,12 +22172,18 @@ public class MiotoCarService {
 
     public getDistrict_args(
       thrift.OpHandle handle,
-      int provinceId)
+      int provinceId,
+      int count,
+      int offset)
     {
       this();
       this.handle = handle;
       this.provinceId = provinceId;
       setProvinceIdIsSet(true);
+      this.count = count;
+      setCountIsSet(true);
+      this.offset = offset;
+      setOffsetIsSet(true);
     }
 
     /**
@@ -21730,6 +22195,8 @@ public class MiotoCarService {
         this.handle = new thrift.OpHandle(other.handle);
       }
       this.provinceId = other.provinceId;
+      this.count = other.count;
+      this.offset = other.offset;
     }
 
     public getDistrict_args deepCopy() {
@@ -21741,6 +22208,10 @@ public class MiotoCarService {
       this.handle = null;
       setProvinceIdIsSet(false);
       this.provinceId = 0;
+      setCountIsSet(false);
+      this.count = 0;
+      setOffsetIsSet(false);
+      this.offset = 0;
     }
 
     @org.apache.thrift.annotation.Nullable
@@ -21791,6 +22262,52 @@ public class MiotoCarService {
       __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __PROVINCEID_ISSET_ID, value);
     }
 
+    public int getCount() {
+      return this.count;
+    }
+
+    public getDistrict_args setCount(int count) {
+      this.count = count;
+      setCountIsSet(true);
+      return this;
+    }
+
+    public void unsetCount() {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __COUNT_ISSET_ID);
+    }
+
+    /** Returns true if field count is set (has been assigned a value) and false otherwise */
+    public boolean isSetCount() {
+      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __COUNT_ISSET_ID);
+    }
+
+    public void setCountIsSet(boolean value) {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __COUNT_ISSET_ID, value);
+    }
+
+    public int getOffset() {
+      return this.offset;
+    }
+
+    public getDistrict_args setOffset(int offset) {
+      this.offset = offset;
+      setOffsetIsSet(true);
+      return this;
+    }
+
+    public void unsetOffset() {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __OFFSET_ISSET_ID);
+    }
+
+    /** Returns true if field offset is set (has been assigned a value) and false otherwise */
+    public boolean isSetOffset() {
+      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __OFFSET_ISSET_ID);
+    }
+
+    public void setOffsetIsSet(boolean value) {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __OFFSET_ISSET_ID, value);
+    }
+
     public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
       switch (field) {
       case HANDLE:
@@ -21809,6 +22326,22 @@ public class MiotoCarService {
         }
         break;
 
+      case COUNT:
+        if (value == null) {
+          unsetCount();
+        } else {
+          setCount((java.lang.Integer)value);
+        }
+        break;
+
+      case OFFSET:
+        if (value == null) {
+          unsetOffset();
+        } else {
+          setOffset((java.lang.Integer)value);
+        }
+        break;
+
       }
     }
 
@@ -21820,6 +22353,12 @@ public class MiotoCarService {
 
       case PROVINCE_ID:
         return getProvinceId();
+
+      case COUNT:
+        return getCount();
+
+      case OFFSET:
+        return getOffset();
 
       }
       throw new java.lang.IllegalStateException();
@@ -21836,6 +22375,10 @@ public class MiotoCarService {
         return isSetHandle();
       case PROVINCE_ID:
         return isSetProvinceId();
+      case COUNT:
+        return isSetCount();
+      case OFFSET:
+        return isSetOffset();
       }
       throw new java.lang.IllegalStateException();
     }
@@ -21873,6 +22416,24 @@ public class MiotoCarService {
           return false;
       }
 
+      boolean this_present_count = true;
+      boolean that_present_count = true;
+      if (this_present_count || that_present_count) {
+        if (!(this_present_count && that_present_count))
+          return false;
+        if (this.count != that.count)
+          return false;
+      }
+
+      boolean this_present_offset = true;
+      boolean that_present_offset = true;
+      if (this_present_offset || that_present_offset) {
+        if (!(this_present_offset && that_present_offset))
+          return false;
+        if (this.offset != that.offset)
+          return false;
+      }
+
       return true;
     }
 
@@ -21885,6 +22446,10 @@ public class MiotoCarService {
         hashCode = hashCode * 8191 + handle.hashCode();
 
       hashCode = hashCode * 8191 + provinceId;
+
+      hashCode = hashCode * 8191 + count;
+
+      hashCode = hashCode * 8191 + offset;
 
       return hashCode;
     }
@@ -21913,6 +22478,26 @@ public class MiotoCarService {
       }
       if (isSetProvinceId()) {
         lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.provinceId, other.provinceId);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetCount()).compareTo(other.isSetCount());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetCount()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.count, other.count);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetOffset()).compareTo(other.isSetOffset());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetOffset()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.offset, other.offset);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -21949,6 +22534,14 @@ public class MiotoCarService {
       sb.append("provinceId:");
       sb.append(this.provinceId);
       first = false;
+      if (!first) sb.append(", ");
+      sb.append("count:");
+      sb.append(this.count);
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("offset:");
+      sb.append(this.offset);
+      first = false;
       sb.append(")");
       return sb.toString();
     }
@@ -21959,6 +22552,8 @@ public class MiotoCarService {
         throw new org.apache.thrift.protocol.TProtocolException("Required field 'handle' was not present! Struct: " + toString());
       }
       // alas, we cannot check 'provinceId' because it's a primitive and you chose the non-beans generator.
+      // alas, we cannot check 'count' because it's a primitive and you chose the non-beans generator.
+      // alas, we cannot check 'offset' because it's a primitive and you chose the non-beans generator.
       // check for sub-struct validity
       if (handle != null) {
         handle.validate();
@@ -22018,6 +22613,22 @@ public class MiotoCarService {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
+            case 3: // COUNT
+              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+                struct.count = iprot.readI32();
+                struct.setCountIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 4: // OFFSET
+              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+                struct.offset = iprot.readI32();
+                struct.setOffsetIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -22028,6 +22639,12 @@ public class MiotoCarService {
         // check for required fields of primitive type, which can't be checked in the validate method
         if (!struct.isSetProvinceId()) {
           throw new org.apache.thrift.protocol.TProtocolException("Required field 'provinceId' was not found in serialized data! Struct: " + toString());
+        }
+        if (!struct.isSetCount()) {
+          throw new org.apache.thrift.protocol.TProtocolException("Required field 'count' was not found in serialized data! Struct: " + toString());
+        }
+        if (!struct.isSetOffset()) {
+          throw new org.apache.thrift.protocol.TProtocolException("Required field 'offset' was not found in serialized data! Struct: " + toString());
         }
         struct.validate();
       }
@@ -22043,6 +22660,12 @@ public class MiotoCarService {
         }
         oprot.writeFieldBegin(PROVINCE_ID_FIELD_DESC);
         oprot.writeI32(struct.provinceId);
+        oprot.writeFieldEnd();
+        oprot.writeFieldBegin(COUNT_FIELD_DESC);
+        oprot.writeI32(struct.count);
+        oprot.writeFieldEnd();
+        oprot.writeFieldBegin(OFFSET_FIELD_DESC);
+        oprot.writeI32(struct.offset);
         oprot.writeFieldEnd();
         oprot.writeFieldStop();
         oprot.writeStructEnd();
@@ -22063,6 +22686,8 @@ public class MiotoCarService {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         struct.handle.write(oprot);
         oprot.writeI32(struct.provinceId);
+        oprot.writeI32(struct.count);
+        oprot.writeI32(struct.offset);
       }
 
       @Override
@@ -22073,6 +22698,10 @@ public class MiotoCarService {
         struct.setHandleIsSet(true);
         struct.provinceId = iprot.readI32();
         struct.setProvinceIdIsSet(true);
+        struct.count = iprot.readI32();
+        struct.setCountIsSet(true);
+        struct.offset = iprot.readI32();
+        struct.setOffsetIsSet(true);
       }
     }
 
@@ -22089,7 +22718,7 @@ public class MiotoCarService {
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new getDistrict_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new getDistrict_resultTupleSchemeFactory();
 
-    public @org.apache.thrift.annotation.Nullable thrift.TDistrictResult success; // required
+    public @org.apache.thrift.annotation.Nullable thrift.TListDistrictResult success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -22156,7 +22785,7 @@ public class MiotoCarService {
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, thrift.TDistrictResult.class)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, thrift.TListDistrictResult.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getDistrict_result.class, metaDataMap);
     }
@@ -22165,7 +22794,7 @@ public class MiotoCarService {
     }
 
     public getDistrict_result(
-      thrift.TDistrictResult success)
+      thrift.TListDistrictResult success)
     {
       this();
       this.success = success;
@@ -22176,7 +22805,7 @@ public class MiotoCarService {
      */
     public getDistrict_result(getDistrict_result other) {
       if (other.isSetSuccess()) {
-        this.success = new thrift.TDistrictResult(other.success);
+        this.success = new thrift.TListDistrictResult(other.success);
       }
     }
 
@@ -22190,11 +22819,11 @@ public class MiotoCarService {
     }
 
     @org.apache.thrift.annotation.Nullable
-    public thrift.TDistrictResult getSuccess() {
+    public thrift.TListDistrictResult getSuccess() {
       return this.success;
     }
 
-    public getDistrict_result setSuccess(@org.apache.thrift.annotation.Nullable thrift.TDistrictResult success) {
+    public getDistrict_result setSuccess(@org.apache.thrift.annotation.Nullable thrift.TListDistrictResult success) {
       this.success = success;
       return this;
     }
@@ -22220,7 +22849,7 @@ public class MiotoCarService {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((thrift.TDistrictResult)value);
+          setSuccess((thrift.TListDistrictResult)value);
         }
         break;
 
@@ -22382,7 +23011,7 @@ public class MiotoCarService {
           switch (schemeField.id) {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.success = new thrift.TDistrictResult();
+                struct.success = new thrift.TListDistrictResult();
                 struct.success.read(iprot);
                 struct.setSuccessIsSet(true);
               } else { 
@@ -22441,7 +23070,7 @@ public class MiotoCarService {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.success = new thrift.TDistrictResult();
+          struct.success = new thrift.TListDistrictResult();
           struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }
@@ -25812,17 +26441,23 @@ public class MiotoCarService {
 
     private static final org.apache.thrift.protocol.TField HANDLE_FIELD_DESC = new org.apache.thrift.protocol.TField("handle", org.apache.thrift.protocol.TType.STRUCT, (short)1);
     private static final org.apache.thrift.protocol.TField NAME_BRAND_FIELD_DESC = new org.apache.thrift.protocol.TField("nameBrand", org.apache.thrift.protocol.TType.STRING, (short)2);
+    private static final org.apache.thrift.protocol.TField COUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("count", org.apache.thrift.protocol.TType.I32, (short)3);
+    private static final org.apache.thrift.protocol.TField OFFSET_FIELD_DESC = new org.apache.thrift.protocol.TField("offset", org.apache.thrift.protocol.TType.I32, (short)4);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new getCarBrand_argsStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new getCarBrand_argsTupleSchemeFactory();
 
     public @org.apache.thrift.annotation.Nullable thrift.OpHandle handle; // required
     public @org.apache.thrift.annotation.Nullable java.lang.String nameBrand; // required
+    public int count; // required
+    public int offset; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
       HANDLE((short)1, "handle"),
-      NAME_BRAND((short)2, "nameBrand");
+      NAME_BRAND((short)2, "nameBrand"),
+      COUNT((short)3, "count"),
+      OFFSET((short)4, "offset");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -25842,6 +26477,10 @@ public class MiotoCarService {
             return HANDLE;
           case 2: // NAME_BRAND
             return NAME_BRAND;
+          case 3: // COUNT
+            return COUNT;
+          case 4: // OFFSET
+            return OFFSET;
           default:
             return null;
         }
@@ -25883,6 +26522,9 @@ public class MiotoCarService {
     }
 
     // isset id assignments
+    private static final int __COUNT_ISSET_ID = 0;
+    private static final int __OFFSET_ISSET_ID = 1;
+    private byte __isset_bitfield = 0;
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -25890,6 +26532,10 @@ public class MiotoCarService {
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, thrift.OpHandle.class)));
       tmpMap.put(_Fields.NAME_BRAND, new org.apache.thrift.meta_data.FieldMetaData("nameBrand", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.COUNT, new org.apache.thrift.meta_data.FieldMetaData("count", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+      tmpMap.put(_Fields.OFFSET, new org.apache.thrift.meta_data.FieldMetaData("offset", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getCarBrand_args.class, metaDataMap);
     }
@@ -25899,23 +26545,32 @@ public class MiotoCarService {
 
     public getCarBrand_args(
       thrift.OpHandle handle,
-      java.lang.String nameBrand)
+      java.lang.String nameBrand,
+      int count,
+      int offset)
     {
       this();
       this.handle = handle;
       this.nameBrand = nameBrand;
+      this.count = count;
+      setCountIsSet(true);
+      this.offset = offset;
+      setOffsetIsSet(true);
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
     public getCarBrand_args(getCarBrand_args other) {
+      __isset_bitfield = other.__isset_bitfield;
       if (other.isSetHandle()) {
         this.handle = new thrift.OpHandle(other.handle);
       }
       if (other.isSetNameBrand()) {
         this.nameBrand = other.nameBrand;
       }
+      this.count = other.count;
+      this.offset = other.offset;
     }
 
     public getCarBrand_args deepCopy() {
@@ -25926,6 +26581,10 @@ public class MiotoCarService {
     public void clear() {
       this.handle = null;
       this.nameBrand = null;
+      setCountIsSet(false);
+      this.count = 0;
+      setOffsetIsSet(false);
+      this.offset = 0;
     }
 
     @org.apache.thrift.annotation.Nullable
@@ -25978,6 +26637,52 @@ public class MiotoCarService {
       }
     }
 
+    public int getCount() {
+      return this.count;
+    }
+
+    public getCarBrand_args setCount(int count) {
+      this.count = count;
+      setCountIsSet(true);
+      return this;
+    }
+
+    public void unsetCount() {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __COUNT_ISSET_ID);
+    }
+
+    /** Returns true if field count is set (has been assigned a value) and false otherwise */
+    public boolean isSetCount() {
+      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __COUNT_ISSET_ID);
+    }
+
+    public void setCountIsSet(boolean value) {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __COUNT_ISSET_ID, value);
+    }
+
+    public int getOffset() {
+      return this.offset;
+    }
+
+    public getCarBrand_args setOffset(int offset) {
+      this.offset = offset;
+      setOffsetIsSet(true);
+      return this;
+    }
+
+    public void unsetOffset() {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __OFFSET_ISSET_ID);
+    }
+
+    /** Returns true if field offset is set (has been assigned a value) and false otherwise */
+    public boolean isSetOffset() {
+      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __OFFSET_ISSET_ID);
+    }
+
+    public void setOffsetIsSet(boolean value) {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __OFFSET_ISSET_ID, value);
+    }
+
     public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
       switch (field) {
       case HANDLE:
@@ -25996,6 +26701,22 @@ public class MiotoCarService {
         }
         break;
 
+      case COUNT:
+        if (value == null) {
+          unsetCount();
+        } else {
+          setCount((java.lang.Integer)value);
+        }
+        break;
+
+      case OFFSET:
+        if (value == null) {
+          unsetOffset();
+        } else {
+          setOffset((java.lang.Integer)value);
+        }
+        break;
+
       }
     }
 
@@ -26007,6 +26728,12 @@ public class MiotoCarService {
 
       case NAME_BRAND:
         return getNameBrand();
+
+      case COUNT:
+        return getCount();
+
+      case OFFSET:
+        return getOffset();
 
       }
       throw new java.lang.IllegalStateException();
@@ -26023,6 +26750,10 @@ public class MiotoCarService {
         return isSetHandle();
       case NAME_BRAND:
         return isSetNameBrand();
+      case COUNT:
+        return isSetCount();
+      case OFFSET:
+        return isSetOffset();
       }
       throw new java.lang.IllegalStateException();
     }
@@ -26060,6 +26791,24 @@ public class MiotoCarService {
           return false;
       }
 
+      boolean this_present_count = true;
+      boolean that_present_count = true;
+      if (this_present_count || that_present_count) {
+        if (!(this_present_count && that_present_count))
+          return false;
+        if (this.count != that.count)
+          return false;
+      }
+
+      boolean this_present_offset = true;
+      boolean that_present_offset = true;
+      if (this_present_offset || that_present_offset) {
+        if (!(this_present_offset && that_present_offset))
+          return false;
+        if (this.offset != that.offset)
+          return false;
+      }
+
       return true;
     }
 
@@ -26074,6 +26823,10 @@ public class MiotoCarService {
       hashCode = hashCode * 8191 + ((isSetNameBrand()) ? 131071 : 524287);
       if (isSetNameBrand())
         hashCode = hashCode * 8191 + nameBrand.hashCode();
+
+      hashCode = hashCode * 8191 + count;
+
+      hashCode = hashCode * 8191 + offset;
 
       return hashCode;
     }
@@ -26102,6 +26855,26 @@ public class MiotoCarService {
       }
       if (isSetNameBrand()) {
         lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.nameBrand, other.nameBrand);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetCount()).compareTo(other.isSetCount());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetCount()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.count, other.count);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetOffset()).compareTo(other.isSetOffset());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetOffset()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.offset, other.offset);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -26142,6 +26915,14 @@ public class MiotoCarService {
         sb.append(this.nameBrand);
       }
       first = false;
+      if (!first) sb.append(", ");
+      sb.append("count:");
+      sb.append(this.count);
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("offset:");
+      sb.append(this.offset);
+      first = false;
       sb.append(")");
       return sb.toString();
     }
@@ -26151,6 +26932,8 @@ public class MiotoCarService {
       if (handle == null) {
         throw new org.apache.thrift.protocol.TProtocolException("Required field 'handle' was not present! Struct: " + toString());
       }
+      // alas, we cannot check 'count' because it's a primitive and you chose the non-beans generator.
+      // alas, we cannot check 'offset' because it's a primitive and you chose the non-beans generator.
       // check for sub-struct validity
       if (handle != null) {
         handle.validate();
@@ -26167,6 +26950,8 @@ public class MiotoCarService {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
       try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -26208,6 +26993,22 @@ public class MiotoCarService {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
+            case 3: // COUNT
+              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+                struct.count = iprot.readI32();
+                struct.setCountIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 4: // OFFSET
+              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+                struct.offset = iprot.readI32();
+                struct.setOffsetIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -26216,6 +27017,12 @@ public class MiotoCarService {
         iprot.readStructEnd();
 
         // check for required fields of primitive type, which can't be checked in the validate method
+        if (!struct.isSetCount()) {
+          throw new org.apache.thrift.protocol.TProtocolException("Required field 'count' was not found in serialized data! Struct: " + toString());
+        }
+        if (!struct.isSetOffset()) {
+          throw new org.apache.thrift.protocol.TProtocolException("Required field 'offset' was not found in serialized data! Struct: " + toString());
+        }
         struct.validate();
       }
 
@@ -26233,6 +27040,12 @@ public class MiotoCarService {
           oprot.writeString(struct.nameBrand);
           oprot.writeFieldEnd();
         }
+        oprot.writeFieldBegin(COUNT_FIELD_DESC);
+        oprot.writeI32(struct.count);
+        oprot.writeFieldEnd();
+        oprot.writeFieldBegin(OFFSET_FIELD_DESC);
+        oprot.writeI32(struct.offset);
+        oprot.writeFieldEnd();
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
@@ -26251,6 +27064,8 @@ public class MiotoCarService {
       public void write(org.apache.thrift.protocol.TProtocol prot, getCarBrand_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         struct.handle.write(oprot);
+        oprot.writeI32(struct.count);
+        oprot.writeI32(struct.offset);
         java.util.BitSet optionals = new java.util.BitSet();
         if (struct.isSetNameBrand()) {
           optionals.set(0);
@@ -26267,6 +27082,10 @@ public class MiotoCarService {
         struct.handle = new thrift.OpHandle();
         struct.handle.read(iprot);
         struct.setHandleIsSet(true);
+        struct.count = iprot.readI32();
+        struct.setCountIsSet(true);
+        struct.offset = iprot.readI32();
+        struct.setOffsetIsSet(true);
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
           struct.nameBrand = iprot.readString();
@@ -26288,7 +27107,7 @@ public class MiotoCarService {
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new getCarBrand_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new getCarBrand_resultTupleSchemeFactory();
 
-    public @org.apache.thrift.annotation.Nullable thrift.TCarBrandResult success; // required
+    public @org.apache.thrift.annotation.Nullable thrift.TListCarBrandResult success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -26355,7 +27174,7 @@ public class MiotoCarService {
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, thrift.TCarBrandResult.class)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, thrift.TListCarBrandResult.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getCarBrand_result.class, metaDataMap);
     }
@@ -26364,7 +27183,7 @@ public class MiotoCarService {
     }
 
     public getCarBrand_result(
-      thrift.TCarBrandResult success)
+      thrift.TListCarBrandResult success)
     {
       this();
       this.success = success;
@@ -26375,7 +27194,7 @@ public class MiotoCarService {
      */
     public getCarBrand_result(getCarBrand_result other) {
       if (other.isSetSuccess()) {
-        this.success = new thrift.TCarBrandResult(other.success);
+        this.success = new thrift.TListCarBrandResult(other.success);
       }
     }
 
@@ -26389,11 +27208,11 @@ public class MiotoCarService {
     }
 
     @org.apache.thrift.annotation.Nullable
-    public thrift.TCarBrandResult getSuccess() {
+    public thrift.TListCarBrandResult getSuccess() {
       return this.success;
     }
 
-    public getCarBrand_result setSuccess(@org.apache.thrift.annotation.Nullable thrift.TCarBrandResult success) {
+    public getCarBrand_result setSuccess(@org.apache.thrift.annotation.Nullable thrift.TListCarBrandResult success) {
       this.success = success;
       return this;
     }
@@ -26419,7 +27238,7 @@ public class MiotoCarService {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((thrift.TCarBrandResult)value);
+          setSuccess((thrift.TListCarBrandResult)value);
         }
         break;
 
@@ -26581,7 +27400,7 @@ public class MiotoCarService {
           switch (schemeField.id) {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.success = new thrift.TCarBrandResult();
+                struct.success = new thrift.TListCarBrandResult();
                 struct.success.read(iprot);
                 struct.setSuccessIsSet(true);
               } else { 
@@ -26640,7 +27459,7 @@ public class MiotoCarService {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.success = new thrift.TCarBrandResult();
+          struct.success = new thrift.TListCarBrandResult();
           struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }
@@ -30037,17 +30856,23 @@ public class MiotoCarService {
 
     private static final org.apache.thrift.protocol.TField HANDLE_FIELD_DESC = new org.apache.thrift.protocol.TField("handle", org.apache.thrift.protocol.TType.STRUCT, (short)1);
     private static final org.apache.thrift.protocol.TField NAME_FEATURE_FIELD_DESC = new org.apache.thrift.protocol.TField("nameFeature", org.apache.thrift.protocol.TType.STRING, (short)2);
+    private static final org.apache.thrift.protocol.TField COUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("count", org.apache.thrift.protocol.TType.I32, (short)3);
+    private static final org.apache.thrift.protocol.TField OFFSET_FIELD_DESC = new org.apache.thrift.protocol.TField("offset", org.apache.thrift.protocol.TType.I32, (short)4);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new getFeature_argsStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new getFeature_argsTupleSchemeFactory();
 
     public @org.apache.thrift.annotation.Nullable thrift.OpHandle handle; // required
     public @org.apache.thrift.annotation.Nullable java.lang.String nameFeature; // required
+    public int count; // required
+    public int offset; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
       HANDLE((short)1, "handle"),
-      NAME_FEATURE((short)2, "nameFeature");
+      NAME_FEATURE((short)2, "nameFeature"),
+      COUNT((short)3, "count"),
+      OFFSET((short)4, "offset");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -30067,6 +30892,10 @@ public class MiotoCarService {
             return HANDLE;
           case 2: // NAME_FEATURE
             return NAME_FEATURE;
+          case 3: // COUNT
+            return COUNT;
+          case 4: // OFFSET
+            return OFFSET;
           default:
             return null;
         }
@@ -30108,6 +30937,9 @@ public class MiotoCarService {
     }
 
     // isset id assignments
+    private static final int __COUNT_ISSET_ID = 0;
+    private static final int __OFFSET_ISSET_ID = 1;
+    private byte __isset_bitfield = 0;
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -30115,6 +30947,10 @@ public class MiotoCarService {
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, thrift.OpHandle.class)));
       tmpMap.put(_Fields.NAME_FEATURE, new org.apache.thrift.meta_data.FieldMetaData("nameFeature", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.COUNT, new org.apache.thrift.meta_data.FieldMetaData("count", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+      tmpMap.put(_Fields.OFFSET, new org.apache.thrift.meta_data.FieldMetaData("offset", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getFeature_args.class, metaDataMap);
     }
@@ -30124,23 +30960,32 @@ public class MiotoCarService {
 
     public getFeature_args(
       thrift.OpHandle handle,
-      java.lang.String nameFeature)
+      java.lang.String nameFeature,
+      int count,
+      int offset)
     {
       this();
       this.handle = handle;
       this.nameFeature = nameFeature;
+      this.count = count;
+      setCountIsSet(true);
+      this.offset = offset;
+      setOffsetIsSet(true);
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
     public getFeature_args(getFeature_args other) {
+      __isset_bitfield = other.__isset_bitfield;
       if (other.isSetHandle()) {
         this.handle = new thrift.OpHandle(other.handle);
       }
       if (other.isSetNameFeature()) {
         this.nameFeature = other.nameFeature;
       }
+      this.count = other.count;
+      this.offset = other.offset;
     }
 
     public getFeature_args deepCopy() {
@@ -30151,6 +30996,10 @@ public class MiotoCarService {
     public void clear() {
       this.handle = null;
       this.nameFeature = null;
+      setCountIsSet(false);
+      this.count = 0;
+      setOffsetIsSet(false);
+      this.offset = 0;
     }
 
     @org.apache.thrift.annotation.Nullable
@@ -30203,6 +31052,52 @@ public class MiotoCarService {
       }
     }
 
+    public int getCount() {
+      return this.count;
+    }
+
+    public getFeature_args setCount(int count) {
+      this.count = count;
+      setCountIsSet(true);
+      return this;
+    }
+
+    public void unsetCount() {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __COUNT_ISSET_ID);
+    }
+
+    /** Returns true if field count is set (has been assigned a value) and false otherwise */
+    public boolean isSetCount() {
+      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __COUNT_ISSET_ID);
+    }
+
+    public void setCountIsSet(boolean value) {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __COUNT_ISSET_ID, value);
+    }
+
+    public int getOffset() {
+      return this.offset;
+    }
+
+    public getFeature_args setOffset(int offset) {
+      this.offset = offset;
+      setOffsetIsSet(true);
+      return this;
+    }
+
+    public void unsetOffset() {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __OFFSET_ISSET_ID);
+    }
+
+    /** Returns true if field offset is set (has been assigned a value) and false otherwise */
+    public boolean isSetOffset() {
+      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __OFFSET_ISSET_ID);
+    }
+
+    public void setOffsetIsSet(boolean value) {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __OFFSET_ISSET_ID, value);
+    }
+
     public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
       switch (field) {
       case HANDLE:
@@ -30221,6 +31116,22 @@ public class MiotoCarService {
         }
         break;
 
+      case COUNT:
+        if (value == null) {
+          unsetCount();
+        } else {
+          setCount((java.lang.Integer)value);
+        }
+        break;
+
+      case OFFSET:
+        if (value == null) {
+          unsetOffset();
+        } else {
+          setOffset((java.lang.Integer)value);
+        }
+        break;
+
       }
     }
 
@@ -30232,6 +31143,12 @@ public class MiotoCarService {
 
       case NAME_FEATURE:
         return getNameFeature();
+
+      case COUNT:
+        return getCount();
+
+      case OFFSET:
+        return getOffset();
 
       }
       throw new java.lang.IllegalStateException();
@@ -30248,6 +31165,10 @@ public class MiotoCarService {
         return isSetHandle();
       case NAME_FEATURE:
         return isSetNameFeature();
+      case COUNT:
+        return isSetCount();
+      case OFFSET:
+        return isSetOffset();
       }
       throw new java.lang.IllegalStateException();
     }
@@ -30285,6 +31206,24 @@ public class MiotoCarService {
           return false;
       }
 
+      boolean this_present_count = true;
+      boolean that_present_count = true;
+      if (this_present_count || that_present_count) {
+        if (!(this_present_count && that_present_count))
+          return false;
+        if (this.count != that.count)
+          return false;
+      }
+
+      boolean this_present_offset = true;
+      boolean that_present_offset = true;
+      if (this_present_offset || that_present_offset) {
+        if (!(this_present_offset && that_present_offset))
+          return false;
+        if (this.offset != that.offset)
+          return false;
+      }
+
       return true;
     }
 
@@ -30299,6 +31238,10 @@ public class MiotoCarService {
       hashCode = hashCode * 8191 + ((isSetNameFeature()) ? 131071 : 524287);
       if (isSetNameFeature())
         hashCode = hashCode * 8191 + nameFeature.hashCode();
+
+      hashCode = hashCode * 8191 + count;
+
+      hashCode = hashCode * 8191 + offset;
 
       return hashCode;
     }
@@ -30327,6 +31270,26 @@ public class MiotoCarService {
       }
       if (isSetNameFeature()) {
         lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.nameFeature, other.nameFeature);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetCount()).compareTo(other.isSetCount());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetCount()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.count, other.count);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetOffset()).compareTo(other.isSetOffset());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetOffset()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.offset, other.offset);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -30367,6 +31330,14 @@ public class MiotoCarService {
         sb.append(this.nameFeature);
       }
       first = false;
+      if (!first) sb.append(", ");
+      sb.append("count:");
+      sb.append(this.count);
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("offset:");
+      sb.append(this.offset);
+      first = false;
       sb.append(")");
       return sb.toString();
     }
@@ -30376,6 +31347,8 @@ public class MiotoCarService {
       if (handle == null) {
         throw new org.apache.thrift.protocol.TProtocolException("Required field 'handle' was not present! Struct: " + toString());
       }
+      // alas, we cannot check 'count' because it's a primitive and you chose the non-beans generator.
+      // alas, we cannot check 'offset' because it's a primitive and you chose the non-beans generator.
       // check for sub-struct validity
       if (handle != null) {
         handle.validate();
@@ -30392,6 +31365,8 @@ public class MiotoCarService {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
       try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -30433,6 +31408,22 @@ public class MiotoCarService {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
+            case 3: // COUNT
+              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+                struct.count = iprot.readI32();
+                struct.setCountIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 4: // OFFSET
+              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+                struct.offset = iprot.readI32();
+                struct.setOffsetIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -30441,6 +31432,12 @@ public class MiotoCarService {
         iprot.readStructEnd();
 
         // check for required fields of primitive type, which can't be checked in the validate method
+        if (!struct.isSetCount()) {
+          throw new org.apache.thrift.protocol.TProtocolException("Required field 'count' was not found in serialized data! Struct: " + toString());
+        }
+        if (!struct.isSetOffset()) {
+          throw new org.apache.thrift.protocol.TProtocolException("Required field 'offset' was not found in serialized data! Struct: " + toString());
+        }
         struct.validate();
       }
 
@@ -30458,6 +31455,12 @@ public class MiotoCarService {
           oprot.writeString(struct.nameFeature);
           oprot.writeFieldEnd();
         }
+        oprot.writeFieldBegin(COUNT_FIELD_DESC);
+        oprot.writeI32(struct.count);
+        oprot.writeFieldEnd();
+        oprot.writeFieldBegin(OFFSET_FIELD_DESC);
+        oprot.writeI32(struct.offset);
+        oprot.writeFieldEnd();
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
@@ -30476,6 +31479,8 @@ public class MiotoCarService {
       public void write(org.apache.thrift.protocol.TProtocol prot, getFeature_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         struct.handle.write(oprot);
+        oprot.writeI32(struct.count);
+        oprot.writeI32(struct.offset);
         java.util.BitSet optionals = new java.util.BitSet();
         if (struct.isSetNameFeature()) {
           optionals.set(0);
@@ -30492,6 +31497,10 @@ public class MiotoCarService {
         struct.handle = new thrift.OpHandle();
         struct.handle.read(iprot);
         struct.setHandleIsSet(true);
+        struct.count = iprot.readI32();
+        struct.setCountIsSet(true);
+        struct.offset = iprot.readI32();
+        struct.setOffsetIsSet(true);
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
           struct.nameFeature = iprot.readString();
@@ -30513,7 +31522,7 @@ public class MiotoCarService {
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new getFeature_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new getFeature_resultTupleSchemeFactory();
 
-    public @org.apache.thrift.annotation.Nullable thrift.TFeatureResult success; // required
+    public @org.apache.thrift.annotation.Nullable thrift.TListFeatureResult success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -30580,7 +31589,7 @@ public class MiotoCarService {
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, thrift.TFeatureResult.class)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, thrift.TListFeatureResult.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getFeature_result.class, metaDataMap);
     }
@@ -30589,7 +31598,7 @@ public class MiotoCarService {
     }
 
     public getFeature_result(
-      thrift.TFeatureResult success)
+      thrift.TListFeatureResult success)
     {
       this();
       this.success = success;
@@ -30600,7 +31609,7 @@ public class MiotoCarService {
      */
     public getFeature_result(getFeature_result other) {
       if (other.isSetSuccess()) {
-        this.success = new thrift.TFeatureResult(other.success);
+        this.success = new thrift.TListFeatureResult(other.success);
       }
     }
 
@@ -30614,11 +31623,11 @@ public class MiotoCarService {
     }
 
     @org.apache.thrift.annotation.Nullable
-    public thrift.TFeatureResult getSuccess() {
+    public thrift.TListFeatureResult getSuccess() {
       return this.success;
     }
 
-    public getFeature_result setSuccess(@org.apache.thrift.annotation.Nullable thrift.TFeatureResult success) {
+    public getFeature_result setSuccess(@org.apache.thrift.annotation.Nullable thrift.TListFeatureResult success) {
       this.success = success;
       return this;
     }
@@ -30644,7 +31653,7 @@ public class MiotoCarService {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((thrift.TFeatureResult)value);
+          setSuccess((thrift.TListFeatureResult)value);
         }
         break;
 
@@ -30806,7 +31815,7 @@ public class MiotoCarService {
           switch (schemeField.id) {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.success = new thrift.TFeatureResult();
+                struct.success = new thrift.TListFeatureResult();
                 struct.success.read(iprot);
                 struct.setSuccessIsSet(true);
               } else { 
@@ -30865,7 +31874,7 @@ public class MiotoCarService {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.success = new thrift.TFeatureResult();
+          struct.success = new thrift.TListFeatureResult();
           struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }
@@ -34247,18 +35256,24 @@ public class MiotoCarService {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getFeedBack_args");
 
     private static final org.apache.thrift.protocol.TField HANDLE_FIELD_DESC = new org.apache.thrift.protocol.TField("handle", org.apache.thrift.protocol.TType.STRUCT, (short)1);
-    private static final org.apache.thrift.protocol.TField REQUEST_FIELD_DESC = new org.apache.thrift.protocol.TField("request", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+    private static final org.apache.thrift.protocol.TField RECEIVER_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("receiverId", org.apache.thrift.protocol.TType.I32, (short)2);
+    private static final org.apache.thrift.protocol.TField COUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("count", org.apache.thrift.protocol.TType.I32, (short)3);
+    private static final org.apache.thrift.protocol.TField OFFSET_FIELD_DESC = new org.apache.thrift.protocol.TField("offset", org.apache.thrift.protocol.TType.I32, (short)4);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new getFeedBack_argsStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new getFeedBack_argsTupleSchemeFactory();
 
     public @org.apache.thrift.annotation.Nullable thrift.OpHandle handle; // required
-    public @org.apache.thrift.annotation.Nullable thrift.TFeedBackRequest request; // required
+    public int receiverId; // required
+    public int count; // required
+    public int offset; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
       HANDLE((short)1, "handle"),
-      REQUEST((short)2, "request");
+      RECEIVER_ID((short)2, "receiverId"),
+      COUNT((short)3, "count"),
+      OFFSET((short)4, "offset");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -34276,8 +35291,12 @@ public class MiotoCarService {
         switch(fieldId) {
           case 1: // HANDLE
             return HANDLE;
-          case 2: // REQUEST
-            return REQUEST;
+          case 2: // RECEIVER_ID
+            return RECEIVER_ID;
+          case 3: // COUNT
+            return COUNT;
+          case 4: // OFFSET
+            return OFFSET;
           default:
             return null;
         }
@@ -34319,13 +35338,21 @@ public class MiotoCarService {
     }
 
     // isset id assignments
+    private static final int __RECEIVERID_ISSET_ID = 0;
+    private static final int __COUNT_ISSET_ID = 1;
+    private static final int __OFFSET_ISSET_ID = 2;
+    private byte __isset_bitfield = 0;
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.HANDLE, new org.apache.thrift.meta_data.FieldMetaData("handle", org.apache.thrift.TFieldRequirementType.REQUIRED, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, thrift.OpHandle.class)));
-      tmpMap.put(_Fields.REQUEST, new org.apache.thrift.meta_data.FieldMetaData("request", org.apache.thrift.TFieldRequirementType.REQUIRED, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, thrift.TFeedBackRequest.class)));
+      tmpMap.put(_Fields.RECEIVER_ID, new org.apache.thrift.meta_data.FieldMetaData("receiverId", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+      tmpMap.put(_Fields.COUNT, new org.apache.thrift.meta_data.FieldMetaData("count", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+      tmpMap.put(_Fields.OFFSET, new org.apache.thrift.meta_data.FieldMetaData("offset", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getFeedBack_args.class, metaDataMap);
     }
@@ -34335,23 +35362,31 @@ public class MiotoCarService {
 
     public getFeedBack_args(
       thrift.OpHandle handle,
-      thrift.TFeedBackRequest request)
+      int receiverId,
+      int count,
+      int offset)
     {
       this();
       this.handle = handle;
-      this.request = request;
+      this.receiverId = receiverId;
+      setReceiverIdIsSet(true);
+      this.count = count;
+      setCountIsSet(true);
+      this.offset = offset;
+      setOffsetIsSet(true);
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
     public getFeedBack_args(getFeedBack_args other) {
+      __isset_bitfield = other.__isset_bitfield;
       if (other.isSetHandle()) {
         this.handle = new thrift.OpHandle(other.handle);
       }
-      if (other.isSetRequest()) {
-        this.request = new thrift.TFeedBackRequest(other.request);
-      }
+      this.receiverId = other.receiverId;
+      this.count = other.count;
+      this.offset = other.offset;
     }
 
     public getFeedBack_args deepCopy() {
@@ -34361,7 +35396,12 @@ public class MiotoCarService {
     @Override
     public void clear() {
       this.handle = null;
-      this.request = null;
+      setReceiverIdIsSet(false);
+      this.receiverId = 0;
+      setCountIsSet(false);
+      this.count = 0;
+      setOffsetIsSet(false);
+      this.offset = 0;
     }
 
     @org.apache.thrift.annotation.Nullable
@@ -34389,29 +35429,73 @@ public class MiotoCarService {
       }
     }
 
-    @org.apache.thrift.annotation.Nullable
-    public thrift.TFeedBackRequest getRequest() {
-      return this.request;
+    public int getReceiverId() {
+      return this.receiverId;
     }
 
-    public getFeedBack_args setRequest(@org.apache.thrift.annotation.Nullable thrift.TFeedBackRequest request) {
-      this.request = request;
+    public getFeedBack_args setReceiverId(int receiverId) {
+      this.receiverId = receiverId;
+      setReceiverIdIsSet(true);
       return this;
     }
 
-    public void unsetRequest() {
-      this.request = null;
+    public void unsetReceiverId() {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __RECEIVERID_ISSET_ID);
     }
 
-    /** Returns true if field request is set (has been assigned a value) and false otherwise */
-    public boolean isSetRequest() {
-      return this.request != null;
+    /** Returns true if field receiverId is set (has been assigned a value) and false otherwise */
+    public boolean isSetReceiverId() {
+      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __RECEIVERID_ISSET_ID);
     }
 
-    public void setRequestIsSet(boolean value) {
-      if (!value) {
-        this.request = null;
-      }
+    public void setReceiverIdIsSet(boolean value) {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __RECEIVERID_ISSET_ID, value);
+    }
+
+    public int getCount() {
+      return this.count;
+    }
+
+    public getFeedBack_args setCount(int count) {
+      this.count = count;
+      setCountIsSet(true);
+      return this;
+    }
+
+    public void unsetCount() {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __COUNT_ISSET_ID);
+    }
+
+    /** Returns true if field count is set (has been assigned a value) and false otherwise */
+    public boolean isSetCount() {
+      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __COUNT_ISSET_ID);
+    }
+
+    public void setCountIsSet(boolean value) {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __COUNT_ISSET_ID, value);
+    }
+
+    public int getOffset() {
+      return this.offset;
+    }
+
+    public getFeedBack_args setOffset(int offset) {
+      this.offset = offset;
+      setOffsetIsSet(true);
+      return this;
+    }
+
+    public void unsetOffset() {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __OFFSET_ISSET_ID);
+    }
+
+    /** Returns true if field offset is set (has been assigned a value) and false otherwise */
+    public boolean isSetOffset() {
+      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __OFFSET_ISSET_ID);
+    }
+
+    public void setOffsetIsSet(boolean value) {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __OFFSET_ISSET_ID, value);
     }
 
     public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
@@ -34424,11 +35508,27 @@ public class MiotoCarService {
         }
         break;
 
-      case REQUEST:
+      case RECEIVER_ID:
         if (value == null) {
-          unsetRequest();
+          unsetReceiverId();
         } else {
-          setRequest((thrift.TFeedBackRequest)value);
+          setReceiverId((java.lang.Integer)value);
+        }
+        break;
+
+      case COUNT:
+        if (value == null) {
+          unsetCount();
+        } else {
+          setCount((java.lang.Integer)value);
+        }
+        break;
+
+      case OFFSET:
+        if (value == null) {
+          unsetOffset();
+        } else {
+          setOffset((java.lang.Integer)value);
         }
         break;
 
@@ -34441,8 +35541,14 @@ public class MiotoCarService {
       case HANDLE:
         return getHandle();
 
-      case REQUEST:
-        return getRequest();
+      case RECEIVER_ID:
+        return getReceiverId();
+
+      case COUNT:
+        return getCount();
+
+      case OFFSET:
+        return getOffset();
 
       }
       throw new java.lang.IllegalStateException();
@@ -34457,8 +35563,12 @@ public class MiotoCarService {
       switch (field) {
       case HANDLE:
         return isSetHandle();
-      case REQUEST:
-        return isSetRequest();
+      case RECEIVER_ID:
+        return isSetReceiverId();
+      case COUNT:
+        return isSetCount();
+      case OFFSET:
+        return isSetOffset();
       }
       throw new java.lang.IllegalStateException();
     }
@@ -34487,12 +35597,30 @@ public class MiotoCarService {
           return false;
       }
 
-      boolean this_present_request = true && this.isSetRequest();
-      boolean that_present_request = true && that.isSetRequest();
-      if (this_present_request || that_present_request) {
-        if (!(this_present_request && that_present_request))
+      boolean this_present_receiverId = true;
+      boolean that_present_receiverId = true;
+      if (this_present_receiverId || that_present_receiverId) {
+        if (!(this_present_receiverId && that_present_receiverId))
           return false;
-        if (!this.request.equals(that.request))
+        if (this.receiverId != that.receiverId)
+          return false;
+      }
+
+      boolean this_present_count = true;
+      boolean that_present_count = true;
+      if (this_present_count || that_present_count) {
+        if (!(this_present_count && that_present_count))
+          return false;
+        if (this.count != that.count)
+          return false;
+      }
+
+      boolean this_present_offset = true;
+      boolean that_present_offset = true;
+      if (this_present_offset || that_present_offset) {
+        if (!(this_present_offset && that_present_offset))
+          return false;
+        if (this.offset != that.offset)
           return false;
       }
 
@@ -34507,9 +35635,11 @@ public class MiotoCarService {
       if (isSetHandle())
         hashCode = hashCode * 8191 + handle.hashCode();
 
-      hashCode = hashCode * 8191 + ((isSetRequest()) ? 131071 : 524287);
-      if (isSetRequest())
-        hashCode = hashCode * 8191 + request.hashCode();
+      hashCode = hashCode * 8191 + receiverId;
+
+      hashCode = hashCode * 8191 + count;
+
+      hashCode = hashCode * 8191 + offset;
 
       return hashCode;
     }
@@ -34532,12 +35662,32 @@ public class MiotoCarService {
           return lastComparison;
         }
       }
-      lastComparison = java.lang.Boolean.valueOf(isSetRequest()).compareTo(other.isSetRequest());
+      lastComparison = java.lang.Boolean.valueOf(isSetReceiverId()).compareTo(other.isSetReceiverId());
       if (lastComparison != 0) {
         return lastComparison;
       }
-      if (isSetRequest()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.request, other.request);
+      if (isSetReceiverId()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.receiverId, other.receiverId);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetCount()).compareTo(other.isSetCount());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetCount()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.count, other.count);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetOffset()).compareTo(other.isSetOffset());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetOffset()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.offset, other.offset);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -34571,12 +35721,16 @@ public class MiotoCarService {
       }
       first = false;
       if (!first) sb.append(", ");
-      sb.append("request:");
-      if (this.request == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.request);
-      }
+      sb.append("receiverId:");
+      sb.append(this.receiverId);
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("count:");
+      sb.append(this.count);
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("offset:");
+      sb.append(this.offset);
       first = false;
       sb.append(")");
       return sb.toString();
@@ -34587,15 +35741,12 @@ public class MiotoCarService {
       if (handle == null) {
         throw new org.apache.thrift.protocol.TProtocolException("Required field 'handle' was not present! Struct: " + toString());
       }
-      if (request == null) {
-        throw new org.apache.thrift.protocol.TProtocolException("Required field 'request' was not present! Struct: " + toString());
-      }
+      // alas, we cannot check 'receiverId' because it's a primitive and you chose the non-beans generator.
+      // alas, we cannot check 'count' because it's a primitive and you chose the non-beans generator.
+      // alas, we cannot check 'offset' because it's a primitive and you chose the non-beans generator.
       // check for sub-struct validity
       if (handle != null) {
         handle.validate();
-      }
-      if (request != null) {
-        request.validate();
       }
     }
 
@@ -34609,6 +35760,8 @@ public class MiotoCarService {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
       try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -34642,11 +35795,26 @@ public class MiotoCarService {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
-            case 2: // REQUEST
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.request = new thrift.TFeedBackRequest();
-                struct.request.read(iprot);
-                struct.setRequestIsSet(true);
+            case 2: // RECEIVER_ID
+              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+                struct.receiverId = iprot.readI32();
+                struct.setReceiverIdIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 3: // COUNT
+              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+                struct.count = iprot.readI32();
+                struct.setCountIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 4: // OFFSET
+              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+                struct.offset = iprot.readI32();
+                struct.setOffsetIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
@@ -34659,6 +35827,15 @@ public class MiotoCarService {
         iprot.readStructEnd();
 
         // check for required fields of primitive type, which can't be checked in the validate method
+        if (!struct.isSetReceiverId()) {
+          throw new org.apache.thrift.protocol.TProtocolException("Required field 'receiverId' was not found in serialized data! Struct: " + toString());
+        }
+        if (!struct.isSetCount()) {
+          throw new org.apache.thrift.protocol.TProtocolException("Required field 'count' was not found in serialized data! Struct: " + toString());
+        }
+        if (!struct.isSetOffset()) {
+          throw new org.apache.thrift.protocol.TProtocolException("Required field 'offset' was not found in serialized data! Struct: " + toString());
+        }
         struct.validate();
       }
 
@@ -34671,11 +35848,15 @@ public class MiotoCarService {
           struct.handle.write(oprot);
           oprot.writeFieldEnd();
         }
-        if (struct.request != null) {
-          oprot.writeFieldBegin(REQUEST_FIELD_DESC);
-          struct.request.write(oprot);
-          oprot.writeFieldEnd();
-        }
+        oprot.writeFieldBegin(RECEIVER_ID_FIELD_DESC);
+        oprot.writeI32(struct.receiverId);
+        oprot.writeFieldEnd();
+        oprot.writeFieldBegin(COUNT_FIELD_DESC);
+        oprot.writeI32(struct.count);
+        oprot.writeFieldEnd();
+        oprot.writeFieldBegin(OFFSET_FIELD_DESC);
+        oprot.writeI32(struct.offset);
+        oprot.writeFieldEnd();
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
@@ -34694,7 +35875,9 @@ public class MiotoCarService {
       public void write(org.apache.thrift.protocol.TProtocol prot, getFeedBack_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         struct.handle.write(oprot);
-        struct.request.write(oprot);
+        oprot.writeI32(struct.receiverId);
+        oprot.writeI32(struct.count);
+        oprot.writeI32(struct.offset);
       }
 
       @Override
@@ -34703,9 +35886,12 @@ public class MiotoCarService {
         struct.handle = new thrift.OpHandle();
         struct.handle.read(iprot);
         struct.setHandleIsSet(true);
-        struct.request = new thrift.TFeedBackRequest();
-        struct.request.read(iprot);
-        struct.setRequestIsSet(true);
+        struct.receiverId = iprot.readI32();
+        struct.setReceiverIdIsSet(true);
+        struct.count = iprot.readI32();
+        struct.setCountIsSet(true);
+        struct.offset = iprot.readI32();
+        struct.setOffsetIsSet(true);
       }
     }
 
@@ -34722,7 +35908,7 @@ public class MiotoCarService {
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new getFeedBack_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new getFeedBack_resultTupleSchemeFactory();
 
-    public @org.apache.thrift.annotation.Nullable thrift.TFeedBackResult success; // required
+    public @org.apache.thrift.annotation.Nullable thrift.TListFeedBackResult success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -34789,7 +35975,7 @@ public class MiotoCarService {
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, thrift.TFeedBackResult.class)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, thrift.TListFeedBackResult.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getFeedBack_result.class, metaDataMap);
     }
@@ -34798,7 +35984,7 @@ public class MiotoCarService {
     }
 
     public getFeedBack_result(
-      thrift.TFeedBackResult success)
+      thrift.TListFeedBackResult success)
     {
       this();
       this.success = success;
@@ -34809,7 +35995,7 @@ public class MiotoCarService {
      */
     public getFeedBack_result(getFeedBack_result other) {
       if (other.isSetSuccess()) {
-        this.success = new thrift.TFeedBackResult(other.success);
+        this.success = new thrift.TListFeedBackResult(other.success);
       }
     }
 
@@ -34823,11 +36009,11 @@ public class MiotoCarService {
     }
 
     @org.apache.thrift.annotation.Nullable
-    public thrift.TFeedBackResult getSuccess() {
+    public thrift.TListFeedBackResult getSuccess() {
       return this.success;
     }
 
-    public getFeedBack_result setSuccess(@org.apache.thrift.annotation.Nullable thrift.TFeedBackResult success) {
+    public getFeedBack_result setSuccess(@org.apache.thrift.annotation.Nullable thrift.TListFeedBackResult success) {
       this.success = success;
       return this;
     }
@@ -34853,7 +36039,7 @@ public class MiotoCarService {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((thrift.TFeedBackResult)value);
+          setSuccess((thrift.TListFeedBackResult)value);
         }
         break;
 
@@ -35015,7 +36201,7 @@ public class MiotoCarService {
           switch (schemeField.id) {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.success = new thrift.TFeedBackResult();
+                struct.success = new thrift.TListFeedBackResult();
                 struct.success.read(iprot);
                 struct.setSuccessIsSet(true);
               } else { 
@@ -35074,7 +36260,7 @@ public class MiotoCarService {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.success = new thrift.TFeedBackResult();
+          struct.success = new thrift.TListFeedBackResult();
           struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }
@@ -37611,17 +38797,23 @@ public class MiotoCarService {
 
     private static final org.apache.thrift.protocol.TField HANDLE_FIELD_DESC = new org.apache.thrift.protocol.TField("handle", org.apache.thrift.protocol.TType.STRUCT, (short)1);
     private static final org.apache.thrift.protocol.TField TITLE_FIELD_DESC = new org.apache.thrift.protocol.TField("title", org.apache.thrift.protocol.TType.STRING, (short)2);
+    private static final org.apache.thrift.protocol.TField COUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("count", org.apache.thrift.protocol.TType.I32, (short)3);
+    private static final org.apache.thrift.protocol.TField OFFSET_FIELD_DESC = new org.apache.thrift.protocol.TField("offset", org.apache.thrift.protocol.TType.I32, (short)4);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new getVoucher_argsStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new getVoucher_argsTupleSchemeFactory();
 
     public @org.apache.thrift.annotation.Nullable thrift.OpHandle handle; // required
     public @org.apache.thrift.annotation.Nullable java.lang.String title; // required
+    public int count; // required
+    public int offset; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
       HANDLE((short)1, "handle"),
-      TITLE((short)2, "title");
+      TITLE((short)2, "title"),
+      COUNT((short)3, "count"),
+      OFFSET((short)4, "offset");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -37641,6 +38833,10 @@ public class MiotoCarService {
             return HANDLE;
           case 2: // TITLE
             return TITLE;
+          case 3: // COUNT
+            return COUNT;
+          case 4: // OFFSET
+            return OFFSET;
           default:
             return null;
         }
@@ -37682,6 +38878,9 @@ public class MiotoCarService {
     }
 
     // isset id assignments
+    private static final int __COUNT_ISSET_ID = 0;
+    private static final int __OFFSET_ISSET_ID = 1;
+    private byte __isset_bitfield = 0;
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -37689,6 +38888,10 @@ public class MiotoCarService {
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, thrift.OpHandle.class)));
       tmpMap.put(_Fields.TITLE, new org.apache.thrift.meta_data.FieldMetaData("title", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.COUNT, new org.apache.thrift.meta_data.FieldMetaData("count", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+      tmpMap.put(_Fields.OFFSET, new org.apache.thrift.meta_data.FieldMetaData("offset", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getVoucher_args.class, metaDataMap);
     }
@@ -37698,23 +38901,32 @@ public class MiotoCarService {
 
     public getVoucher_args(
       thrift.OpHandle handle,
-      java.lang.String title)
+      java.lang.String title,
+      int count,
+      int offset)
     {
       this();
       this.handle = handle;
       this.title = title;
+      this.count = count;
+      setCountIsSet(true);
+      this.offset = offset;
+      setOffsetIsSet(true);
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
     public getVoucher_args(getVoucher_args other) {
+      __isset_bitfield = other.__isset_bitfield;
       if (other.isSetHandle()) {
         this.handle = new thrift.OpHandle(other.handle);
       }
       if (other.isSetTitle()) {
         this.title = other.title;
       }
+      this.count = other.count;
+      this.offset = other.offset;
     }
 
     public getVoucher_args deepCopy() {
@@ -37725,6 +38937,10 @@ public class MiotoCarService {
     public void clear() {
       this.handle = null;
       this.title = null;
+      setCountIsSet(false);
+      this.count = 0;
+      setOffsetIsSet(false);
+      this.offset = 0;
     }
 
     @org.apache.thrift.annotation.Nullable
@@ -37777,6 +38993,52 @@ public class MiotoCarService {
       }
     }
 
+    public int getCount() {
+      return this.count;
+    }
+
+    public getVoucher_args setCount(int count) {
+      this.count = count;
+      setCountIsSet(true);
+      return this;
+    }
+
+    public void unsetCount() {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __COUNT_ISSET_ID);
+    }
+
+    /** Returns true if field count is set (has been assigned a value) and false otherwise */
+    public boolean isSetCount() {
+      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __COUNT_ISSET_ID);
+    }
+
+    public void setCountIsSet(boolean value) {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __COUNT_ISSET_ID, value);
+    }
+
+    public int getOffset() {
+      return this.offset;
+    }
+
+    public getVoucher_args setOffset(int offset) {
+      this.offset = offset;
+      setOffsetIsSet(true);
+      return this;
+    }
+
+    public void unsetOffset() {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __OFFSET_ISSET_ID);
+    }
+
+    /** Returns true if field offset is set (has been assigned a value) and false otherwise */
+    public boolean isSetOffset() {
+      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __OFFSET_ISSET_ID);
+    }
+
+    public void setOffsetIsSet(boolean value) {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __OFFSET_ISSET_ID, value);
+    }
+
     public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
       switch (field) {
       case HANDLE:
@@ -37795,6 +39057,22 @@ public class MiotoCarService {
         }
         break;
 
+      case COUNT:
+        if (value == null) {
+          unsetCount();
+        } else {
+          setCount((java.lang.Integer)value);
+        }
+        break;
+
+      case OFFSET:
+        if (value == null) {
+          unsetOffset();
+        } else {
+          setOffset((java.lang.Integer)value);
+        }
+        break;
+
       }
     }
 
@@ -37806,6 +39084,12 @@ public class MiotoCarService {
 
       case TITLE:
         return getTitle();
+
+      case COUNT:
+        return getCount();
+
+      case OFFSET:
+        return getOffset();
 
       }
       throw new java.lang.IllegalStateException();
@@ -37822,6 +39106,10 @@ public class MiotoCarService {
         return isSetHandle();
       case TITLE:
         return isSetTitle();
+      case COUNT:
+        return isSetCount();
+      case OFFSET:
+        return isSetOffset();
       }
       throw new java.lang.IllegalStateException();
     }
@@ -37859,6 +39147,24 @@ public class MiotoCarService {
           return false;
       }
 
+      boolean this_present_count = true;
+      boolean that_present_count = true;
+      if (this_present_count || that_present_count) {
+        if (!(this_present_count && that_present_count))
+          return false;
+        if (this.count != that.count)
+          return false;
+      }
+
+      boolean this_present_offset = true;
+      boolean that_present_offset = true;
+      if (this_present_offset || that_present_offset) {
+        if (!(this_present_offset && that_present_offset))
+          return false;
+        if (this.offset != that.offset)
+          return false;
+      }
+
       return true;
     }
 
@@ -37873,6 +39179,10 @@ public class MiotoCarService {
       hashCode = hashCode * 8191 + ((isSetTitle()) ? 131071 : 524287);
       if (isSetTitle())
         hashCode = hashCode * 8191 + title.hashCode();
+
+      hashCode = hashCode * 8191 + count;
+
+      hashCode = hashCode * 8191 + offset;
 
       return hashCode;
     }
@@ -37901,6 +39211,26 @@ public class MiotoCarService {
       }
       if (isSetTitle()) {
         lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.title, other.title);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetCount()).compareTo(other.isSetCount());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetCount()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.count, other.count);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetOffset()).compareTo(other.isSetOffset());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetOffset()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.offset, other.offset);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -37941,6 +39271,14 @@ public class MiotoCarService {
         sb.append(this.title);
       }
       first = false;
+      if (!first) sb.append(", ");
+      sb.append("count:");
+      sb.append(this.count);
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("offset:");
+      sb.append(this.offset);
+      first = false;
       sb.append(")");
       return sb.toString();
     }
@@ -37950,6 +39288,8 @@ public class MiotoCarService {
       if (handle == null) {
         throw new org.apache.thrift.protocol.TProtocolException("Required field 'handle' was not present! Struct: " + toString());
       }
+      // alas, we cannot check 'count' because it's a primitive and you chose the non-beans generator.
+      // alas, we cannot check 'offset' because it's a primitive and you chose the non-beans generator.
       // check for sub-struct validity
       if (handle != null) {
         handle.validate();
@@ -37966,6 +39306,8 @@ public class MiotoCarService {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
       try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -38007,6 +39349,22 @@ public class MiotoCarService {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
+            case 3: // COUNT
+              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+                struct.count = iprot.readI32();
+                struct.setCountIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 4: // OFFSET
+              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+                struct.offset = iprot.readI32();
+                struct.setOffsetIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -38015,6 +39373,12 @@ public class MiotoCarService {
         iprot.readStructEnd();
 
         // check for required fields of primitive type, which can't be checked in the validate method
+        if (!struct.isSetCount()) {
+          throw new org.apache.thrift.protocol.TProtocolException("Required field 'count' was not found in serialized data! Struct: " + toString());
+        }
+        if (!struct.isSetOffset()) {
+          throw new org.apache.thrift.protocol.TProtocolException("Required field 'offset' was not found in serialized data! Struct: " + toString());
+        }
         struct.validate();
       }
 
@@ -38032,6 +39396,12 @@ public class MiotoCarService {
           oprot.writeString(struct.title);
           oprot.writeFieldEnd();
         }
+        oprot.writeFieldBegin(COUNT_FIELD_DESC);
+        oprot.writeI32(struct.count);
+        oprot.writeFieldEnd();
+        oprot.writeFieldBegin(OFFSET_FIELD_DESC);
+        oprot.writeI32(struct.offset);
+        oprot.writeFieldEnd();
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
@@ -38050,6 +39420,8 @@ public class MiotoCarService {
       public void write(org.apache.thrift.protocol.TProtocol prot, getVoucher_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         struct.handle.write(oprot);
+        oprot.writeI32(struct.count);
+        oprot.writeI32(struct.offset);
         java.util.BitSet optionals = new java.util.BitSet();
         if (struct.isSetTitle()) {
           optionals.set(0);
@@ -38066,6 +39438,10 @@ public class MiotoCarService {
         struct.handle = new thrift.OpHandle();
         struct.handle.read(iprot);
         struct.setHandleIsSet(true);
+        struct.count = iprot.readI32();
+        struct.setCountIsSet(true);
+        struct.offset = iprot.readI32();
+        struct.setOffsetIsSet(true);
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
           struct.title = iprot.readString();
@@ -38087,7 +39463,7 @@ public class MiotoCarService {
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new getVoucher_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new getVoucher_resultTupleSchemeFactory();
 
-    public @org.apache.thrift.annotation.Nullable thrift.TVoucherResult success; // required
+    public @org.apache.thrift.annotation.Nullable thrift.TListVoucherResult success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -38154,7 +39530,7 @@ public class MiotoCarService {
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, thrift.TVoucherResult.class)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, thrift.TListVoucherResult.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getVoucher_result.class, metaDataMap);
     }
@@ -38163,7 +39539,7 @@ public class MiotoCarService {
     }
 
     public getVoucher_result(
-      thrift.TVoucherResult success)
+      thrift.TListVoucherResult success)
     {
       this();
       this.success = success;
@@ -38174,7 +39550,7 @@ public class MiotoCarService {
      */
     public getVoucher_result(getVoucher_result other) {
       if (other.isSetSuccess()) {
-        this.success = new thrift.TVoucherResult(other.success);
+        this.success = new thrift.TListVoucherResult(other.success);
       }
     }
 
@@ -38188,11 +39564,11 @@ public class MiotoCarService {
     }
 
     @org.apache.thrift.annotation.Nullable
-    public thrift.TVoucherResult getSuccess() {
+    public thrift.TListVoucherResult getSuccess() {
       return this.success;
     }
 
-    public getVoucher_result setSuccess(@org.apache.thrift.annotation.Nullable thrift.TVoucherResult success) {
+    public getVoucher_result setSuccess(@org.apache.thrift.annotation.Nullable thrift.TListVoucherResult success) {
       this.success = success;
       return this;
     }
@@ -38218,7 +39594,7 @@ public class MiotoCarService {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((thrift.TVoucherResult)value);
+          setSuccess((thrift.TListVoucherResult)value);
         }
         break;
 
@@ -38380,7 +39756,7 @@ public class MiotoCarService {
           switch (schemeField.id) {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.success = new thrift.TVoucherResult();
+                struct.success = new thrift.TListVoucherResult();
                 struct.success.read(iprot);
                 struct.setSuccessIsSet(true);
               } else { 
@@ -38439,7 +39815,7 @@ public class MiotoCarService {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.success = new thrift.TVoucherResult();
+          struct.success = new thrift.TListVoucherResult();
           struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }

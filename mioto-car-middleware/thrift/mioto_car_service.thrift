@@ -41,9 +41,11 @@ service MiotoCarService {
         2:required mioto_car_struct.TFeePolicy        feePolicy
     );
 
-    mioto_car_struct.TFeePolicyResult getFeePolicy(
+    mioto_car_struct.TListFeePolicyResult getFeePolicy(
         1:required mioto_car_struct.OpHandle handle
         2:optional string                    name
+        3:required i32                       count
+        4:required i32                       offset
     );
 
     mioto_car_struct.TFeePolicyResult getFeePolicyById(
@@ -66,9 +68,11 @@ service MiotoCarService {
         2:required mioto_car_struct.TProvince        province
     );
     
-    mioto_car_struct.TProvinceResult getProvince(
+    mioto_car_struct.TListProvinceResult getProvince(
         1:required mioto_car_struct.OpHandle         handle
-        2:required string                            provinceName
+        2:optional string                            provinceName
+        3:required i32                               count
+        4:required i32                               offset
     );
 
     mioto_car_struct.TProvinceResult getProvinceById(
@@ -91,9 +95,11 @@ service MiotoCarService {
         2:required mioto_car_struct.TDistrict        district
     );
     
-    mioto_car_struct.TDistrictResult getDistrict(
+    mioto_car_struct.TListDistrictResult getDistrict(
         1:required mioto_car_struct.OpHandle         handle
         2:required i32                               provinceId
+        3:required i32                               count
+        4:required i32                               offset
     );
 
     mioto_car_struct.TDistrictResult getDistrictById(
@@ -116,9 +122,11 @@ service MiotoCarService {
         2:required mioto_car_struct.TCarBrand        carBrand
     );
 
-    mioto_car_struct.TCarBrandResult getCarBrand (
+    mioto_car_struct.TListCarBrandResult getCarBrand (
         1:required mioto_car_struct.OpHandle         handle
         2:optional string                            nameBrand
+        3:required i32                               count
+        4:required i32                               offset
     );
     
     mioto_car_struct.TCarBrandResult getCarBrandById (
@@ -141,9 +149,11 @@ service MiotoCarService {
         2:optional mioto_car_struct.TFeature         feature
     );
 
-    mioto_car_struct.TFeatureResult getFeature (
+    mioto_car_struct.TListFeatureResult getFeature (
         1:required mioto_car_struct.OpHandle         handle
         2:optional string                            nameFeature
+        3:required i32                               count
+        4:required i32                               offset
     );
 
     mioto_car_struct.TFeatureResult getFeatureById (
@@ -166,9 +176,11 @@ service MiotoCarService {
         2:required mioto_car_struct.TFeedBack        feedback
     );
 
-    mioto_car_struct.TFeedBackResult getFeedBack (
+    mioto_car_struct.TListFeedBackResult getFeedBack (
         1:required mioto_car_struct.OpHandle         handle
-        2:required mioto_car_struct.TFeedBackRequest request
+        2:required i32                               receiverId
+        3:required i32                               count
+        4:required i32                               offset
     );
 
     mioto_car_struct.TFeedBackResult deleteFeedBack (
@@ -186,9 +198,11 @@ service MiotoCarService {
         2:required mioto_car_struct.TVoucher         voucher
     );
 
-    mioto_car_struct.TVoucherResult getVoucher (
+    mioto_car_struct.TListVoucherResult getVoucher (
         1:required mioto_car_struct.OpHandle         handle
         2:optional string                            title
+        3:required i32                               count
+        4:required i32                               offset
     );
     
     mioto_car_struct.TVoucherResult getVoucherById (
