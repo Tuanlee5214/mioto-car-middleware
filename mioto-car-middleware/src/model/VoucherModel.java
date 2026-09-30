@@ -97,10 +97,10 @@ public class VoucherModel {
         return result;
     }
     
-    public TListVoucherResult getAllVoucher(String title, int count, int offset)
+    public TListVoucherResult getAllVoucher(String title, String code, int count, int offset)
     {
         TListVoucherResult result = new TListVoucherResult();
-        ValueResult<List<TVoucher>> ret = _dao.getAllVoucher(title, count, offset);
+        ValueResult<List<TVoucher>> ret = _dao.getAllVoucher(title, code, count, offset);
         if(Err.isFail(ret.error)) return new TListVoucherResult((int) ret.error, "");
         List<TVoucher> value = ret.value != null ? ret.value : new ArrayList<TVoucher>();
         result.setError(Err.SUCCESS);

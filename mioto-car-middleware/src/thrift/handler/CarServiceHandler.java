@@ -476,9 +476,9 @@ public class CarServiceHandler implements MiotoCarService.Iface {
     }
 
     @Override
-    public TListVoucherResult getVoucher(OpHandle handle, String title, int count, int offset) throws TException {
+    public TListVoucherResult getVoucher(OpHandle handle, String title, int count, int offset, String code) throws TException {
         try {
-            return VoucherModel.Instance.getAllVoucher(title, count, offset);
+            return VoucherModel.Instance.getAllVoucher(title, code, count, offset);
         } catch (Exception e) {
             _Logger.error("get all voucher with src = " + handle.source, e);
             return new TListVoucherResult(Err.FAIL, "Lỗi hệ thống");
