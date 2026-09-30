@@ -132,7 +132,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
     @Override
     public TFeePolicyResult createFeePolicy(OpHandle handle, TFeePolicy feePolicy) throws TException {
         try {
-            return new TFeePolicyResult((int) FeePolicyModel.Instance.createFeePolicy(feePolicy), "");
+            return FeePolicyModel.Instance.createFeePolicy(feePolicy);
         }
         catch(Exception e) 
         {
@@ -145,7 +145,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
     public TFeePolicyResult updateFeePolicy(OpHandle handle, TFeePolicy feePolicy) throws TException {
         try 
         {
-            return new TFeePolicyResult((int)FeePolicyModel.Instance.updateFeePolicy(feePolicy), "");
+            return FeePolicyModel.Instance.updateFeePolicy(feePolicy);
         } 
         catch (Exception e) 
         {
@@ -179,7 +179,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
     @Override
     public TProvinceResult createProvince(OpHandle handle, TProvince province) throws TException {
         try {
-            return new TProvinceResult((int) ProvinceModel.Instance.createProvince(province), "");
+            return ProvinceModel.Instance.createProvince(province);
         } catch (Exception e) {
             _Logger.error("create province with src= " + handle.source, e);
             return new TProvinceResult(Err.FAIL, "Lỗi hệ thống");
@@ -189,7 +189,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
     @Override
     public TProvinceResult updateProvince(OpHandle handle, TProvince province) throws TException {
         try {
-            return new TProvinceResult((int)ProvinceModel.Instance.updateProvince(province), "");
+            return ProvinceModel.Instance.updateProvince(province);
         } catch (Exception e) {
             _Logger.error("update province with id : " + province.getProvinceId() + " src= " + handle.source, e);
             return new TProvinceResult(Err.FAIL, "Lỗi hệ thống");
@@ -220,7 +220,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
     @Override
     public TDistrictResult createDistrict(OpHandle handle, TDistrict district) throws TException {
         try {
-            return new TDistrictResult((int) DistrictModel.Instance.createDistrict(district), "");
+            return DistrictModel.Instance.createDistrict(district);
         } 
         catch (Exception e) {
             _Logger.error("create district with src = " + handle.source, e);
@@ -231,7 +231,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
     @Override
     public TDistrictResult updateDistrict(OpHandle handle, TDistrict district) throws TException {
         try {
-            return new TDistrictResult((int) DistrictModel.Instance.updateDistrict(district), "");
+            return DistrictModel.Instance.updateDistrict(district);
         } 
         catch (Exception e) {
             _Logger.error("update district with id :" + district.getDistrictId() + " src= " + handle.source, e);
@@ -257,7 +257,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
     @Override
     public TCarBrandResult createCarBrand(OpHandle handle, TCarBrand carBrand) throws TException {
         try {
-            return new TCarBrandResult((int) CarBrandModel.Instance.createCarBrand(carBrand), "");
+            return CarBrandModel.Instance.createCarBrand(carBrand);
         } 
         catch (Exception e) {
             _Logger.error("create car brand with src= " + handle.source, e);
@@ -268,7 +268,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
     @Override
     public TCarBrandResult updateCarBrand(OpHandle handle, TCarBrand carBrand) throws TException {
         try {
-            return new TCarBrandResult((int) CarBrandModel.Instance.updateCarBrand(carBrand), "");
+            return CarBrandModel.Instance.updateCarBrand(carBrand);
         } 
         catch (Exception e) {
             _Logger.error("update car brand by id :" + carBrand.getCarBrandId() + " src= " + handle.source, e);
@@ -301,7 +301,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
     @Override
     public TFeatureResult createFeature(OpHandle handle, TFeature feature) throws TException {
         try {
-            return new TFeatureResult((int) FeatureModel.Instance.createFeature(feature), "");
+            return FeatureModel.Instance.createFeature(feature);
         } 
         catch (Exception e) {
             _Logger.error("create feature result with src = " + handle.source, e);
@@ -312,7 +312,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
     @Override
     public TFeatureResult updateFeature(OpHandle handle, TFeature feature) throws TException {
         try {
-            return new TFeatureResult((int)FeatureModel.Instance.updateFeature(feature), "");
+            return FeatureModel.Instance.updateFeature(feature);
         } catch (Exception e) {
             _Logger.error("update feature by id : " + feature.getFeatureId() + " src= " + handle.source, e);
             return new TFeatureResult(Err.FAIL, "Lỗi hệ thống");
@@ -343,7 +343,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
     @Override
     public TFeedBackResult createFeedBack(OpHandle handle, TFeedBack feedback) throws TException {
         try {
-            return new TFeedBackResult((int)FeedBackModel.Instance.createFeedBack(feedback), "");
+            return FeedBackModel.Instance.createFeedBack(feedback);
         } catch (Exception e) {
             _Logger.error("create feedback with src: " + handle.source, e);
             return new TFeedBackResult(Err.FAIL, "Lỗi hệ thống");
@@ -353,7 +353,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
     @Override
     public TFeedBackResult updateFeedBack(OpHandle handle, TFeedBack feedback) throws TException {
         try {
-            return new TFeedBackResult((int)FeedBackModel.Instance.updateFeedBack(feedback), "");
+            return FeedBackModel.Instance.updateFeedBack(feedback);
         } catch (Exception e) {
             _Logger.error("update feedback by id :" + feedback.getFeedbackId() + " src= " + handle.source, e);
             return new TFeedBackResult(Err.FAIL, "Lỗi hệ thống");
@@ -373,7 +373,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
     @Override
     public TVoucherResult createVoucher(OpHandle handle, TVoucher voucher) throws TException {
         try {
-            return new TVoucherResult((int)VoucherModel.Instance.createVoucher(voucher), "");
+            return VoucherModel.Instance.createVoucher(voucher);
         } catch (Exception e) {
             _Logger.error("create voucher with src= " + handle.source, e);
             return new TVoucherResult(Err.FAIL, "Lỗi hệ thống");
@@ -383,7 +383,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
     @Override
     public TVoucherResult updateVoucher(OpHandle handle, TVoucher voucher) throws TException {
         try {
-            return new TVoucherResult((int)VoucherModel.Instance.updateVoucher(voucher), "");
+            return VoucherModel.Instance.updateVoucher(voucher);
         } catch (Exception e) {
             _Logger.error("update voucher by id : " + voucher.getVoucherId() + " src= " + handle.source, e);
             return new TVoucherResult(Err.FAIL, "Lỗi hệ thống");
@@ -413,7 +413,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
     @Override
     public TListFeePolicyResult getFeePolicy(OpHandle handle, String name, int count, int offset) throws TException {
         try {
-            return FeePolicyModel.Instance.getAllFeePolicy(name, offset, count);
+            return FeePolicyModel.Instance.getAllFeePolicy(name, count, offset);
         } catch (Exception e) {
             _Logger.error("get all fee policy with src = " + handle.source, e);
             return new TListFeePolicyResult(Err.FAIL, "Lỗi hệ thống");
