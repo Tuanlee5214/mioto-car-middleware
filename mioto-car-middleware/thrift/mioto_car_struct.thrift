@@ -40,6 +40,8 @@ struct TUser {
     2:optional string  phone,
     3:optional string  email,
     4:optional string  displayName,
+    5:optional string  role,
+    6:optional bool    isOwnCar,
     20:optional byte   status,
     21:optional i64    timeCreated,
     22:optional i64    timeUpdated,
@@ -55,7 +57,7 @@ struct TSignUpRequest {
 struct TFeePolicy {
     1:optional i32    feePolicyId,
     2:optional string name,
-    3:optional i32    percentFee,
+    3:optional string percentFee,
     4:optional bool   isActive,
 }
 

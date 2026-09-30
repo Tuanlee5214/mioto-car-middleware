@@ -204,7 +204,7 @@ service MiotoCarService {
         3:required i32                               count
         4:required i32                               offset
     );
-    
+        
     mioto_car_struct.TVoucherResult getVoucherById (
         1:required mioto_car_struct.OpHandle         handle
         2:required i32                               voucherId
