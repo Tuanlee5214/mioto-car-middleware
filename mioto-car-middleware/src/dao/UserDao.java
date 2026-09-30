@@ -22,7 +22,7 @@ public class UserDao {
 
     private static final String TABLE = "Users";
     private static final String KEY = "userId";
-    private static final String COLS = "userId,phone,email,displayName,status,timeCreated,timeUpdated";
+    private static final String COLS = "userId,phone,email,displayName,status,timeCreated,timeUpdated,role,isOwnCar";
 
     private final MysqlClient _cli;
 
@@ -40,13 +40,20 @@ public class UserDao {
 
         return Err.isSuccess(result);
     }
+    
+    public boolean isEmailExisted(String email)
+    {
+        String sql = "SELECT 1 FROM " + TABLE + " WHERE email=? LIMIT 1";
+        int result = _cli.executeQuery(null, sql, email);
+        return Err.isSuccess(result);
+    }
 
     public long createUser(TUser user) {
         String sql = "INSERT INTO " + TABLE
-                + " (phone,email,displayName,status,timeCreated,timeUpdated)"
+                + " (phone,email,displayName,status,timeCreated,timeUpdated,role,isOwnCar)"
                 + " VALUES (?,?,?,?,?,?)";
         return _cli.executeInsertAndReturnKey(sql, user.getPhone(), user.getEmail(), user.getDisplayName(),
-                user.getStatus(), user.getTimeCreated(), user.getTimeUpdated());
+                user.getStatus(), user.getTimeCreated(), user.getTimeUpdated(), "Customer", false);
     }
 
     public ValueResult<TUser> getUser(long userId) {
@@ -94,6 +101,8 @@ public class UserDao {
         user.setStatus(rs.getByte("status"));
         user.setTimeCreated(rs.getLong("timeCreated"));
         user.setTimeUpdated(rs.getLong("timeUpdated"));
+        user.setIsOwnCar(rs.getBoolean("isOwnCar"));
+        user.setRole(rs.getString("role"));
         return user;
     }
 }
