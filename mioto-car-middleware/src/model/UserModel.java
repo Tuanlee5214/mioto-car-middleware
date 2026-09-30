@@ -136,7 +136,7 @@ public class UserModel {
 
     public TUpdateUserResult updateUser(TUser user) {
         ValueResult<Integer> ret = _dao.updateUser(user);
-        TUpdateUserResult result = new TUpdateUserResult(Err.FAIL, "");
+        TUpdateUserResult result = new TUpdateUserResult();
         if (Err.isNetworkError(ret.error)) {
             return new TUpdateUserResult((int) ret.error, "Lỗi kết nối mạng");
         }

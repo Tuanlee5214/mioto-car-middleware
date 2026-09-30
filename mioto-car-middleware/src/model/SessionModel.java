@@ -83,10 +83,10 @@ public class SessionModel {
     
     public TSessionResult deleteSession(long sessionId)
     {
-        _cache.remove((int)sessionId);
         ValueResult<Integer> ret = _dao.deleteSession(sessionId);
         if(ret.value == 0) return new TSessionResult(Err.NOT_FOUND, "Không tìm thấy phiên để xóa");
         if(ret.value < 0) return new TSessionResult(ret.value, "Lỗi kết nối mạng");
+        _cache.remove((int)sessionId);
         TSessionResult result = new TSessionResult();
         result.setError(Err.SUCCESS);
         result.setMessage("Xóa phiên thành công");  
