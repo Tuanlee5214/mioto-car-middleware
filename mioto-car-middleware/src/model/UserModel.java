@@ -41,6 +41,10 @@ public class UserModel {
     public boolean isPhoneExisted(String phone) {
         return _dao.isPhoneExisted(phone);
     }
+    
+    public boolean isEmailExisted(String email) {
+        return _dao.isEmailExisted(email);
+    }
 
     public long createUser(TUser user) {
         long id = _dao.createUser(user);
