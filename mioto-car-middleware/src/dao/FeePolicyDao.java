@@ -7,6 +7,7 @@ package dao;
 import db.MysqlClient;
 import error.Err;
 import error.ValueResult;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class FeePolicyDao {
         String sql = "UPDATE " + TABLE
                 + " SET nameFeePolicy=?,percentFee=?,isActive=?"
                 + " WHERE " + KEY + "=?";
-        return _cli.executeUpdate(sql, feePolicy.getName(), feePolicy.getPercentFee(), feePolicy.isIsActive(), feePolicy.getFeePolicyId());
+        return _cli.executeUpdate(sql, feePolicy.getName(), new BigDecimal(feePolicy.getPercentFee()), feePolicy.isIsActive(), feePolicy.getFeePolicyId());
     }
     
     public long deleteFeePolicy(long feePolicyId)
@@ -78,7 +79,7 @@ public class FeePolicyDao {
         StringBuilder sql = new StringBuilder("SELECT " + COLS + " FROM " + TABLE + " WHERE 1=1");
         List<Object> params = new ArrayList<Object>();
         
-        if(name != null && !name.isEmpty())
+        if(name != null && !name.trim().isEmpty())
         {
             sql.append(" AND nameFeePolicy = ?");
             params.add(name);
@@ -107,7 +108,7 @@ public class FeePolicyDao {
         feePolicy.setFeePolicyId(rs.getInt("feePolicyId"));
         feePolicy.setIsActive(rs.getBoolean("isActive"));
         feePolicy.setName(rs.getString("nameFeePolicy"));
-        feePolicy.setPercentFee(rs.getInt("percentFee"));
+        feePolicy.setPercentFee(rs.getBigDecimal("percentFee").toPlainString());
         return feePolicy;
     }
 }

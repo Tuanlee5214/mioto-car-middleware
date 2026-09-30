@@ -81,7 +81,7 @@ public class VoucherDao {
         StringBuilder sql = new StringBuilder("SELECT " + COLS + " FROM " + TABLE + " WHERE 1=1");
         List<Object> params = new ArrayList<Object>();
         
-        if(title != null && !title.isEmpty())
+        if(title != null && !title.trim().isEmpty())
         {
             sql.append(" AND title=?");
             params.add(title);

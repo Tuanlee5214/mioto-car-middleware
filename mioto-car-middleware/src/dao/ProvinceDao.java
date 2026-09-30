@@ -9,6 +9,7 @@ import error.Err;
 import error.ValueResult;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -37,7 +38,7 @@ public class ProvinceDao {
         return _cli;
     }
     
-    public long createProvince(TProvince province)
+    public long createProvince(TProvince province) 
     {
         String sql = "INSERT INTO " + TABLE
                 + " (nameProvince)"
@@ -77,7 +78,7 @@ public class ProvinceDao {
         StringBuilder sql = new StringBuilder("SELECT " + COLS + " FROM " + TABLE + " WHERE 1=1");
         List<Object> params = new ArrayList<Object>();
         
-        if(provinceName != null && !provinceName.isEmpty())
+        if(provinceName != null && !provinceName.trim().isEmpty())
         {
             sql.append(" AND nameProvince=?");
             params.add(provinceName);

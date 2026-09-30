@@ -34,8 +34,8 @@ public class SimpleConnectionPool {
     private final Object _lock = new Object();
 
     // ---- counters: read without the lock, so they must be atomic ----
-    private final AtomicLong _created  = new AtomicLong();
-    private final AtomicLong _failed   = new AtomicLong();
+    private final AtomicLong _created = new AtomicLong();
+    private final AtomicLong _failed = new AtomicLong();
     private final AtomicLong _borrowed = new AtomicLong();
     private final AtomicLong _timeouts = new AtomicLong();
     private final AtomicLong _discarded = new AtomicLong();
@@ -44,18 +44,18 @@ public class SimpleConnectionPool {
         _driver = Config.getString(SimpleConnectionPool.class, name, "driver", "com.mysql.cj.jdbc.Driver");
         String host = Config.getString(SimpleConnectionPool.class, name, "host", "127.0.0.1:3306");
         _dbName = Config.getString(SimpleConnectionPool.class, name, "dbname", "");
-        _user   = Config.getString(SimpleConnectionPool.class, name, "uname", "");
-        _pwd    = Config.getString(SimpleConnectionPool.class, name, "pwd", "");
+        _user = Config.getString(SimpleConnectionPool.class, name, "uname", "");
+        _pwd = Config.getString(SimpleConnectionPool.class, name, "pwd", "");
 
-        _maxConn       = Config.getInt(SimpleConnectionPool.class, name, "max_conn", 4);
+        _maxConn = Config.getInt(SimpleConnectionPool.class, name, "max_conn", 4);
         _connTimeoutMs = Config.getInt(SimpleConnectionPool.class, name, "conn-timeout", 5000);
         _waitTimeoutMs = Config.getInt(SimpleConnectionPool.class, name, "wait-timeout", 3000);
 
         _url = "jdbc:mysql://" + host + "/" + _dbName
-             + "?useUnicode=true&characterEncoding=UTF-8"
-             + "&connectTimeout=" + _connTimeoutMs
-             + "&socketTimeout=" + (_connTimeoutMs * 4);
-
+                + "?useUnicode=true&characterEncoding=UTF-8"
+                + "&useAffectedRows=false"
+                + "&connectTimeout=" + _connTimeoutMs
+                + "&socketTimeout=" + (_connTimeoutMs * 4);
         // Log ngay khi khởi tạo, KHÔNG log password.
         _Logger.info("Initializing SimpleConnectionPool[" + name + "] -> url=" + _url
                 + " user=" + _user + " maxConn=" + _maxConn
@@ -71,8 +71,9 @@ public class SimpleConnectionPool {
     }
 
     /**
-     * Take a connection out of the pool, or open a new one if we are under the cap.
-     * Returns null when no connection could be obtained (caller returns an error code).
+     * Take a connection out of the pool, or open a new one if we are under the
+     * cap. Returns null when no connection could be obtained (caller returns an
+     * error code).
      */
     public Connection borrow() {
         final long deadline = System.currentTimeMillis() + _waitTimeoutMs;
@@ -136,8 +137,9 @@ public class SimpleConnectionPool {
     }
 
     /**
-     * Return a connection. Pass ok=false if the caller saw a SQLException, so the
-     * suspect connection is thrown away instead of handed to the next borrower.
+     * Return a connection. Pass ok=false if the caller saw a SQLException, so
+     * the suspect connection is thrown away instead of handed to the next
+     * borrower.
      */
     public void giveBack(Connection conn, boolean ok) {
         if (conn == null) {
@@ -158,7 +160,7 @@ public class SimpleConnectionPool {
 
     private Connection open() throws SQLException {
         Connection conn = DriverManager.getConnection(_url, _user, _pwd);
-        
+
         PreparedStatement prst = conn.prepareStatement("SET NAMES 'utf8mb4'");
         try {
             prst.execute();
@@ -168,7 +170,10 @@ public class SimpleConnectionPool {
         return conn;
     }
 
-    /** Bounded liveness check - isValid(0) means "no timeout" and can hang under the lock. */
+    /**
+     * Bounded liveness check - isValid(0) means "no timeout" and can hang under
+     * the lock.
+     */
     private boolean isAlive(Connection conn) {
         try {
             return conn != null && !conn.isClosed() && conn.isValid(1);
@@ -186,7 +191,9 @@ public class SimpleConnectionPool {
         }
     }
 
-    /** Close everything. Called from the shutdown hook. */
+    /**
+     * Close everything. Called from the shutdown hook.
+     */
     public void shutdown() {
         _Logger.info("Shutting down connection pool. " + stats());
         synchronized (_lock) {
@@ -199,19 +206,48 @@ public class SimpleConnectionPool {
     }
 
     // ---- observability: a pool you cannot see into is a pool you cannot debug ----
-    public int  getTotal()      { synchronized (_lock) { return _total; } }
-    public int  getIdle()       { synchronized (_lock) { return _idle.size(); } }
-    public int  getBusy()       { synchronized (_lock) { return _total - _idle.size(); } }
-    public long getCreated()    { return _created.get(); }
-    public long getFailed()     { return _failed.get(); }
-    public long getBorrowed()   { return _borrowed.get(); }
-    public long getTimeouts()   { return _timeouts.get(); }
-    public long getDiscarded()  { return _discarded.get(); }
+    public int getTotal() {
+        synchronized (_lock) {
+            return _total;
+        }
+    }
+
+    public int getIdle() {
+        synchronized (_lock) {
+            return _idle.size();
+        }
+    }
+
+    public int getBusy() {
+        synchronized (_lock) {
+            return _total - _idle.size();
+        }
+    }
+
+    public long getCreated() {
+        return _created.get();
+    }
+
+    public long getFailed() {
+        return _failed.get();
+    }
+
+    public long getBorrowed() {
+        return _borrowed.get();
+    }
+
+    public long getTimeouts() {
+        return _timeouts.get();
+    }
+
+    public long getDiscarded() {
+        return _discarded.get();
+    }
 
     public String stats() {
         return "pool{total=" + getTotal() + ", idle=" + getIdle() + ", busy=" + getBusy()
-             + ", created=" + getCreated() + ", failed=" + getFailed()
-             + ", borrowed=" + getBorrowed() + ", timeouts=" + getTimeouts()
-             + ", discarded=" + getDiscarded() + "}";
+                + ", created=" + getCreated() + ", failed=" + getFailed()
+                + ", borrowed=" + getBorrowed() + ", timeouts=" + getTimeouts()
+                + ", discarded=" + getDiscarded() + "}";
     }
 }

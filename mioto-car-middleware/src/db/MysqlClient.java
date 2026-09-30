@@ -114,6 +114,10 @@ public class MysqlClient {
             } catch (SQLException ex) {
                 ok = false;
                 _Logger.error("update failed (retry " + retry + "): " + query, ex);
+                if(ex.getErrorCode() == 1062)
+                {
+                    return Err.CONFLICT;
+                }
             } finally {
                 _pool.giveBack(conn, ok);
             }
@@ -158,6 +162,10 @@ public class MysqlClient {
             } catch (SQLException ex) {
                 ok = false;
                 _Logger.error("insert failed (retry " + retry + "): " + query, ex);
+                if(ex.getErrorCode() == 1062)
+                {
+                    return Err.CONFLICT;
+                }
             } finally {
                 _pool.giveBack(conn, ok);
             }

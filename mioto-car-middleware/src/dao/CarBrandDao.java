@@ -77,7 +77,7 @@ public class CarBrandDao {
         StringBuilder sql = new StringBuilder("SELECT " + COLS + " FROM " + TABLE + " WHERE 1=1");
         List<Object> params = new ArrayList<Object>();
         
-        if(nameBrand != null && !nameBrand.isEmpty())
+        if(nameBrand != null && !nameBrand.trim().isEmpty())
         {
             sql.append(" AND nameBrand=?");
             params.add(nameBrand);

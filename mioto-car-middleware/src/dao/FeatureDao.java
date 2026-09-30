@@ -77,7 +77,7 @@ public class FeatureDao {
         StringBuilder sql = new StringBuilder("SELECT " + COLS + " FROM " + TABLE + " WHERE 1=1");
         List<Object> params = new ArrayList<Object>();
         
-        if(nameFeature != null && !nameFeature.isEmpty())
+        if(nameFeature != null && !nameFeature.trim().isEmpty())
         {
             sql.append(" AND nameFeature=?");
             params.add(nameFeature);
