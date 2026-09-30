@@ -203,6 +203,7 @@ service MiotoCarService {
         2:optional string                            title
         3:required i32                               count
         4:required i32                               offset
+        5:optional string                            code
     );
         
     mioto_car_struct.TVoucherResult getVoucherById (
