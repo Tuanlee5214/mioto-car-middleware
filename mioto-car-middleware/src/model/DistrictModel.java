@@ -38,18 +38,28 @@ public class DistrictModel {
         return _cache;
     }
     
-    public long createDistrict(TDistrict district)
+    public TDistrictResult createDistrict(TDistrict district)
     {
-        long result = _dao.createDistrict(district);
-        if(Err.isFail(result)) return result;
-        _cache.remove((int)result);
+        TDistrictResult result = new TDistrictResult();
+        long ret = _dao.createDistrict(district);
+        if(Err.isFail(ret)) return new TDistrictResult((int)ret, "");
+        result.setError(Err.SUCCESS);
+        result.setMessage("");
+        result.setValue(new TDistrict(district));
+        _cache.remove((int)ret);
         return result;
     }
     
-    public long updateDistrict(TDistrict district)
+    public TDistrictResult updateDistrict(TDistrict district)
     {
-        long result = _dao.updateDistrict(district);
-        if(Err.isFail(result)) return result;
+        TDistrictResult result = new TDistrictResult();
+        long ret = _dao.updateDistrict(district);
+        if(ret == 0) return new TDistrictResult(Err.NOT_FOUND, "");
+        if(Err.isFail(ret)) return new TDistrictResult((int)ret, "");
+        
+        result.setError(Err.SUCCESS);
+        result.setMessage("");
+        result.setValue(new TDistrict(district));
         _cache.remove((int)district.getDistrictId());
         return result;
     }
@@ -65,12 +75,13 @@ public class DistrictModel {
     
     public TListDistrictResult getDistrict(long provinceId, int count, int offset)
     {
-        TListDistrictResult result = new TListDistrictResult(Err.FAIL, "");
+        TListDistrictResult result = new TListDistrictResult();
         ValueResult<List<TDistrict>> ret = _dao.getDistrict(provinceId, count, offset);
         if(Err.isFail(ret.error)) return new TListDistrictResult((int) ret.error, "");
+        List<TDistrict> value = ret.value != null ? ret.value : new ArrayList<TDistrict>();
         result.setError(Err.SUCCESS);
         result.setMessage("Lấy dữ liệu thành công");
-        result.setValue(new ArrayList<TDistrict>(ret.value));
+        result.setValue(value);
         return result;
     }
 }

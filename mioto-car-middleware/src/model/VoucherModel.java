@@ -36,19 +36,29 @@ public class VoucherModel {
         return _cache;
     }
     
-    public long createVoucher(TVoucher voucher)
+    public TVoucherResult createVoucher(TVoucher voucher)
     {
-        long result = _dao.createVoucher(voucher);
-        if(Err.isFail(result)) return result;
+        TVoucherResult result = new TVoucherResult();
+        long ret = _dao.createVoucher(voucher);
+        if(Err.isFail(ret)) return new TVoucherResult((int)ret, "");
         
-        _cache.remove((int) result);
+        result.setError(Err.SUCCESS);
+        result.setMessage("");
+        result.setValue(new TVoucher(voucher));
+        _cache.remove((int) ret);
         return result;
     }
     
-    public long updateVoucher(TVoucher voucher)
+    public TVoucherResult updateVoucher(TVoucher voucher)
     {
-        long result = _dao.updatedVoucher(voucher);
-        if(Err.isFail(result)) return result;
+        TVoucherResult result = new TVoucherResult();
+        long ret = _dao.updatedVoucher(voucher);
+        if(ret == 0) return new TVoucherResult(Err.NOT_FOUND, "");
+        if(Err.isFail(ret)) return new TVoucherResult((int)ret, "");
+        
+        result.setError(Err.SUCCESS);
+        result.setMessage("");
+        result.setValue(new TVoucher(voucher));
         _cache.remove((int)voucher.getVoucherId());
         return result;
     }
@@ -89,12 +99,13 @@ public class VoucherModel {
     
     public TListVoucherResult getAllVoucher(String title, int count, int offset)
     {
-        TListVoucherResult result = new TListVoucherResult(Err.FAIL, "");
+        TListVoucherResult result = new TListVoucherResult();
         ValueResult<List<TVoucher>> ret = _dao.getAllVoucher(title, count, offset);
         if(Err.isFail(ret.error)) return new TListVoucherResult((int) ret.error, "");
+        List<TVoucher> value = ret.value != null ? ret.value : new ArrayList<TVoucher>();
         result.setError(Err.SUCCESS);
         result.setMessage("Lấy dữ liệu thành công");
-        result.setValue(new ArrayList<TVoucher>(ret.value));
+        result.setValue(value);
         return result;
     }
 }

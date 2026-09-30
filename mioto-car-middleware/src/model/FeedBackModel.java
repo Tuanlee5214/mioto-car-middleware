@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
 import thrift.TFeedBack;
+import thrift.TFeedBackResult;
 import thrift.TListFeedBackResult;
 
 /**
@@ -36,18 +37,29 @@ public class FeedBackModel {
         return _cache;
     }
     
-    public long createFeedBack(TFeedBack feedback)
+    public TFeedBackResult createFeedBack(TFeedBack feedback)
     {
-        long result = _dao.createFeedBack(feedback);
-        if(Err.isFail(result)) return result;
-        _cache.remove((int)result);
+        TFeedBackResult result = new TFeedBackResult();
+        long ret = _dao.createFeedBack(feedback);
+        if(Err.isFail(ret)) return new TFeedBackResult((int)ret, "");
+        
+        result.setError(Err.SUCCESS);
+        result.setMessage("");
+        result.setValue(new TFeedBack(feedback));
+        _cache.remove((int)ret);
         return result;
     }
     
-    public long updateFeedBack(TFeedBack feedback)
+    public TFeedBackResult updateFeedBack(TFeedBack feedback)
     {
-        long result = _dao.updateFeedBack(feedback);
-        if(Err.isFail(result)) return result;
+        TFeedBackResult result = new TFeedBackResult();
+        long ret = _dao.updateFeedBack(feedback);
+        if(ret == 0) return new TFeedBackResult(Err.NOT_FOUND, "");
+        if(Err.isFail(ret)) return new TFeedBackResult((int)ret, "");
+        
+        result.setError(Err.SUCCESS);
+        result.setMessage("");
+        result.setValue(new TFeedBack(feedback));
         _cache.remove((int)feedback.getFeedbackId());
         return result;
     }
@@ -63,12 +75,13 @@ public class FeedBackModel {
     
     public TListFeedBackResult getFeedBackByReceiverId(long receiverId, int count, int offset)
     {
-        TListFeedBackResult result = new TListFeedBackResult(Err.FAIL, "");
+        TListFeedBackResult result = new TListFeedBackResult();
         ValueResult<List<TFeedBack>> ret = _dao.getFeedBackByReceiverId(receiverId, count, offset);
         if(Err.isNetworkError(ret.error)) return new TListFeedBackResult((int) ret.error, "Lỗi kết nối mạng");
+        List<TFeedBack> value = ret.value != null ? ret.value : new ArrayList<TFeedBack>();
         result.setError(Err.SUCCESS);
         result.setMessage("Lấy dữ liệu thành công");
-        result.setValue(new ArrayList<TFeedBack>(ret.value));
+        result.setValue(value);
         return result;
     }
             

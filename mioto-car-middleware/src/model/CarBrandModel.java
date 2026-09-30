@@ -39,19 +39,28 @@ public class CarBrandModel {
         return _cache;
     }
     
-    public long createCarBrand(TCarBrand carBrand)
+    public TCarBrandResult createCarBrand(TCarBrand carBrand)
     {
-        long result = _dao.createCarBrand(carBrand);
-        if(Err.isFail(result)) return result;
-        _cache.remove((int)result);
+        TCarBrandResult result = new TCarBrandResult();
+        long ret = _dao.createCarBrand(carBrand);
+        if(Err.isFail(ret)) return new TCarBrandResult((int) ret, "");
+        
+        result.setError(Err.SUCCESS);
+        result.setMessage("");
+        result.setValue(new TCarBrand(carBrand));
+        _cache.remove((int)ret);
         return result;
     }
     
-    public long updateCarBrand(TCarBrand carBrand)
+    public TCarBrandResult updateCarBrand(TCarBrand carBrand)
     {
-        long result = _dao.updateCarBrand(carBrand);
-        if(Err.isFail(result)) return result;
+        TCarBrandResult result = new TCarBrandResult();
+        long ret = _dao.updateCarBrand(carBrand);
+        if(Err.isFail(ret)) return new TCarBrandResult((int) ret, "");
         
+        result.setError(Err.SUCCESS);
+        result.setMessage("");
+        result.setValue(new TCarBrand(carBrand));
         _cache.remove(carBrand.getCarBrandId());
         return result;
     }
@@ -68,12 +77,14 @@ public class CarBrandModel {
     
     public TListCarBrandResult getAllCarBrand(String nameBrand, int count, int offset)
     {
-        TListCarBrandResult result = new TListCarBrandResult(Err.FAIL, "");
+        TListCarBrandResult result = new TListCarBrandResult();
         ValueResult<List<TCarBrand>> ret = _dao.getAllCarBrand(nameBrand, count, offset);
         if(Err.isFail(ret.error)) return new TListCarBrandResult((int) ret.error, "Lỗi kết nối mạng");
+        
+        List<TCarBrand> value = ret.value != null ? ret.value : new ArrayList<TCarBrand>();
         result.setError(Err.SUCCESS);
         result.setMessage("Lấy dữ liệu thành công");
-        result.setValue(new ArrayList<TCarBrand>(ret.value));
+        result.setValue(value);
         return result;
     }
     

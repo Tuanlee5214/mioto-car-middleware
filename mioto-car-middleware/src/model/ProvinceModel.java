@@ -37,19 +37,30 @@ public class ProvinceModel {
         return _cache;
     }
     
-    public long createProvince(TProvince province)
+    public TProvinceResult createProvince(TProvince province)
     {
-        long result = _dao.createProvince(province);
-        if(Err.isFail(result)) return result;
+        TProvinceResult result = new TProvinceResult();
+        long ret = _dao.createProvince(province);
+        if(Err.isFail(ret)) return new TProvinceResult((int)ret, "");
         
-        _cache.remove((int) result);
+        result.setError(Err.SUCCESS);
+        result.setMessage("");
+        result.setValue(new TProvince(province));
+        
+        _cache.remove((int) ret);
         return result;
     }
     
-    public long updateProvince(TProvince province)
+    public TProvinceResult updateProvince(TProvince province)
     {
-        long result = _dao.updateProvince(province);
-        if(Err.isFail(result)) return result;
+        TProvinceResult result = new TProvinceResult();
+        long ret = _dao.updateProvince(province);
+        if(ret == 0) return new TProvinceResult(Err.NOT_FOUND, "");
+        if(Err.isFail(ret)) return new TProvinceResult((int)ret, "");
+        
+        result.setError(Err.SUCCESS);
+        result.setMessage("");
+        result.setValue(new TProvince(province));
         
         _cache.remove((int) province.getProvinceId());
         return result;
@@ -91,12 +102,13 @@ public class ProvinceModel {
     
     public TListProvinceResult getAllProvince(String provinceName, int count, int offset)
     {
-        TListProvinceResult result = new TListProvinceResult(Err.FAIL, "");
+        TListProvinceResult result = new TListProvinceResult();
         ValueResult<List<TProvince>> ret = _dao.getAllProvince(provinceName, count, offset);
         if(Err.isFail(ret.error)) return new TListProvinceResult(Err.FAIL, "Lỗi kết nối mạng");
+        List<TProvince> value = ret.value != null ? ret.value : new ArrayList<TProvince>();
         result.setError(Err.SUCCESS);
         result.setMessage("Lấy dữ liệu thành công");
-        result.setValue(new ArrayList<TProvince>(ret.value));
+        result.setValue(value);
         return result;
     }
 }

@@ -37,18 +37,29 @@ public class FeePolicyModel {
         return _cache;
     }
     
-    public long createFeePolicy(TFeePolicy feePolicy)
+    public TFeePolicyResult createFeePolicy(TFeePolicy feePolicy)
     {
-        long result = _dao.createFeePolicy(feePolicy);
-        if(Err.isFail(result)) return result;
-        _cache.remove((int)result);
+        TFeePolicyResult result = new TFeePolicyResult();
+        long ret = _dao.createFeePolicy(feePolicy);
+        if(Err.isFail(ret)) return new TFeePolicyResult((int) ret, "");
+        
+        result.setError(Err.SUCCESS);
+        result.setMessage("");
+        result.setValue(new TFeePolicy(feePolicy));
+        _cache.remove((int)ret);
         return result;
     }
     
-    public long updateFeePolicy(TFeePolicy feePolicy)
+    public TFeePolicyResult updateFeePolicy(TFeePolicy feePolicy)
     {
-        long result = _dao.updateFeePolicy(feePolicy);
-        if(Err.isFail(result)) return result;
+        TFeePolicyResult result = new TFeePolicyResult();
+        long ret = _dao.updateFeePolicy(feePolicy);
+        if(ret == 0) return new TFeePolicyResult(Err.NOT_FOUND, "");
+        if(Err.isFail(ret)) return new TFeePolicyResult((int)ret, "");
+        
+        result.setError(Err.SUCCESS);
+        result.setMessage("");
+        result.setValue(new TFeePolicy(feePolicy));
         
         _cache.remove((int) feePolicy.getFeePolicyId());
         return result;
@@ -90,12 +101,13 @@ public class FeePolicyModel {
     
     public TListFeePolicyResult getAllFeePolicy(String name, int offset, int count)
     {
-        TListFeePolicyResult result = new TListFeePolicyResult(Err.FAIL, "");
+        TListFeePolicyResult result = new TListFeePolicyResult();
         ValueResult<List<TFeePolicy>> ret = _dao.getAllFeePolicy(name, offset, count);
         if(Err.isFail(ret.error)) return new TListFeePolicyResult((int) ret.error, "Lỗi kết nối mạng");
+        List<TFeePolicy> value = ret.value != null ? ret.value : new ArrayList<TFeePolicy>();
         result.setError(Err.SUCCESS);
         result.setMessage("Lấy dữ liệu thành công");
-        result.setValue(new ArrayList<TFeePolicy>(ret.value));
+        result.setValue(value);
         return result;
     }
 }

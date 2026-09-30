@@ -38,18 +38,29 @@ public class FeatureModel {
         return _cache;
     }
     
-    public long createFeature(TFeature feature)
+    public TFeatureResult createFeature(TFeature feature)
     {
-        long result = _dao.createFeature(feature);
-        if(Err.isFail(result)) return result;
-        _cache.remove((int)result);
+        TFeatureResult result = new TFeatureResult();
+        long ret = _dao.createFeature(feature);
+        if(Err.isFail(ret)) return new TFeatureResult((int)ret, "");
+        
+        result.setError(Err.SUCCESS);
+        result.setMessage("");
+        result.setValue(new TFeature(feature));
+        _cache.remove((int)ret);
         return result;
     }
     
-    public long updateFeature(TFeature feature)
+    public TFeatureResult updateFeature(TFeature feature)
     {
-        long result = _dao.updatedFeature(feature);
-        if(Err.isFail(result)) return result;
+        TFeatureResult result = new TFeatureResult();
+        long ret = _dao.updatedFeature(feature);
+        if(ret == 0) return new TFeatureResult(Err.NOT_FOUND, "");
+        if(Err.isFail(ret)) return new TFeatureResult((int)ret, "");
+        
+        result.setError(Err.SUCCESS);
+        result.setMessage("");
+        result.setValue(new TFeature(feature));
         
         _cache.remove((int)feature.getFeatureId());
         return result;
@@ -91,12 +102,13 @@ public class FeatureModel {
     
     public TListFeatureResult getAllFeature(String nameFeature, int count, int offset)
     {
-        TListFeatureResult result = new TListFeatureResult(Err.FAIL, "");
+        TListFeatureResult result = new TListFeatureResult();
         ValueResult<List<TFeature>> ret = _dao.getAllFeature(nameFeature, count, offset);
         if(Err.isFail(ret.error)) return new TListFeatureResult((int) ret.error, "Lỗi kết nối mạng");
+        List<TFeature> value = ret.value != null ? ret.value : new ArrayList<TFeature>();
         result.setError(Err.SUCCESS);
         result.setMessage("Lấy dữ liệu thành công");
-        result.setValue(new ArrayList<TFeature>(ret.value));
+        result.setValue(value);
         return result;
     }
 }
