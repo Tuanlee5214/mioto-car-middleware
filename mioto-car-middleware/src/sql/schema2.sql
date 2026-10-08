@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS Cars (
   policy          TEXT,                             -- Điều khoản thuê xe của chủ xe
   districtId      INT            NOT NULL,
   userId          INT            NOT NULL,          -- Chủ xe (Owner)
-  status          TINYINT        NOT NULL DEFAULT 1, -- 1: Active, 0: Pending, 2: Blocked
+  status          TINYINT        NOT NULL DEFAULT 1, 
   createdAt       BIGINT         NOT NULL DEFAULT 0,
   updatedAt       BIGINT         NOT NULL DEFAULT 0,
   PRIMARY KEY (carId),
@@ -92,6 +92,7 @@ CREATE TABLE IF NOT EXISTS CarImages (
   imageUrl      VARCHAR(255) NOT NULL,
   publicId      VARCHAR(100) NOT NULL DEFAULT '', -- Quản lý trên Cloudinary/S3
   createdAt     BIGINT       NOT NULL DEFAULT 0,
+  orderNum      INT          NOT NULL,
   PRIMARY KEY (id),
   KEY idx_carimages_car (carId),
   CONSTRAINT fk_carimages_cars FOREIGN KEY (carId) REFERENCES Cars(carId) ON DELETE CASCADE
@@ -174,4 +175,19 @@ CREATE TABLE IF NOT EXISTS FeedBacks (
   KEY idx_feedbacks_receiver (receiverId),
   CONSTRAINT fk_feedbacks_sender FOREIGN KEY (senderId) REFERENCES Users(userId),
   CONSTRAINT fk_feedbacks_receiver FOREIGN KEY (receiverId) REFERENCES Users(userId)
+) ENGINE=InnoDB;
+                     
+CREATE TABLE IF NOT EXISTS Roles (
+  id           INT       NOT NULL AUTO_INCREMENT,
+  name         VARCHAR(100)  NOT NULL, 
+  PRIMARY KEY (id),
+  UNIQUE KEY uk_role_name(name)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS UserRoles (
+  id            INT      NOT NULL AUTO_INCREMENT,
+  userId        INT      NOT NULL,
+  roleIds       VARCHAR(2000)    NOT NULL,
+  isSuperAdmin  TINYINT(1) NOT NULL,
+  PRIMARY KEY (id)
 ) ENGINE=InnoDB;

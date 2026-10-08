@@ -221,5 +221,143 @@ service MiotoCarService {
         2:required  mioto_car_struct.TSessionID sessionId
         3:required  mioto_car_struct.TLoginInfo loginInfo
     );
-    
+
+    mioto_car_struct.TCarResult createCar(
+        1:required mioto_car_struct.OpHandle              handle
+        2:required mioto_car_struct.TCar                  car
+        3:optional list<mioto_car_struct.TCarImage>       images
+        4:optional list<mioto_car_struct.TCarFeature>     features
+    );
+
+    mioto_car_struct.TCarResult updateCar(
+        1:required mioto_car_struct.OpHandle handle
+        2:required mioto_car_struct.TCar     car
+    );
+
+    mioto_car_struct.TCarResult updateStatusCar(
+        1:required mioto_car_struct.OpHandle handle
+        2:required mioto_car_struct.TCar     car
+    );
+
+    mioto_car_struct.TCarDetailResult getCarById(
+        1:required mioto_car_struct.OpHandle handle
+        2:required i32                       carId
+    );
+
+    mioto_car_struct.TListCarViewResult getCarViewByUserId(
+        1:required mioto_car_struct.OpHandle handle
+        2:required i32                       userId
+        3:required i32                       count
+        4:required i32                       offset
+    );
+
+    mioto_car_struct.TListCarViewResult searchCar(
+        1:required mioto_car_struct.OpHandle          handle
+        2:optional mioto_car_struct.TCarFilterRequest filter
+        3:optional i64                                startTime
+        4:optional i64                                endTime
+        5:required i32                                count
+        6:required i32                                offset
+    );
+
+    mioto_car_struct.TListCarViewResult searchCarByAdmin(
+        1:required mioto_car_struct.OpHandle          handle
+        2:optional mioto_car_struct.TCarFilterRequest filter
+        3:required i32                                status
+        4:required i32                                count
+        5:required i32                                offset
+    );
+
+    mioto_car_struct.TListCarImageResult getCarImagesByCarId(
+        1:required mioto_car_struct.OpHandle handle
+        2:required i32                       carId
+    );
+
+    mioto_car_struct.TListCarImageResult createCarImages(
+        1:required mioto_car_struct.OpHandle            handle
+        2:required list<mioto_car_struct.TCarImage>     images
+        3:required i32                                  userId
+    );
+
+    mioto_car_struct.TCarImageResult deleteCarImages(
+        1:required mioto_car_struct.OpHandle handle
+        2:required i32                       carId
+        3:required list<i64>                 imageIds
+        4:required i32                       userId
+    );
+
+    mioto_car_struct.TListCarFeatureViewResult getListCarFeatures(
+        1:required mioto_car_struct.OpHandle handle
+        2:required i32                       carId
+    );
+
+    mioto_car_struct.TListCarFeatureViewResult createCarFeatures(
+        1:required mioto_car_struct.OpHandle                handle
+        2:required list<mioto_car_struct.TCarFeature>       features
+        3:required i32                                      userId
+    );
+
+    mioto_car_struct.TListCarFeatureViewResult deleteCarFeatures(
+        1:required mioto_car_struct.OpHandle handle
+        2:required i32                       carId
+        3:required list<i64>                 carFeatureIds
+        4:required i32                       userId
+    );
+
+    mioto_car_struct.TListCarUnavailsResult getListCarUnavails(
+        1:required mioto_car_struct.OpHandle handle
+        2:required i32                       carId
+    );
+
+    mioto_car_struct.TCarUnavailsResult createCarUnavails(
+        1:required mioto_car_struct.OpHandle       handle
+        2:required mioto_car_struct.TCarUnavails   unavail
+        3:required i32                             userId
+    );
+
+    mioto_car_struct.TCarUnavailsResult deleteCarUnavails(
+        1:required mioto_car_struct.OpHandle handle
+        2:required i32                       carId
+        3:required i64                       carUnavailId
+        4:required i32                       userId
+    );    
+
+    mioto_car_struct.TRoleResult      createRole(
+        1: required mioto_car_struct.OpHandle handle, 
+        2: required mioto_car_struct.TRole role
+    );
+
+    mioto_car_struct.TRoleResult      updateRole(
+        1: required mioto_car_struct.OpHandle handle, 
+        2: required mioto_car_struct.TRole role
+    );
+
+    mioto_car_struct.TRoleResult      deleteRole(
+        1: required mioto_car_struct.OpHandle handle, 
+        2: required i32 roleId
+    );
+
+    mioto_car_struct.TListRoleResult  getRole(
+        1: required mioto_car_struct.OpHandle handle, 
+        2: optional string name, 
+        3: optional i32 count, 
+        4: optional i32 offset
+    );
+
+    mioto_car_struct.TUserRoleResult  getUserRole(
+        1: required mioto_car_struct.OpHandle handle, 
+        2: required i32 userId
+    );
+
+    mioto_car_struct.TUserRoleResult  createUserRole(
+        1: required mioto_car_struct.OpHandle handle, 
+        2: required i32 userId, 
+        3: required list<i32> roleIds
+    );
+
+    mioto_car_struct.TUserRoleResult  deleteUserRole(
+        1: required mioto_car_struct.OpHandle handle, 
+        2: required i32 userId, 
+        3: required list<i32> roleIds
+    );    
 }
