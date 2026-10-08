@@ -77,7 +77,7 @@ public class FeedBackModel {
     {
         TListFeedBackResult result = new TListFeedBackResult();
         ValueResult<List<TFeedBack>> ret = _dao.getFeedBackByReceiverId(receiverId, count, offset);
-        if(Err.isNetworkError(ret.error)) return new TListFeedBackResult((int) ret.error, "Lỗi kết nối mạng");
+        if(Err.isNetworkError(ret.error) && !Err.isNotFound(ret.error)) return new TListFeedBackResult((int) ret.error, "Lỗi kết nối mạng");
         List<TFeedBack> value = ret.value != null ? ret.value : new ArrayList<TFeedBack>();
         result.setError(Err.SUCCESS);
         result.setMessage("Lấy dữ liệu thành công");

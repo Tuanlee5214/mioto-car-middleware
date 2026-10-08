@@ -77,7 +77,7 @@ public class DistrictModel {
     {
         TListDistrictResult result = new TListDistrictResult();
         ValueResult<List<TDistrict>> ret = _dao.getDistrict(provinceId, count, offset);
-        if(Err.isFail(ret.error)) return new TListDistrictResult((int) ret.error, "");
+        if(Err.isFail(ret.error) && !Err.isNotFound(ret.error)) return new TListDistrictResult((int) ret.error, "");
         List<TDistrict> value = ret.value != null ? ret.value : new ArrayList<TDistrict>();
         result.setError(Err.SUCCESS);
         result.setMessage("Lấy dữ liệu thành công");

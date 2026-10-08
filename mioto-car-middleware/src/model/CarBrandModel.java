@@ -79,7 +79,7 @@ public class CarBrandModel {
     {
         TListCarBrandResult result = new TListCarBrandResult();
         ValueResult<List<TCarBrand>> ret = _dao.getAllCarBrand(nameBrand, count, offset);
-        if(Err.isFail(ret.error)) return new TListCarBrandResult((int) ret.error, "Lỗi kết nối mạng");
+        if(Err.isFail(ret.error) && !Err.isNotFound(ret.error)) return new TListCarBrandResult((int) ret.error, "Lỗi kết nối mạng");
         
         List<TCarBrand> value = ret.value != null ? ret.value : new ArrayList<TCarBrand>();
         result.setError(Err.SUCCESS);

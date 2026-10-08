@@ -104,7 +104,7 @@ public class FeatureModel {
     {
         TListFeatureResult result = new TListFeatureResult();
         ValueResult<List<TFeature>> ret = _dao.getAllFeature(nameFeature, count, offset);
-        if(Err.isFail(ret.error)) return new TListFeatureResult((int) ret.error, "Lỗi kết nối mạng");
+        if(Err.isFail(ret.error) && !Err.isNotFound(ret.error)) return new TListFeatureResult((int) ret.error, "Lỗi kết nối mạng");
         List<TFeature> value = ret.value != null ? ret.value : new ArrayList<TFeature>();
         result.setError(Err.SUCCESS);
         result.setMessage("Lấy dữ liệu thành công");

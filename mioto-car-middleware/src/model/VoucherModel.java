@@ -101,7 +101,7 @@ public class VoucherModel {
     {
         TListVoucherResult result = new TListVoucherResult();
         ValueResult<List<TVoucher>> ret = _dao.getAllVoucher(title, code, count, offset);
-        if(Err.isFail(ret.error)) return new TListVoucherResult((int) ret.error, "");
+        if(Err.isFail(ret.error) && !Err.isNotFound(ret.error)) return new TListVoucherResult((int) ret.error, "");
         List<TVoucher> value = ret.value != null ? ret.value : new ArrayList<TVoucher>();
         result.setError(Err.SUCCESS);
         result.setMessage("Lấy dữ liệu thành công");

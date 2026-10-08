@@ -104,7 +104,7 @@ public class ProvinceModel {
     {
         TListProvinceResult result = new TListProvinceResult();
         ValueResult<List<TProvince>> ret = _dao.getAllProvince(provinceName, count, offset);
-        if(Err.isFail(ret.error)) return new TListProvinceResult(Err.FAIL, "Lỗi kết nối mạng");
+        if(Err.isFail(ret.error) && !Err.isNotFound(ret.error)) return new TListProvinceResult(Err.FAIL, "Lỗi kết nối mạng");
         List<TProvince> value = ret.value != null ? ret.value : new ArrayList<TProvince>();
         result.setError(Err.SUCCESS);
         result.setMessage("Lấy dữ liệu thành công");
