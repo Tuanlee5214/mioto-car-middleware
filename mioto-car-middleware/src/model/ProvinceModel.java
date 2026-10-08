@@ -57,10 +57,12 @@ public class ProvinceModel {
         long ret = _dao.updateProvince(province);
         if(ret == 0) return new TProvinceResult(Err.NOT_FOUND, "");
         if(Err.isFail(ret)) return new TProvinceResult((int)ret, "");
-        
+        TProvinceResult returnValue = this.getProvinceById(province.getProvinceId());
+        if(Err.isFail(returnValue.getError())) return returnValue;
+            
         result.setError(Err.SUCCESS);
         result.setMessage("");
-        result.setValue(new TProvince(province));
+        result.setValue(returnValue.getValue());
         
         _cache.remove((int) province.getProvinceId());
         return result;

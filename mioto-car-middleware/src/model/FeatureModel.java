@@ -57,10 +57,12 @@ public class FeatureModel {
         long ret = _dao.updatedFeature(feature);
         if(ret == 0) return new TFeatureResult(Err.NOT_FOUND, "");
         if(Err.isFail(ret)) return new TFeatureResult((int)ret, "");
+        TFeatureResult returnValue = this.getFeatureById(feature.getFeatureId());
+        if(Err.isFail(returnValue.getError())) return returnValue;
         
         result.setError(Err.SUCCESS);
         result.setMessage("");
-        result.setValue(new TFeature(feature));
+        result.setValue(returnValue.getValue());
         
         _cache.remove((int)feature.getFeatureId());
         return result;

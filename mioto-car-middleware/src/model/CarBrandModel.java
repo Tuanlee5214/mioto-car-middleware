@@ -47,7 +47,9 @@ public class CarBrandModel {
         
         result.setError(Err.SUCCESS);
         result.setMessage("");
-        result.setValue(new TCarBrand(carBrand));
+        TCarBrand created = new TCarBrand(carBrand);
+        created.setCarBrandId((int) ret);
+        result.setValue(created);
         _cache.remove((int)ret);
         return result;
     }
