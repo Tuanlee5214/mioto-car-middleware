@@ -99,7 +99,7 @@ public class VoucherDao {
         ret.error = _cli.executeQuery(new MysqlClient.IRowListener() {
             @Override
             public void onRow(ResultSet rs) throws SQLException {
-                if(ret.value == null) ret.value = new ArrayList<TVoucher>(Err.FAIL);
+                if(ret.value == null) ret.value = new ArrayList<TVoucher>();
                 ret.value.add(map(rs));
                 
             }

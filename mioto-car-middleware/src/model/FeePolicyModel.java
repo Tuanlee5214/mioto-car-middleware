@@ -99,11 +99,11 @@ public class FeePolicyModel {
         return result;
     }
     
-    public TListFeePolicyResult getAllFeePolicy(String name, int offset, int count)
+    public TListFeePolicyResult getAllFeePolicy(String name, int count, int offset)
     {
         TListFeePolicyResult result = new TListFeePolicyResult();
-        ValueResult<List<TFeePolicy>> ret = _dao.getAllFeePolicy(name, offset, count);
-        if(Err.isFail(ret.error)) return new TListFeePolicyResult((int) ret.error, "Lỗi kết nối mạng");
+        ValueResult<List<TFeePolicy>> ret = _dao.getAllFeePolicy(name, count, offset);
+        if(Err.isFail(ret.error) && !Err.isNotFound(ret.error)) return new TListFeePolicyResult((int) ret.error, "Lỗi kết nối mạng");
         List<TFeePolicy> value = ret.value != null ? ret.value : new ArrayList<TFeePolicy>();
         result.setError(Err.SUCCESS);
         result.setMessage("Lấy dữ liệu thành công");

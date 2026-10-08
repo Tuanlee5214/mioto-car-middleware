@@ -84,12 +84,13 @@ public class FeatureDao {
         }
         
         sql.append(" ORDER BY nameFeature ASC LIMIT ? OFFSET ?");
-        params.add(count <= 0 || count > 100 ? 20 : count);
+        params.add((count <= 0 || count > 100) ? 20 : count);
         params.add(Math.max(0, offset));
         ret.error = _cli.executeQuery(new MysqlClient.IRowListener() {
             @Override
             public void onRow(ResultSet rs) throws SQLException {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                if(ret.value == null) ret.value = new ArrayList<TFeature>();
+                ret.value.add(map(rs));
             }
         }, sql.toString(), params.toArray());
         return ret;

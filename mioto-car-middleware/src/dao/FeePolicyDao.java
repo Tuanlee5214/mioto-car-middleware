@@ -73,7 +73,7 @@ public class FeePolicyDao {
         return ret;
     }
     
-    public ValueResult<List<TFeePolicy>> getAllFeePolicy(String name, int offset, int count)
+    public ValueResult<List<TFeePolicy>> getAllFeePolicy(String name, int count, int offset)
     {
         ValueResult<List<TFeePolicy>> ret = new ValueResult<List<TFeePolicy>>(Err.FAIL);
         StringBuilder sql = new StringBuilder("SELECT " + COLS + " FROM " + TABLE + " WHERE 1=1");
@@ -86,7 +86,7 @@ public class FeePolicyDao {
         }
         
         sql.append(" ORDER BY percentFee ASC LIMIT ? OFFSET ?");
-        params.add(count <= 0 || count >= 100 ? 20 : count);
+        params.add(count <= 0 || count > 100 ? 20 : count);
         params.add(Math.max(0, offset));
         
         ret.error = _cli.executeQuery(new MysqlClient.IRowListener() {
