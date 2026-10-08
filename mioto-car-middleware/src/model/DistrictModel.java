@@ -27,25 +27,18 @@ public class DistrictModel {
     private final SimpleCache<Integer, TDistrict> _cache = new SimpleCache<Integer, TDistrict>("common");
     
     private DistrictModel() {}
-    
-    public DistrictDao getDao()
-    {
-        return _dao;
-    }
-    
-    public SimpleCache<Integer, TDistrict> getCache()
-    {
-        return _cache;
-    }
-    
+        
     public TDistrictResult createDistrict(TDistrict district)
     {
         TDistrictResult result = new TDistrictResult();
         long ret = _dao.createDistrict(district);
         if(Err.isFail(ret)) return new TDistrictResult((int)ret, "");
+        
+        TDistrict created = new TDistrict(district);
+        created.setDistrictId((int) ret);
         result.setError(Err.SUCCESS);
         result.setMessage("");
-        result.setValue(new TDistrict(district));
+        result.setValue(created);
         _cache.remove((int)ret);
         return result;
     }

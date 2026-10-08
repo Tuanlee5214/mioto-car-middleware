@@ -28,25 +28,17 @@ public class FeatureModel {
     
     private FeatureModel() {}
     
-    public FeatureDao getDao()
-    {
-        return _dao;
-    }
-    
-    public SimpleCache<Integer, TFeature> getCache()
-    {
-        return _cache;
-    }
-    
     public TFeatureResult createFeature(TFeature feature)
     {
         TFeatureResult result = new TFeatureResult();
         long ret = _dao.createFeature(feature);
         if(Err.isFail(ret)) return new TFeatureResult((int)ret, "");
         
+        TFeature created = new TFeature(feature);
+        created.setFeatureId((int)ret);
         result.setError(Err.SUCCESS);
         result.setMessage("");
-        result.setValue(new TFeature(feature));
+        result.setValue(created);
         _cache.remove((int)ret);
         return result;
     }

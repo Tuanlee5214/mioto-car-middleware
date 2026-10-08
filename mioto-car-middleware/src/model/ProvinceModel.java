@@ -26,26 +26,18 @@ public class ProvinceModel {
     private final ProvinceDao _dao = new ProvinceDao("mioto");
     private final SimpleCache<Integer, TProvince> _cache = new SimpleCache<Integer, TProvince>("common");
     private ProvinceModel() {}
-    
-    public ProvinceDao getDao()
-    {
-        return _dao;
-    }
-    
-    public SimpleCache<Integer, TProvince> getCache()
-    {
-        return _cache;
-    }
-    
+        
     public TProvinceResult createProvince(TProvince province)
     {
         TProvinceResult result = new TProvinceResult();
         long ret = _dao.createProvince(province);
         if(Err.isFail(ret)) return new TProvinceResult((int)ret, "");
         
+        TProvince created = new TProvince(province);
+        created.setProvinceId((int)ret);
         result.setError(Err.SUCCESS);
         result.setMessage("");
-        result.setValue(new TProvince(province));
+        result.setValue(created);
         
         _cache.remove((int) ret);
         return result;

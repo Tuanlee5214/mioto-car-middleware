@@ -26,26 +26,18 @@ public class FeePolicyModel {
     private final FeePolicyDao _dao = new FeePolicyDao("mioto");
     private final SimpleCache<Integer, TFeePolicy> _cache = new SimpleCache<Integer, TFeePolicy>("common");
     private FeePolicyModel() {}
-    
-    public FeePolicyDao getDao()
-    {
-        return _dao;
-    }
-    
-    public SimpleCache<Integer, TFeePolicy> getCache()
-    {
-        return _cache;
-    }
-    
+        
     public TFeePolicyResult createFeePolicy(TFeePolicy feePolicy)
     {
         TFeePolicyResult result = new TFeePolicyResult();
         long ret = _dao.createFeePolicy(feePolicy);
         if(Err.isFail(ret)) return new TFeePolicyResult((int) ret, "");
         
+        TFeePolicy created = new TFeePolicy(feePolicy);
+        created.setFeePolicyId((int)ret);
         result.setError(Err.SUCCESS);
         result.setMessage("");
-        result.setValue(new TFeePolicy(feePolicy));
+        result.setValue(created);
         _cache.remove((int)ret);
         return result;
     }
@@ -56,10 +48,12 @@ public class FeePolicyModel {
         long ret = _dao.updateFeePolicy(feePolicy);
         if(ret == 0) return new TFeePolicyResult(Err.NOT_FOUND, "");
         if(Err.isFail(ret)) return new TFeePolicyResult((int)ret, "");
+        TFeePolicyResult returnValue = this.getFeePolicyById(feePolicy.getFeePolicyId());
+        if(Err.isFail(returnValue.getError())) return returnValue;
         
         result.setError(Err.SUCCESS);
         result.setMessage("");
-        result.setValue(new TFeePolicy(feePolicy));
+        result.setValue(returnValue.getValue());
         
         _cache.remove((int) feePolicy.getFeePolicyId());
         return result;

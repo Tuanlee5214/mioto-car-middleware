@@ -26,26 +26,18 @@ public class FeedBackModel {
     private final FeedBackDao _dao = new FeedBackDao("mioto");
     private final SimpleCache<Integer, TFeedBack> _cache = new SimpleCache<Integer, TFeedBack>("common");
     private FeedBackModel(){}
-    
-    public FeedBackDao getDao()
-    {
-        return _dao;
-    }
-    
-    public SimpleCache<Integer, TFeedBack> getCache()
-    {
-        return _cache;
-    }
-    
+        
     public TFeedBackResult createFeedBack(TFeedBack feedback)
     {
         TFeedBackResult result = new TFeedBackResult();
         long ret = _dao.createFeedBack(feedback);
         if(Err.isFail(ret)) return new TFeedBackResult((int)ret, "");
         
+        TFeedBack created = new TFeedBack(feedback);
+        created.setFeedbackId((int)ret);
         result.setError(Err.SUCCESS);
         result.setMessage("");
-        result.setValue(new TFeedBack(feedback));
+        result.setValue(created);
         _cache.remove((int)ret);
         return result;
     }
