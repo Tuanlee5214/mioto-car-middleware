@@ -22,7 +22,7 @@ public class UserDao {
 
     private static final String TABLE = "Users";
     private static final String KEY = "userId";
-    private static final String COLS = "userId,phone,email,displayName,status,timeCreated,timeUpdated,role,isOwnCar";
+    private static final String COLS = "userId,phone,email,displayName,status,timeCreated,timeUpdated";
 
     private final MysqlClient _cli;
 
@@ -110,8 +110,6 @@ public class UserDao {
         user.setStatus(rs.getByte("status"));
         user.setTimeCreated(rs.getLong("timeCreated"));
         user.setTimeUpdated(rs.getLong("timeUpdated"));
-        user.setIsOwnCar(rs.getBoolean("isOwnCar"));
-        user.setRole(rs.getString("role"));
         return user;
     }
 }
