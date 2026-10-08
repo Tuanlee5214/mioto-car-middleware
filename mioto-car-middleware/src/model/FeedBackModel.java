@@ -26,26 +26,18 @@ public class FeedBackModel {
     private final FeedBackDao _dao = new FeedBackDao("mioto");
     private final SimpleCache<Integer, TFeedBack> _cache = new SimpleCache<Integer, TFeedBack>("common");
     private FeedBackModel(){}
-    
-    public FeedBackDao getDao()
-    {
-        return _dao;
-    }
-    
-    public SimpleCache<Integer, TFeedBack> getCache()
-    {
-        return _cache;
-    }
-    
+        
     public TFeedBackResult createFeedBack(TFeedBack feedback)
     {
         TFeedBackResult result = new TFeedBackResult();
         long ret = _dao.createFeedBack(feedback);
         if(Err.isFail(ret)) return new TFeedBackResult((int)ret, "");
         
+        TFeedBack created = new TFeedBack(feedback);
+        created.setFeedbackId((int)ret);
         result.setError(Err.SUCCESS);
         result.setMessage("");
-        result.setValue(new TFeedBack(feedback));
+        result.setValue(created);
         _cache.remove((int)ret);
         return result;
     }
@@ -56,11 +48,38 @@ public class FeedBackModel {
         long ret = _dao.updateFeedBack(feedback);
         if(ret == 0) return new TFeedBackResult(Err.NOT_FOUND, "");
         if(Err.isFail(ret)) return new TFeedBackResult((int)ret, "");
+        TFeedBackResult returnValue = this.getFeedBackById(feedback.getFeedbackId());
+        if(Err.isFail(returnValue.getError())) return returnValue;
         
         result.setError(Err.SUCCESS);
         result.setMessage("");
-        result.setValue(new TFeedBack(feedback));
+        result.setValue(returnValue.getValue());
         _cache.remove((int)feedback.getFeedbackId());
+        return result;
+    }
+    
+    public TFeedBackResult getFeedBackById(long feedbackId)
+    {
+        TFeedBackResult result = new TFeedBackResult(Err.FAIL, "");
+        TFeedBack cached = _cache.get((int)feedbackId);
+        if(cached != null)
+        {
+            result.setError(Err.SUCCESS);
+            result.setMessage("Lấy dữ liệu thành công");
+            result.setValue(new TFeedBack(cached));
+            return result;
+        }
+        
+        ValueResult<TFeedBack> ret = _dao.getFeedBackById(feedbackId);
+        if(Err.isNetworkError(ret.error)) return new TFeedBackResult((int) ret.error, "Lỗi kết nối mạng");
+        if(Err.isNotFound(ret.error)) return new TFeedBackResult((int) ret.error, "Không tìm thấy dữ liệu");
+        if(Err.isSuccess(ret.error))
+        {
+            _cache.put((int)feedbackId, new TFeedBack(ret.value));
+            result.setError(Err.SUCCESS);
+            result.setMessage("Lấy dữ liệu thành công");
+            result.setValue(new TFeedBack(ret.value));
+        }
         return result;
     }
     
@@ -77,7 +96,7 @@ public class FeedBackModel {
     {
         TListFeedBackResult result = new TListFeedBackResult();
         ValueResult<List<TFeedBack>> ret = _dao.getFeedBackByReceiverId(receiverId, count, offset);
-        if(Err.isNetworkError(ret.error)) return new TListFeedBackResult((int) ret.error, "Lỗi kết nối mạng");
+        if(Err.isNetworkError(ret.error) && !Err.isNotFound(ret.error)) return new TListFeedBackResult((int) ret.error, "Lỗi kết nối mạng");
         List<TFeedBack> value = ret.value != null ? ret.value : new ArrayList<TFeedBack>();
         result.setError(Err.SUCCESS);
         result.setMessage("Lấy dữ liệu thành công");

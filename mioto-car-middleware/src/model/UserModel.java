@@ -30,16 +30,12 @@ public class UserModel {
     private UserModel() {
     }
 
-    public UserDao getDao() {
-        return _dao;
-    }
-
-    public SimpleCache<Integer, TUser> getCache() {
-        return _cacheId;
-    }
-
     public boolean isPhoneExisted(String phone) {
         return _dao.isPhoneExisted(phone);
+    }
+    
+    public boolean isEmailExisted(String email) {
+        return _dao.isEmailExisted(email);
     }
 
     public long createUser(TUser user) {
@@ -49,6 +45,16 @@ public class UserModel {
         }
         _cacheId.remove((int) id);
         return id;
+    }
+    
+    public long setIsOwnCarForUserByAdmin(long userId)
+    {
+        long result = _dao.setIsOwnCarForUserByAdmin(userId);
+        if(Err.isNotFound(result)) return Err.NOT_FOUND;
+        if(Err.isFail(result)) return result;
+        
+        _cacheId.remove((int)userId);
+        return result;
     }
 
     public TUserResult getUser(long userId) {

@@ -59,6 +59,19 @@ public class DistrictDao {
         return _cli.executeUpdate("DELETE FROM " + TABLE + " WHERE " + KEY + "=?", districtId);
     }
     
+    public ValueResult<TDistrict> getDistrictById(long districtId)
+    {
+        ValueResult<TDistrict> result = new ValueResult<TDistrict>(Err.FAIL);
+        String sql = "SELECT " + COLS + " FROM " + TABLE + " WHERE " + KEY + "=?";
+        result.error = _cli.executeQuery(new MysqlClient.IRowListener() {
+            @Override
+            public void onRow(ResultSet rs) throws SQLException {
+                result.value = map(rs);
+            }
+        }, sql, districtId);
+        return result;
+    }
+    
     public ValueResult<List<TDistrict>> getDistrict(long provinceId, int count, int offset)
     {
         ValueResult<List<TDistrict>> ret = new ValueResult<List<TDistrict>>(Err.FAIL);

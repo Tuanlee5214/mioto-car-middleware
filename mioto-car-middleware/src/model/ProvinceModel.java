@@ -26,26 +26,18 @@ public class ProvinceModel {
     private final ProvinceDao _dao = new ProvinceDao("mioto");
     private final SimpleCache<Integer, TProvince> _cache = new SimpleCache<Integer, TProvince>("common");
     private ProvinceModel() {}
-    
-    public ProvinceDao getDao()
-    {
-        return _dao;
-    }
-    
-    public SimpleCache<Integer, TProvince> getCache()
-    {
-        return _cache;
-    }
-    
+        
     public TProvinceResult createProvince(TProvince province)
     {
         TProvinceResult result = new TProvinceResult();
         long ret = _dao.createProvince(province);
         if(Err.isFail(ret)) return new TProvinceResult((int)ret, "");
         
+        TProvince created = new TProvince(province);
+        created.setProvinceId((int)ret);
         result.setError(Err.SUCCESS);
         result.setMessage("");
-        result.setValue(new TProvince(province));
+        result.setValue(created);
         
         _cache.remove((int) ret);
         return result;
@@ -57,10 +49,12 @@ public class ProvinceModel {
         long ret = _dao.updateProvince(province);
         if(ret == 0) return new TProvinceResult(Err.NOT_FOUND, "");
         if(Err.isFail(ret)) return new TProvinceResult((int)ret, "");
-        
+        TProvinceResult returnValue = this.getProvinceById(province.getProvinceId());
+        if(Err.isFail(returnValue.getError())) return returnValue;
+            
         result.setError(Err.SUCCESS);
         result.setMessage("");
-        result.setValue(new TProvince(province));
+        result.setValue(returnValue.getValue());
         
         _cache.remove((int) province.getProvinceId());
         return result;
@@ -104,7 +98,7 @@ public class ProvinceModel {
     {
         TListProvinceResult result = new TListProvinceResult();
         ValueResult<List<TProvince>> ret = _dao.getAllProvince(provinceName, count, offset);
-        if(Err.isFail(ret.error)) return new TListProvinceResult(Err.FAIL, "Lỗi kết nối mạng");
+        if(Err.isFail(ret.error) && !Err.isNotFound(ret.error)) return new TListProvinceResult(Err.FAIL, "Lỗi kết nối mạng");
         List<TProvince> value = ret.value != null ? ret.value : new ArrayList<TProvince>();
         result.setError(Err.SUCCESS);
         result.setMessage("Lấy dữ liệu thành công");

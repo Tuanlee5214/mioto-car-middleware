@@ -28,25 +28,17 @@ public class FeatureModel {
     
     private FeatureModel() {}
     
-    public FeatureDao getDao()
-    {
-        return _dao;
-    }
-    
-    public SimpleCache<Integer, TFeature> getCache()
-    {
-        return _cache;
-    }
-    
     public TFeatureResult createFeature(TFeature feature)
     {
         TFeatureResult result = new TFeatureResult();
         long ret = _dao.createFeature(feature);
         if(Err.isFail(ret)) return new TFeatureResult((int)ret, "");
         
+        TFeature created = new TFeature(feature);
+        created.setFeatureId((int)ret);
         result.setError(Err.SUCCESS);
         result.setMessage("");
-        result.setValue(new TFeature(feature));
+        result.setValue(created);
         _cache.remove((int)ret);
         return result;
     }
@@ -57,10 +49,12 @@ public class FeatureModel {
         long ret = _dao.updatedFeature(feature);
         if(ret == 0) return new TFeatureResult(Err.NOT_FOUND, "");
         if(Err.isFail(ret)) return new TFeatureResult((int)ret, "");
+        TFeatureResult returnValue = this.getFeatureById(feature.getFeatureId());
+        if(Err.isFail(returnValue.getError())) return returnValue;
         
         result.setError(Err.SUCCESS);
         result.setMessage("");
-        result.setValue(new TFeature(feature));
+        result.setValue(returnValue.getValue());
         
         _cache.remove((int)feature.getFeatureId());
         return result;
@@ -104,7 +98,7 @@ public class FeatureModel {
     {
         TListFeatureResult result = new TListFeatureResult();
         ValueResult<List<TFeature>> ret = _dao.getAllFeature(nameFeature, count, offset);
-        if(Err.isFail(ret.error)) return new TListFeatureResult((int) ret.error, "Lỗi kết nối mạng");
+        if(Err.isFail(ret.error) && !Err.isNotFound(ret.error)) return new TListFeatureResult((int) ret.error, "Lỗi kết nối mạng");
         List<TFeature> value = ret.value != null ? ret.value : new ArrayList<TFeature>();
         result.setError(Err.SUCCESS);
         result.setMessage("Lấy dữ liệu thành công");

@@ -27,25 +27,18 @@ public class DistrictModel {
     private final SimpleCache<Integer, TDistrict> _cache = new SimpleCache<Integer, TDistrict>("common");
     
     private DistrictModel() {}
-    
-    public DistrictDao getDao()
-    {
-        return _dao;
-    }
-    
-    public SimpleCache<Integer, TDistrict> getCache()
-    {
-        return _cache;
-    }
-    
+        
     public TDistrictResult createDistrict(TDistrict district)
     {
         TDistrictResult result = new TDistrictResult();
         long ret = _dao.createDistrict(district);
         if(Err.isFail(ret)) return new TDistrictResult((int)ret, "");
+        
+        TDistrict created = new TDistrict(district);
+        created.setDistrictId((int) ret);
         result.setError(Err.SUCCESS);
         result.setMessage("");
-        result.setValue(new TDistrict(district));
+        result.setValue(created);
         _cache.remove((int)ret);
         return result;
     }
@@ -56,11 +49,39 @@ public class DistrictModel {
         long ret = _dao.updateDistrict(district);
         if(ret == 0) return new TDistrictResult(Err.NOT_FOUND, "");
         if(Err.isFail(ret)) return new TDistrictResult((int)ret, "");
+        TDistrictResult returnValue = this.getDistrictById(district.getDistrictId());
+        if(Err.isFail(returnValue.getError())) return returnValue;
+        
         
         result.setError(Err.SUCCESS);
         result.setMessage("");
-        result.setValue(new TDistrict(district));
+        result.setValue(returnValue.getValue());
         _cache.remove((int)district.getDistrictId());
+        return result;
+    }
+    
+    public TDistrictResult getDistrictById(long districtId)
+    {
+        TDistrictResult result = new TDistrictResult(Err.FAIL, "");
+        TDistrict cached = _cache.get((int)districtId);
+        if(cached != null)
+        {
+            result.setError(Err.SUCCESS);
+            result.setMessage("Lấy dữ liệu thành công");
+            result.setValue(new TDistrict(cached));
+            return result;
+        }
+        
+        ValueResult<TDistrict> ret = _dao.getDistrictById(districtId);
+        if(Err.isNetworkError(ret.error)) return new TDistrictResult((int) ret.error, "Lỗi kết nối mạng");
+        if(Err.isNotFound(ret.error)) return new TDistrictResult((int) Err.NOT_FOUND, "Không tìm thấy quận huyện");
+        if(Err.isSuccess(ret.error)) 
+        {
+            _cache.put((int)districtId, new TDistrict(ret.value));
+            result.setError(Err.SUCCESS);
+            result.setMessage("Lấy dữ liệu thành công");
+            result.setValue(new TDistrict(ret.value));
+        }
         return result;
     }
     
@@ -77,7 +98,7 @@ public class DistrictModel {
     {
         TListDistrictResult result = new TListDistrictResult();
         ValueResult<List<TDistrict>> ret = _dao.getDistrict(provinceId, count, offset);
-        if(Err.isFail(ret.error)) return new TListDistrictResult((int) ret.error, "");
+        if(Err.isFail(ret.error) && !Err.isNotFound(ret.error)) return new TListDistrictResult((int) ret.error, "");
         List<TDistrict> value = ret.value != null ? ret.value : new ArrayList<TDistrict>();
         result.setError(Err.SUCCESS);
         result.setMessage("Lấy dữ liệu thành công");

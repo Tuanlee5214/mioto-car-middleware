@@ -25,26 +25,18 @@ public class VoucherModel {
     private final VoucherDao _dao = new VoucherDao("mioto");
     private final SimpleCache<Integer, TVoucher> _cache = new SimpleCache<Integer, TVoucher>("common");
     private VoucherModel() {}
-    
-    private VoucherDao getDao()
-    {
-        return _dao;
-    }
-    
-    private SimpleCache<Integer, TVoucher> getCache()
-    {
-        return _cache;
-    }
-    
+        
     public TVoucherResult createVoucher(TVoucher voucher)
     {
         TVoucherResult result = new TVoucherResult();
         long ret = _dao.createVoucher(voucher);
         if(Err.isFail(ret)) return new TVoucherResult((int)ret, "");
         
+        TVoucher created = new TVoucher(voucher);
+        created.setVoucherId((int)ret);
         result.setError(Err.SUCCESS);
         result.setMessage("");
-        result.setValue(new TVoucher(voucher));
+        result.setValue(created);
         _cache.remove((int) ret);
         return result;
     }
@@ -55,10 +47,12 @@ public class VoucherModel {
         long ret = _dao.updatedVoucher(voucher);
         if(ret == 0) return new TVoucherResult(Err.NOT_FOUND, "");
         if(Err.isFail(ret)) return new TVoucherResult((int)ret, "");
+        TVoucherResult returnValue = this.getVoucherById(voucher.getVoucherId());
+        if(Err.isFail(returnValue.getError())) return returnValue;
         
         result.setError(Err.SUCCESS);
         result.setMessage("");
-        result.setValue(new TVoucher(voucher));
+        result.setValue(returnValue.getValue());
         _cache.remove((int)voucher.getVoucherId());
         return result;
     }
@@ -97,11 +91,11 @@ public class VoucherModel {
         return result;
     }
     
-    public TListVoucherResult getAllVoucher(String title, int count, int offset)
+    public TListVoucherResult getAllVoucher(String title, String code, int count, int offset)
     {
         TListVoucherResult result = new TListVoucherResult();
-        ValueResult<List<TVoucher>> ret = _dao.getAllVoucher(title, count, offset);
-        if(Err.isFail(ret.error)) return new TListVoucherResult((int) ret.error, "");
+        ValueResult<List<TVoucher>> ret = _dao.getAllVoucher(title, code, count, offset);
+        if(Err.isFail(ret.error) && !Err.isNotFound(ret.error)) return new TListVoucherResult((int) ret.error, "");
         List<TVoucher> value = ret.value != null ? ret.value : new ArrayList<TVoucher>();
         result.setError(Err.SUCCESS);
         result.setMessage("Lấy dữ liệu thành công");

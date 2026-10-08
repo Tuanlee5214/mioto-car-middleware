@@ -39,12 +39,14 @@ public class AuthModel {
     {            
         if(UserModel.Instance.isPhoneExisted(request.getPhone()))
             return new TLoginResult(Err.CONFLICT, "Số điện thoại đã tồn tại trong hệ thống");
+        if(UserModel.Instance.isEmailExisted(request.getEmail()))
+            return new TLoginResult(Err.CONFLICT, "Email này đã tồn tại trong hệ thống");
         
         //Create user
         TUser user = new TUser();
-        user.setDisplayName(request.getDisplayName().trim() == null ? "" : request.getDisplayName().trim());
-        user.setPhone(request.getPhone().trim() == null ? "" : request.getPhone().trim());
-        user.setEmail(request.getEmail().trim() == null ? "" : request.getEmail().trim());
+        user.setDisplayName(request.getDisplayName() == null ? "" : request.getDisplayName().trim());
+        user.setPhone(request.getPhone() == null ? "" : request.getPhone().trim());
+        user.setEmail(request.getEmail() == null ? "" : request.getEmail().trim());
         user.setStatus((byte) TUserStatus.TUS_ACTIVE.getValue());
         user.setTimeCreated(System.currentTimeMillis());
         user.setTimeUpdated(System.currentTimeMillis());

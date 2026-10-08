@@ -28,17 +28,7 @@ public class CarBrandModel {
     private final SimpleCache<Integer, TCarBrand> _cache = new SimpleCache<Integer, TCarBrand>("common");
     
     private CarBrandModel() {}
-    
-    public CarBrandDao getDao()
-    {
-        return _dao;
-    }
-    
-    public SimpleCache<Integer, TCarBrand> getCache()
-    {
-        return _cache;
-    }
-    
+        
     public TCarBrandResult createCarBrand(TCarBrand carBrand)
     {
         TCarBrandResult result = new TCarBrandResult();
@@ -47,7 +37,9 @@ public class CarBrandModel {
         
         result.setError(Err.SUCCESS);
         result.setMessage("");
-        result.setValue(new TCarBrand(carBrand));
+        TCarBrand created = new TCarBrand(carBrand);
+        created.setCarBrandId((int) ret);
+        result.setValue(created);
         _cache.remove((int)ret);
         return result;
     }
@@ -57,10 +49,12 @@ public class CarBrandModel {
         TCarBrandResult result = new TCarBrandResult();
         long ret = _dao.updateCarBrand(carBrand);
         if(Err.isFail(ret)) return new TCarBrandResult((int) ret, "");
+        TCarBrandResult returnValue = this.getCarBrandById(carBrand.getCarBrandId());
+        if(Err.isFail(returnValue.getError())) return returnValue;
         
         result.setError(Err.SUCCESS);
         result.setMessage("");
-        result.setValue(new TCarBrand(carBrand));
+        result.setValue(returnValue.getValue());
         _cache.remove(carBrand.getCarBrandId());
         return result;
     }
@@ -79,7 +73,7 @@ public class CarBrandModel {
     {
         TListCarBrandResult result = new TListCarBrandResult();
         ValueResult<List<TCarBrand>> ret = _dao.getAllCarBrand(nameBrand, count, offset);
-        if(Err.isFail(ret.error)) return new TListCarBrandResult((int) ret.error, "Lỗi kết nối mạng");
+        if(Err.isFail(ret.error) && !Err.isNotFound(ret.error)) return new TListCarBrandResult((int) ret.error, "Lỗi kết nối mạng");
         
         List<TCarBrand> value = ret.value != null ? ret.value : new ArrayList<TCarBrand>();
         result.setError(Err.SUCCESS);

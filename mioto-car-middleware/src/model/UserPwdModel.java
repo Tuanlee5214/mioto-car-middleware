@@ -24,10 +24,7 @@ public class UserPwdModel {
     private final SimpleCache<Integer, TUserPwd> _cache = new SimpleCache<Integer, TUserPwd>("userPwd");
     
     private UserPwdModel() {}
-    
-    public UserPwdDao getDao() { return _dao; }
-    public SimpleCache<Integer, TUserPwd> getCache() { return _cache; }
-    
+        
     public long createUserPwd(TUserPwd userPwd)
     {
         long id = _dao.CreateUserPwd(userPwd);

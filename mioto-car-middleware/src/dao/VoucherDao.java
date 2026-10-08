@@ -75,7 +75,7 @@ public class VoucherDao {
         return ret;
     }
     
-    public ValueResult<List<TVoucher>> getAllVoucher(String title, int count, int offset)
+    public ValueResult<List<TVoucher>> getAllVoucher(String title, String code, int count, int offset)
     {
         ValueResult<List<TVoucher>> ret = new ValueResult<List<TVoucher>>(Err.FAIL);
         StringBuilder sql = new StringBuilder("SELECT " + COLS + " FROM " + TABLE + " WHERE 1=1");
@@ -87,6 +87,11 @@ public class VoucherDao {
             params.add(title);
         }
         
+        if(code != null && !code.trim().isEmpty())
+        {
+            sql.append(" AND code=?");
+            params.add(code);
+        }
         sql.append(" ORDER BY createdAt DESC LIMIT ? OFFSET ?");
         params.add(count <= 0 || count > 100 ? 20 : count);
         params.add(Math.max(0, offset));
@@ -94,7 +99,7 @@ public class VoucherDao {
         ret.error = _cli.executeQuery(new MysqlClient.IRowListener() {
             @Override
             public void onRow(ResultSet rs) throws SQLException {
-                if(ret.value == null) ret.value = new ArrayList<TVoucher>(Err.FAIL);
+                if(ret.value == null) ret.value = new ArrayList<TVoucher>();
                 ret.value.add(map(rs));
                 
             }
