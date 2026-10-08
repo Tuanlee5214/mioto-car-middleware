@@ -433,3 +433,34 @@ struct TSessionResult {
     2:required string   message,
     3:optional TSession value,
 }
+
+struct TRole {
+    1:optional i32 roleId, 
+    2:optional string name,
+}
+
+struct TRoleResult {
+    1:required i32 error,
+    2:required string message, 
+    3:optional TRole value 
+}
+
+struct TListRoleResult { 
+    1:required i32 error, 
+    2:required string message, 
+    3:optional list<TRole> value 
+}
+
+struct TUserRole {
+    1:optional i32 id,
+    2:optional i32 userId,
+    3:optional list<i32> roleIds,
+    4:optional bool isSuperAdmin,
+    5:optional list<TRole> roles,    
+}
+
+struct TUserRoleResult { 
+    1:required i32 error, 
+    2:required string message, 
+    3:optional TUserRole value 
+}
