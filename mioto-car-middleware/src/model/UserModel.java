@@ -46,6 +46,16 @@ public class UserModel {
         _cacheId.remove((int) id);
         return id;
     }
+    
+    public long setIsOwnCarForUserByAdmin(long userId)
+    {
+        long result = _dao.setIsOwnCarForUserByAdmin(userId);
+        if(Err.isNotFound(result)) return Err.NOT_FOUND;
+        if(Err.isFail(result)) return result;
+        
+        _cacheId.remove((int)userId);
+        return result;
+    }
 
     public TUserResult getUser(long userId) {
         TUserResult result = new TUserResult(Err.FAIL, "");

@@ -68,6 +68,16 @@ public class UserDao {
 
         return ret;
     }
+    
+    public long setIsOwnCarForUserByAdmin(long userId)
+    {
+        String role = "OwnerCar";
+        Boolean isOwnCar = true;
+        String sql = "UPDATE " + TABLE
+                + " SET role=?,isOwnCar=?"
+                + " WHERE " + KEY + "=?";
+        return _cli.executeUpdate(sql, role, isOwnCar,  userId);
+    }
 
     public ValueResult<TUser> getUserByPhone(String phone) {
         final ValueResult<TUser> ret = new ValueResult<TUser>(Err.FAIL);
@@ -82,7 +92,6 @@ public class UserDao {
         return ret;     
     }
     
-
     public ValueResult<Integer> updateUser(TUser user) {
         ValueResult<Integer> ret = new ValueResult<Integer>(Err.FAIL);
         String sql = "UPDATE " + TABLE
