@@ -50,7 +50,7 @@ public class UserDao {
 
     public long createUser(TUser user) {
         String sql = "INSERT INTO " + TABLE
-                + " (phone,email,displayName,status,timeCreated,timeUpdated,role,isOwnCar)"
+                + " (phone,email,displayName,status,timeCreated,timeUpdated)"
                 + " VALUES (?,?,?,?,?,?)";
         return _cli.executeInsertAndReturnKey(sql, user.getPhone(), user.getEmail(), user.getDisplayName(),
                 user.getStatus(), user.getTimeCreated(), user.getTimeUpdated(), "Customer", false);
@@ -69,16 +69,6 @@ public class UserDao {
         return ret;
     }
     
-    public long setIsOwnCarForUserByAdmin(long userId)
-    {
-        String role = "OwnerCar";
-        Boolean isOwnCar = true;
-        String sql = "UPDATE " + TABLE
-                + " SET role=?,isOwnCar=?"
-                + " WHERE " + KEY + "=?";
-        return _cli.executeUpdate(sql, role, isOwnCar,  userId);
-    }
-
     public ValueResult<TUser> getUserByPhone(String phone) {
         final ValueResult<TUser> ret = new ValueResult<TUser>(Err.FAIL);
         String sql = "SELECT " + COLS + " FROM " + TABLE + " WHERE phone=?";
