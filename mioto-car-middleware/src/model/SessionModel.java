@@ -25,10 +25,7 @@ public class SessionModel {
     private final SimpleCache<Integer, TSession> _cache = new SimpleCache<Integer, TSession>("session");
 
     private SessionModel() {}
-    
-    public SessionDao getDao() { return _dao; }
-    public SimpleCache<Integer, TSession> getCache() { return _cache; }
-    
+        
     public long createSession(TSession session, TLoginInfo loginInfo)
     {
         long id = _dao.createSession(session, loginInfo);

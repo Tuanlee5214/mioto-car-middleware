@@ -30,14 +30,6 @@ public class UserModel {
     private UserModel() {
     }
 
-    public UserDao getDao() {
-        return _dao;
-    }
-
-    public SimpleCache<Integer, TUser> getCache() {
-        return _cacheId;
-    }
-
     public boolean isPhoneExisted(String phone) {
         return _dao.isPhoneExisted(phone);
     }

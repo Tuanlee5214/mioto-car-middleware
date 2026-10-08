@@ -28,17 +28,7 @@ public class CarBrandModel {
     private final SimpleCache<Integer, TCarBrand> _cache = new SimpleCache<Integer, TCarBrand>("common");
     
     private CarBrandModel() {}
-    
-    public CarBrandDao getDao()
-    {
-        return _dao;
-    }
-    
-    public SimpleCache<Integer, TCarBrand> getCache()
-    {
-        return _cache;
-    }
-    
+        
     public TCarBrandResult createCarBrand(TCarBrand carBrand)
     {
         TCarBrandResult result = new TCarBrandResult();
