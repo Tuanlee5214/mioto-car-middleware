@@ -435,6 +435,7 @@ struct TSessionResult {
 struct TRole {
     1:optional i32 roleId, 
     2:optional string name,
+    3:optional string displayName,
 }
 
 struct TRoleResult {

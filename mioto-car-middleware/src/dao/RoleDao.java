@@ -20,7 +20,7 @@ import thrift.TRole;
 public class RoleDao {
     private static final String TABLE = "Roles";
     private static final String KEY = "id";
-    private static final String COLS = "id,name";
+    private static final String COLS = "id,name,displayName";
     private final MysqlClient _cli;
 
     public RoleDao(String name) {
@@ -107,6 +107,7 @@ public class RoleDao {
         TRole role = new TRole();
         role.setRoleId(rs.getInt("id"));
         role.setName(rs.getString("name"));
+        role.setDisplayName(rs.getString("displayName"));
         return role;
     }
 }

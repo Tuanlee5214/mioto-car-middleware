@@ -13,17 +13,20 @@ public class TRole implements org.apache.thrift.TBase<TRole, TRole._Fields>, jav
 
   private static final org.apache.thrift.protocol.TField ROLE_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("roleId", org.apache.thrift.protocol.TType.I32, (short)1);
   private static final org.apache.thrift.protocol.TField NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("name", org.apache.thrift.protocol.TType.STRING, (short)2);
+  private static final org.apache.thrift.protocol.TField DISPLAY_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("displayName", org.apache.thrift.protocol.TType.STRING, (short)3);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TRoleStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TRoleTupleSchemeFactory();
 
   public int roleId; // optional
   public @org.apache.thrift.annotation.Nullable java.lang.String name; // optional
+  public @org.apache.thrift.annotation.Nullable java.lang.String displayName; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     ROLE_ID((short)1, "roleId"),
-    NAME((short)2, "name");
+    NAME((short)2, "name"),
+    DISPLAY_NAME((short)3, "displayName");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -43,6 +46,8 @@ public class TRole implements org.apache.thrift.TBase<TRole, TRole._Fields>, jav
           return ROLE_ID;
         case 2: // NAME
           return NAME;
+        case 3: // DISPLAY_NAME
+          return DISPLAY_NAME;
         default:
           return null;
       }
@@ -86,13 +91,15 @@ public class TRole implements org.apache.thrift.TBase<TRole, TRole._Fields>, jav
   // isset id assignments
   private static final int __ROLEID_ISSET_ID = 0;
   private byte __isset_bitfield = 0;
-  private static final _Fields optionals[] = {_Fields.ROLE_ID,_Fields.NAME};
+  private static final _Fields optionals[] = {_Fields.ROLE_ID,_Fields.NAME,_Fields.DISPLAY_NAME};
   public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
     tmpMap.put(_Fields.ROLE_ID, new org.apache.thrift.meta_data.FieldMetaData("roleId", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     tmpMap.put(_Fields.NAME, new org.apache.thrift.meta_data.FieldMetaData("name", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.DISPLAY_NAME, new org.apache.thrift.meta_data.FieldMetaData("displayName", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TRole.class, metaDataMap);
@@ -110,6 +117,9 @@ public class TRole implements org.apache.thrift.TBase<TRole, TRole._Fields>, jav
     if (other.isSetName()) {
       this.name = other.name;
     }
+    if (other.isSetDisplayName()) {
+      this.displayName = other.displayName;
+    }
   }
 
   public TRole deepCopy() {
@@ -121,6 +131,7 @@ public class TRole implements org.apache.thrift.TBase<TRole, TRole._Fields>, jav
     setRoleIdIsSet(false);
     this.roleId = 0;
     this.name = null;
+    this.displayName = null;
   }
 
   public int getRoleId() {
@@ -171,6 +182,31 @@ public class TRole implements org.apache.thrift.TBase<TRole, TRole._Fields>, jav
     }
   }
 
+  @org.apache.thrift.annotation.Nullable
+  public java.lang.String getDisplayName() {
+    return this.displayName;
+  }
+
+  public TRole setDisplayName(@org.apache.thrift.annotation.Nullable java.lang.String displayName) {
+    this.displayName = displayName;
+    return this;
+  }
+
+  public void unsetDisplayName() {
+    this.displayName = null;
+  }
+
+  /** Returns true if field displayName is set (has been assigned a value) and false otherwise */
+  public boolean isSetDisplayName() {
+    return this.displayName != null;
+  }
+
+  public void setDisplayNameIsSet(boolean value) {
+    if (!value) {
+      this.displayName = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
     switch (field) {
     case ROLE_ID:
@@ -189,6 +225,14 @@ public class TRole implements org.apache.thrift.TBase<TRole, TRole._Fields>, jav
       }
       break;
 
+    case DISPLAY_NAME:
+      if (value == null) {
+        unsetDisplayName();
+      } else {
+        setDisplayName((java.lang.String)value);
+      }
+      break;
+
     }
   }
 
@@ -200,6 +244,9 @@ public class TRole implements org.apache.thrift.TBase<TRole, TRole._Fields>, jav
 
     case NAME:
       return getName();
+
+    case DISPLAY_NAME:
+      return getDisplayName();
 
     }
     throw new java.lang.IllegalStateException();
@@ -216,6 +263,8 @@ public class TRole implements org.apache.thrift.TBase<TRole, TRole._Fields>, jav
       return isSetRoleId();
     case NAME:
       return isSetName();
+    case DISPLAY_NAME:
+      return isSetDisplayName();
     }
     throw new java.lang.IllegalStateException();
   }
@@ -253,6 +302,15 @@ public class TRole implements org.apache.thrift.TBase<TRole, TRole._Fields>, jav
         return false;
     }
 
+    boolean this_present_displayName = true && this.isSetDisplayName();
+    boolean that_present_displayName = true && that.isSetDisplayName();
+    if (this_present_displayName || that_present_displayName) {
+      if (!(this_present_displayName && that_present_displayName))
+        return false;
+      if (!this.displayName.equals(that.displayName))
+        return false;
+    }
+
     return true;
   }
 
@@ -267,6 +325,10 @@ public class TRole implements org.apache.thrift.TBase<TRole, TRole._Fields>, jav
     hashCode = hashCode * 8191 + ((isSetName()) ? 131071 : 524287);
     if (isSetName())
       hashCode = hashCode * 8191 + name.hashCode();
+
+    hashCode = hashCode * 8191 + ((isSetDisplayName()) ? 131071 : 524287);
+    if (isSetDisplayName())
+      hashCode = hashCode * 8191 + displayName.hashCode();
 
     return hashCode;
   }
@@ -295,6 +357,16 @@ public class TRole implements org.apache.thrift.TBase<TRole, TRole._Fields>, jav
     }
     if (isSetName()) {
       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.name, other.name);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = java.lang.Boolean.valueOf(isSetDisplayName()).compareTo(other.isSetDisplayName());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetDisplayName()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.displayName, other.displayName);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -332,6 +404,16 @@ public class TRole implements org.apache.thrift.TBase<TRole, TRole._Fields>, jav
         sb.append("null");
       } else {
         sb.append(this.name);
+      }
+      first = false;
+    }
+    if (isSetDisplayName()) {
+      if (!first) sb.append(", ");
+      sb.append("displayName:");
+      if (this.displayName == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.displayName);
       }
       first = false;
     }
@@ -396,6 +478,14 @@ public class TRole implements org.apache.thrift.TBase<TRole, TRole._Fields>, jav
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 3: // DISPLAY_NAME
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.displayName = iprot.readString();
+              struct.setDisplayNameIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -423,6 +513,13 @@ public class TRole implements org.apache.thrift.TBase<TRole, TRole._Fields>, jav
           oprot.writeFieldEnd();
         }
       }
+      if (struct.displayName != null) {
+        if (struct.isSetDisplayName()) {
+          oprot.writeFieldBegin(DISPLAY_NAME_FIELD_DESC);
+          oprot.writeString(struct.displayName);
+          oprot.writeFieldEnd();
+        }
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -447,19 +544,25 @@ public class TRole implements org.apache.thrift.TBase<TRole, TRole._Fields>, jav
       if (struct.isSetName()) {
         optionals.set(1);
       }
-      oprot.writeBitSet(optionals, 2);
+      if (struct.isSetDisplayName()) {
+        optionals.set(2);
+      }
+      oprot.writeBitSet(optionals, 3);
       if (struct.isSetRoleId()) {
         oprot.writeI32(struct.roleId);
       }
       if (struct.isSetName()) {
         oprot.writeString(struct.name);
       }
+      if (struct.isSetDisplayName()) {
+        oprot.writeString(struct.displayName);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TRole struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(2);
+      java.util.BitSet incoming = iprot.readBitSet(3);
       if (incoming.get(0)) {
         struct.roleId = iprot.readI32();
         struct.setRoleIdIsSet(true);
@@ -467,6 +570,10 @@ public class TRole implements org.apache.thrift.TBase<TRole, TRole._Fields>, jav
       if (incoming.get(1)) {
         struct.name = iprot.readString();
         struct.setNameIsSet(true);
+      }
+      if (incoming.get(2)) {
+        struct.displayName = iprot.readString();
+        struct.setDisplayNameIsSet(true);
       }
     }
   }
