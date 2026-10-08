@@ -58,6 +58,19 @@ public class FeedBackDao {
         return _cli.executeUpdate("DELETE FROM " + TABLE + " WHERE " + KEY + "=?", feedbackId);
     }
     
+    public ValueResult<TFeedBack> getFeedBackById(long feedbackId)
+    {
+        ValueResult<TFeedBack> result = new ValueResult<TFeedBack>(Err.FAIL);
+        String sql = "SELECT " + COLS + " FROM " + TABLE + " WHERE " + KEY + "=?";
+        result.error = _cli.executeQuery(new MysqlClient.IRowListener() {
+            @Override
+            public void onRow(ResultSet rs) throws SQLException {
+                result.value = map(rs);
+            }
+        }, sql, feedbackId);
+        return result;
+    }
+    
     public ValueResult<List<TFeedBack>> getFeedBackByReceiverId(long receiverId, int count, int offset)
     {
         ValueResult<List<TFeedBack>> ret = new ValueResult<List<TFeedBack>>(Err.FAIL);

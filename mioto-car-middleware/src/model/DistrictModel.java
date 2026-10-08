@@ -56,11 +56,39 @@ public class DistrictModel {
         long ret = _dao.updateDistrict(district);
         if(ret == 0) return new TDistrictResult(Err.NOT_FOUND, "");
         if(Err.isFail(ret)) return new TDistrictResult((int)ret, "");
+        TDistrictResult returnValue = this.getDistrictById(district.getDistrictId());
+        if(Err.isFail(returnValue.getError())) return returnValue;
+        
         
         result.setError(Err.SUCCESS);
         result.setMessage("");
-        result.setValue(new TDistrict(district));
+        result.setValue(returnValue.getValue());
         _cache.remove((int)district.getDistrictId());
+        return result;
+    }
+    
+    public TDistrictResult getDistrictById(long districtId)
+    {
+        TDistrictResult result = new TDistrictResult(Err.FAIL, "");
+        TDistrict cached = _cache.get((int)districtId);
+        if(cached != null)
+        {
+            result.setError(Err.SUCCESS);
+            result.setMessage("Lấy dữ liệu thành công");
+            result.setValue(new TDistrict(cached));
+            return result;
+        }
+        
+        ValueResult<TDistrict> ret = _dao.getDistrictById(districtId);
+        if(Err.isNetworkError(ret.error)) return new TDistrictResult((int) ret.error, "Lỗi kết nối mạng");
+        if(Err.isNotFound(ret.error)) return new TDistrictResult((int) Err.NOT_FOUND, "Không tìm thấy quận huyện");
+        if(Err.isSuccess(ret.error)) 
+        {
+            _cache.put((int)districtId, new TDistrict(ret.value));
+            result.setError(Err.SUCCESS);
+            result.setMessage("Lấy dữ liệu thành công");
+            result.setValue(new TDistrict(ret.value));
+        }
         return result;
     }
     
