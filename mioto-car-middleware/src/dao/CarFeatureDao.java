@@ -55,7 +55,7 @@ public class CarFeatureDao {
     public ValueResult<List<TCarFeatureView>> getListCarFeatures(long carId) {
         ValueResult<List<TCarFeatureView>> result = new ValueResult<List<TCarFeatureView>>(Err.FAIL);
         result.value = new ArrayList<TCarFeatureView>();
-        String sql = "SELECT cf.id,cf.carId,cf.featureId,f.nameFeature AS featureName"
+        String sql = "SELECT cf.id,cf.carId,cf.featureId,f.nameFeature AS featureName,f.iconKey AS iconKey"
                 + " FROM " + TABLE + " cf JOIN Features f ON f.id=cf.featureId"
                 + " WHERE cf.carId=? ORDER BY cf.id";
         result.error = _cli.executeQuery(new MysqlClient.IRowListener() {
@@ -89,6 +89,7 @@ public class CarFeatureDao {
         view.setCarId(rs.getInt("carId"));
         view.setFeatureId(rs.getInt("featureId"));
         view.setFeatureName(rs.getString("featureName"));
+        view.setIconKey(rs.getString("iconKey"));
         return view;
     }
 }

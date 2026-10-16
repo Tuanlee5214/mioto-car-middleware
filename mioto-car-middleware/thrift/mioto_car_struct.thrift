@@ -130,6 +130,7 @@ struct TCarFeatureView {
     2:required i32       carId,
     3:required i32       featureId,
     4:required string    featureName,
+    5:required string    iconKey,
 }
 
 struct TCarImage {

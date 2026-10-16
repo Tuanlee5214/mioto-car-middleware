@@ -41,7 +41,7 @@ public class FeatureDao {
     {
         String sql = "INSERT INTO " + TABLE 
                 + " (nameFeature,iconKey,createdAt,updatedAt)"
-                + " VALUES (?,?,?)";
+                + " VALUES (?,?,?,?)";
         return _cli.executeInsertAndReturnKey(sql, feature.getNameFeature(), feature.getIconKey(), feature.getCreatedAt(), feature.getUpdatedAt());
     }
     
