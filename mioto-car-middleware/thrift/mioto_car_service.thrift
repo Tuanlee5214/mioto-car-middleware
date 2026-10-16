@@ -26,6 +26,12 @@ service MiotoCarService {
         1:required mioto_car_struct.OpHandle handle
         2:required mioto_car_struct.TUserID  userId);
 
+    mioto_car_struct.TListUserResult getAllUser(
+        1:required mioto_car_struct.OpHandle handle
+        2:optional i32                       status
+        3:optional i32                       count
+        4:optional i32                       offset);
+
     mioto_car_struct.TUpdateUserResult updateUser(
         1:required mioto_car_struct.OpHandle handle
         2:required mioto_car_struct.TUser    user

@@ -401,6 +401,12 @@ struct TUserResult {
     3:optional TUser value,
 }
 
+struct TListUserResult {
+    1:required i32   error,
+    2:required string message,
+    3:optional list<TUser> value,
+}
+
 struct TUserPwdResult {
     1:required i32   error,
     2:required string message,

@@ -8,7 +8,10 @@ import cache.SimpleCache;
 import dao.UserDao;
 import error.Err;
 import error.ValueResult;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.log4j.Logger;
+import thrift.TListUserResult;
 import thrift.TLoginInfo;
 import thrift.TSessionResult;
 import thrift.TUpdateUserResult;
@@ -92,6 +95,19 @@ public class UserModel {
             result.setMessage("Lấy thông tin người dùng thành công");
             result.setValue(new TUser(ret.value));
         }
+        return result;
+    }
+    
+    public TListUserResult getAllUser(int status, int count, int offset)
+    {
+        TListUserResult result = new TListUserResult();
+        ValueResult<List<TUser>> ret = _dao.getAllUser(status, count, offset);
+        if(Err.isFail(ret.error) && !Err.isNotFound(ret.error)) return new TListUserResult((int) ret.error, "Lỗi kết nối mạng");
+        
+        List<TUser> value = ret.value != null ? ret.value : new ArrayList<TUser>();
+        result.setError(Err.SUCCESS);
+        result.setMessage("Lấy dữ liệu thành công");
+        result.setValue(value);
         return result;
     }
 

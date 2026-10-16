@@ -56,6 +56,7 @@ import thrift.TListFeePolicyResult;
 import thrift.TListFeedBackResult;
 import thrift.TListProvinceResult;
 import thrift.TListRoleResult;
+import thrift.TListUserResult;
 import thrift.TListVoucherResult;
 import thrift.TLoginInfo;
 import thrift.TLoginRequest;
@@ -721,4 +722,27 @@ public class CarServiceHandler implements MiotoCarService.Iface {
             return new TUserRoleResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
+
+    @Override
+    public TCarImagePublicIdResult multigetPublicId(int carId, List<Long> ids) throws TException {
+        try {
+            return CarImageModel.Instance.multigetPublicId(carId, ids);
+        } 
+        catch (Exception e) {
+            _Logger.error("multiget publicIds from ids", e);
+            return new TCarImagePublicIdResult(Err.FAIL, "Lỗi hệ thống");
+        }
+    }
+
+    @Override
+    public TListUserResult getAllUser(OpHandle handle, int status, int count, int offset) throws TException {
+        try {
+            return UserModel.Instance.getAllUser(status, count, offset);
+        } 
+        catch (Exception e) {
+            _Logger.error("get all car fail", e);
+            return new TListUserResult(Err.FAIL, "Lỗi hệ thống");
+        }
+    }
+
 }
