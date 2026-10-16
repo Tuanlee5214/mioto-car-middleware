@@ -41,8 +41,8 @@ public class CarDao {
             + " JOIN Provinces p ON p.id=d.provinceId"
             + " JOIN Users u ON u.userId=c.userId";
     
-    private static final String THUMB_COL = ", (SELECT i.imageUrl FROM CarImages i WHERE i.carId=c.carId"
-            + " ORDER BY i.orderNum ASC, i.id ASC LIMIT 1) AS thumbnailUrl";
+    private static final String PUBLIC_ID_COL = ", (SELECT i.publicId FROM CarImages i WHERE i.carId=c.carId"
+            + " ORDER BY i.orderNum ASC, i.id ASC LIMIT 1) AS publicId";
 
     private final MysqlClient _cli;
 
@@ -92,7 +92,7 @@ public class CarDao {
 
     public ValueResult<TCarView> getCarViewById(long carId) {
         ValueResult<TCarView> result = new ValueResult<TCarView>(Err.FAIL);
-        String sql = "SELECT " + VIEW_COLS + THUMB_COL + VIEW_FROM + " WHERE c." + KEY + "=?";
+        String sql = "SELECT " + VIEW_COLS + PUBLIC_ID_COL + VIEW_FROM + " WHERE c." + KEY + "=?";
         result.error = _cli.executeQuery(new MysqlClient.IRowListener() {
             @Override
             public void onRow(ResultSet rs) throws SQLException {
@@ -105,7 +105,7 @@ public class CarDao {
     public ValueResult<List<TCarView>> getCarViewByUserId(long userId, int count, int offset) {
         ValueResult<List<TCarView>> result = new ValueResult<List<TCarView>>(Err.FAIL);
         result.value = new ArrayList<TCarView>();
-        String sql = "SELECT " + VIEW_COLS + THUMB_COL + VIEW_FROM
+        String sql = "SELECT " + VIEW_COLS + PUBLIC_ID_COL + VIEW_FROM
                 + " WHERE c.userId=?"
                 + " ORDER BY c.createdAt DESC, c.carId DESC LIMIT ? OFFSET ?";
         result.error = _cli.executeQuery(new MysqlClient.IRowListener() {
@@ -121,7 +121,7 @@ public class CarDao {
 public ValueResult<List<TCarView>> searchCar(TCarFilterRequest filter, long startTime, long endTime, int status, int count, int offset) {
         ValueResult<List<TCarView>> result = new ValueResult<List<TCarView>>(Err.FAIL);
         result.value = new ArrayList<TCarView>();
-        StringBuilder sql = new StringBuilder("SELECT " + VIEW_COLS + THUMB_COL + VIEW_FROM + " WHERE 1=1");
+        StringBuilder sql = new StringBuilder("SELECT " + VIEW_COLS + PUBLIC_ID_COL + VIEW_FROM + " WHERE 1=1");
         List<Object> params = new ArrayList<Object>();
 
         if (filter != null) {
@@ -201,7 +201,7 @@ public ValueResult<List<TCarView>> searchCar(TCarFilterRequest filter, long star
         view.setCar(mapCar(rs));
         view.setBrandName(rs.getString("brandName"));
         view.setDistrictName(rs.getString("districtName"));
-        view.setThumbnailUrl(rs.getString("thumbnailUrl"));
+        view.setPublicId(rs.getString("publicId"));
         view.setProvinceName(rs.getString("provinceName"));
         view.setOwnerName(rs.getString("ownerName"));
         return view;

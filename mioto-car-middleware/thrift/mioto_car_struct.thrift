@@ -121,7 +121,8 @@ struct TCarView {
   3: optional string districtName,
   4: optional string provinceName,
   5: optional string ownerName,
-  6: optional string thumbnailUrl,
+  6: optional string publicId,
+  7: optional string imageUrl,
 }
 
 struct TCarFeatureView {

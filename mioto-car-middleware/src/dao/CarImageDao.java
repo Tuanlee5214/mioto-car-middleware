@@ -22,7 +22,7 @@ public class CarImageDao {
 
     private static final Logger _Logger = Logger.getLogger(CarImageDao.class);
     private static final String TABLE = "CarImages";
-    private static final String COLS = "id,carId,imageUrl,publicId,createdAt,orderNum";
+    private static final String COLS = "id,carId,publicId,createdAt,orderNum";
     private static final String KEY = "id";
 
     private final MysqlClient _cli;
@@ -41,13 +41,12 @@ public class CarImageDao {
             return 0;
         }
         StringBuilder sql = new StringBuilder("INSERT INTO " + TABLE
-                + " (carId,imageUrl,publicId,createdAt,orderNum) VALUES ");
+                + " (carId,publicId,createdAt,orderNum) VALUES ");
         List<Object> params = new ArrayList<Object>();
         for (int i = 0; i < images.size(); i++) {
             TCarImage img = images.get(i);
-            sql.append(i == 0 ? "(?,?,?,?,?)" : ",(?,?,?,?,?)");
+            sql.append(i == 0 ? "(?,?,?,?)" : ",(?,?,?,?)");
             params.add(img.getCarId());
-            params.add(img.getImageUrl());
             params.add(img.getPublicId());
             params.add(img.getCreatedAt());
             params.add(startOrder + i);
@@ -129,7 +128,6 @@ public class CarImageDao {
         TCarImage carImage = new TCarImage();
         carImage.setId(rs.getInt("id"));
         carImage.setCarId(rs.getInt("carId"));
-        carImage.setImageUrl(rs.getString("imageUrl"));
         carImage.setPublicId(rs.getString("publicId"));
         carImage.setCreatedAt(rs.getLong("createdAt"));
         carImage.setOrderNum(rs.getInt("orderNum"));
