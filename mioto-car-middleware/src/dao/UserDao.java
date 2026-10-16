@@ -9,6 +9,8 @@ import error.Err;
 import error.ValueResult;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.log4j.Logger;
 import thrift.TUser;
 
@@ -53,7 +55,7 @@ public class UserDao {
                 + " (phone,email,displayName,status,timeCreated,timeUpdated)"
                 + " VALUES (?,?,?,?,?,?)";
         return _cli.executeInsertAndReturnKey(sql, user.getPhone(), user.getEmail(), user.getDisplayName(),
-                user.getStatus(), user.getTimeCreated(), user.getTimeUpdated(), "Customer", false);
+                user.getStatus(), user.getTimeCreated(), user.getTimeUpdated());
     }
 
     public ValueResult<TUser> getUser(long userId) {
@@ -68,6 +70,33 @@ public class UserDao {
 
         return ret;
     }
+    
+    public ValueResult<List<TUser>> getAllUser(int status, int count, int offset)
+    {
+        ValueResult<List<TUser>> ret = new ValueResult<List<TUser>>(Err.FAIL);
+        StringBuilder sql = new StringBuilder("SELECT " + COLS + " FROM " + TABLE + " WHERE 1=1");
+        List<Object> params = new ArrayList<Object>();
+        
+        if(status > 0 && status <= 3)
+        {
+            sql.append(" AND status=?");
+            params.add(status);
+        }
+        
+        sql.append(" ORDER BY userId DESC LIMIT ? OFFSET ?");
+        params.add(count <= 0 || count > 100 ? 20 : count);
+        params.add(Math.max(0, offset));
+        
+        ret.error = _cli.executeQuery(new MysqlClient.IRowListener() {
+            @Override
+            public void onRow(ResultSet rs) throws SQLException {
+                if(ret.value == null) ret.value = new ArrayList<TUser>();
+                ret.value.add(mapToUser(rs));
+            }
+        }, sql.toString(), params.toArray());
+        return ret;
+    }
+    
     
     public ValueResult<TUser> getUserByPhone(String phone) {
         final ValueResult<TUser> ret = new ValueResult<TUser>(Err.FAIL);
