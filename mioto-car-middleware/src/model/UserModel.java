@@ -13,6 +13,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import thrift.TListUserResult;
 import thrift.TLoginInfo;
+import thrift.TLoginResult;
 import thrift.TSessionResult;
 import thrift.TUpdateUserResult;
 import thrift.TUser;
@@ -147,6 +148,9 @@ public class UserModel {
     }
 
     public TUpdateUserResult updateUser(TUser user) {
+        if(_dao.isEmailExisted(user.getEmail()))
+            return new TUpdateUserResult(Err.CONFLICT, "Email này đã tồn tại trong hệ thống");
+        
         ValueResult<Integer> ret = _dao.updateUser(user);
         TUpdateUserResult result = new TUpdateUserResult();
         if (Err.isNetworkError(ret.error)) {
