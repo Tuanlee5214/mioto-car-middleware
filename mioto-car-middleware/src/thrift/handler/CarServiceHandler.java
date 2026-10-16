@@ -33,6 +33,7 @@ import thrift.TCarDetailResult;
 import thrift.TCarFeature;
 import thrift.TCarFilterRequest;
 import thrift.TCarImage;
+import thrift.TCarImagePublicIdResult;
 import thrift.TCarImageResult;
 import thrift.TCarResult;
 import thrift.TCarUnavails;
