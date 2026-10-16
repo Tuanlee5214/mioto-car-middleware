@@ -15,6 +15,8 @@ public class TUser implements org.apache.thrift.TBase<TUser, TUser._Fields>, jav
   private static final org.apache.thrift.protocol.TField PHONE_FIELD_DESC = new org.apache.thrift.protocol.TField("phone", org.apache.thrift.protocol.TType.STRING, (short)2);
   private static final org.apache.thrift.protocol.TField EMAIL_FIELD_DESC = new org.apache.thrift.protocol.TField("email", org.apache.thrift.protocol.TType.STRING, (short)3);
   private static final org.apache.thrift.protocol.TField DISPLAY_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("displayName", org.apache.thrift.protocol.TType.STRING, (short)4);
+  private static final org.apache.thrift.protocol.TField PUBLIC_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("publicId", org.apache.thrift.protocol.TType.STRING, (short)5);
+  private static final org.apache.thrift.protocol.TField IMAGE_URL_FIELD_DESC = new org.apache.thrift.protocol.TField("imageUrl", org.apache.thrift.protocol.TType.STRING, (short)6);
   private static final org.apache.thrift.protocol.TField STATUS_FIELD_DESC = new org.apache.thrift.protocol.TField("status", org.apache.thrift.protocol.TType.BYTE, (short)20);
   private static final org.apache.thrift.protocol.TField TIME_CREATED_FIELD_DESC = new org.apache.thrift.protocol.TField("timeCreated", org.apache.thrift.protocol.TType.I64, (short)21);
   private static final org.apache.thrift.protocol.TField TIME_UPDATED_FIELD_DESC = new org.apache.thrift.protocol.TField("timeUpdated", org.apache.thrift.protocol.TType.I64, (short)22);
@@ -26,6 +28,8 @@ public class TUser implements org.apache.thrift.TBase<TUser, TUser._Fields>, jav
   public @org.apache.thrift.annotation.Nullable java.lang.String phone; // optional
   public @org.apache.thrift.annotation.Nullable java.lang.String email; // optional
   public @org.apache.thrift.annotation.Nullable java.lang.String displayName; // optional
+  public @org.apache.thrift.annotation.Nullable java.lang.String publicId; // optional
+  public @org.apache.thrift.annotation.Nullable java.lang.String imageUrl; // optional
   public byte status; // optional
   public long timeCreated; // optional
   public long timeUpdated; // optional
@@ -36,6 +40,8 @@ public class TUser implements org.apache.thrift.TBase<TUser, TUser._Fields>, jav
     PHONE((short)2, "phone"),
     EMAIL((short)3, "email"),
     DISPLAY_NAME((short)4, "displayName"),
+    PUBLIC_ID((short)5, "publicId"),
+    IMAGE_URL((short)6, "imageUrl"),
     STATUS((short)20, "status"),
     TIME_CREATED((short)21, "timeCreated"),
     TIME_UPDATED((short)22, "timeUpdated");
@@ -62,6 +68,10 @@ public class TUser implements org.apache.thrift.TBase<TUser, TUser._Fields>, jav
           return EMAIL;
         case 4: // DISPLAY_NAME
           return DISPLAY_NAME;
+        case 5: // PUBLIC_ID
+          return PUBLIC_ID;
+        case 6: // IMAGE_URL
+          return IMAGE_URL;
         case 20: // STATUS
           return STATUS;
         case 21: // TIME_CREATED
@@ -114,7 +124,7 @@ public class TUser implements org.apache.thrift.TBase<TUser, TUser._Fields>, jav
   private static final int __TIMECREATED_ISSET_ID = 2;
   private static final int __TIMEUPDATED_ISSET_ID = 3;
   private byte __isset_bitfield = 0;
-  private static final _Fields optionals[] = {_Fields.USER_ID,_Fields.PHONE,_Fields.EMAIL,_Fields.DISPLAY_NAME,_Fields.STATUS,_Fields.TIME_CREATED,_Fields.TIME_UPDATED};
+  private static final _Fields optionals[] = {_Fields.USER_ID,_Fields.PHONE,_Fields.EMAIL,_Fields.DISPLAY_NAME,_Fields.PUBLIC_ID,_Fields.IMAGE_URL,_Fields.STATUS,_Fields.TIME_CREATED,_Fields.TIME_UPDATED};
   public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -125,6 +135,10 @@ public class TUser implements org.apache.thrift.TBase<TUser, TUser._Fields>, jav
     tmpMap.put(_Fields.EMAIL, new org.apache.thrift.meta_data.FieldMetaData("email", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.DISPLAY_NAME, new org.apache.thrift.meta_data.FieldMetaData("displayName", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.PUBLIC_ID, new org.apache.thrift.meta_data.FieldMetaData("publicId", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.IMAGE_URL, new org.apache.thrift.meta_data.FieldMetaData("imageUrl", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.STATUS, new org.apache.thrift.meta_data.FieldMetaData("status", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BYTE)));
@@ -154,6 +168,12 @@ public class TUser implements org.apache.thrift.TBase<TUser, TUser._Fields>, jav
     if (other.isSetDisplayName()) {
       this.displayName = other.displayName;
     }
+    if (other.isSetPublicId()) {
+      this.publicId = other.publicId;
+    }
+    if (other.isSetImageUrl()) {
+      this.imageUrl = other.imageUrl;
+    }
     this.status = other.status;
     this.timeCreated = other.timeCreated;
     this.timeUpdated = other.timeUpdated;
@@ -170,6 +190,8 @@ public class TUser implements org.apache.thrift.TBase<TUser, TUser._Fields>, jav
     this.phone = null;
     this.email = null;
     this.displayName = null;
+    this.publicId = null;
+    this.imageUrl = null;
     setStatusIsSet(false);
     this.status = 0;
     setTimeCreatedIsSet(false);
@@ -276,6 +298,56 @@ public class TUser implements org.apache.thrift.TBase<TUser, TUser._Fields>, jav
     }
   }
 
+  @org.apache.thrift.annotation.Nullable
+  public java.lang.String getPublicId() {
+    return this.publicId;
+  }
+
+  public TUser setPublicId(@org.apache.thrift.annotation.Nullable java.lang.String publicId) {
+    this.publicId = publicId;
+    return this;
+  }
+
+  public void unsetPublicId() {
+    this.publicId = null;
+  }
+
+  /** Returns true if field publicId is set (has been assigned a value) and false otherwise */
+  public boolean isSetPublicId() {
+    return this.publicId != null;
+  }
+
+  public void setPublicIdIsSet(boolean value) {
+    if (!value) {
+      this.publicId = null;
+    }
+  }
+
+  @org.apache.thrift.annotation.Nullable
+  public java.lang.String getImageUrl() {
+    return this.imageUrl;
+  }
+
+  public TUser setImageUrl(@org.apache.thrift.annotation.Nullable java.lang.String imageUrl) {
+    this.imageUrl = imageUrl;
+    return this;
+  }
+
+  public void unsetImageUrl() {
+    this.imageUrl = null;
+  }
+
+  /** Returns true if field imageUrl is set (has been assigned a value) and false otherwise */
+  public boolean isSetImageUrl() {
+    return this.imageUrl != null;
+  }
+
+  public void setImageUrlIsSet(boolean value) {
+    if (!value) {
+      this.imageUrl = null;
+    }
+  }
+
   public byte getStatus() {
     return this.status;
   }
@@ -379,6 +451,22 @@ public class TUser implements org.apache.thrift.TBase<TUser, TUser._Fields>, jav
       }
       break;
 
+    case PUBLIC_ID:
+      if (value == null) {
+        unsetPublicId();
+      } else {
+        setPublicId((java.lang.String)value);
+      }
+      break;
+
+    case IMAGE_URL:
+      if (value == null) {
+        unsetImageUrl();
+      } else {
+        setImageUrl((java.lang.String)value);
+      }
+      break;
+
     case STATUS:
       if (value == null) {
         unsetStatus();
@@ -421,6 +509,12 @@ public class TUser implements org.apache.thrift.TBase<TUser, TUser._Fields>, jav
     case DISPLAY_NAME:
       return getDisplayName();
 
+    case PUBLIC_ID:
+      return getPublicId();
+
+    case IMAGE_URL:
+      return getImageUrl();
+
     case STATUS:
       return getStatus();
 
@@ -449,6 +543,10 @@ public class TUser implements org.apache.thrift.TBase<TUser, TUser._Fields>, jav
       return isSetEmail();
     case DISPLAY_NAME:
       return isSetDisplayName();
+    case PUBLIC_ID:
+      return isSetPublicId();
+    case IMAGE_URL:
+      return isSetImageUrl();
     case STATUS:
       return isSetStatus();
     case TIME_CREATED:
@@ -510,6 +608,24 @@ public class TUser implements org.apache.thrift.TBase<TUser, TUser._Fields>, jav
         return false;
     }
 
+    boolean this_present_publicId = true && this.isSetPublicId();
+    boolean that_present_publicId = true && that.isSetPublicId();
+    if (this_present_publicId || that_present_publicId) {
+      if (!(this_present_publicId && that_present_publicId))
+        return false;
+      if (!this.publicId.equals(that.publicId))
+        return false;
+    }
+
+    boolean this_present_imageUrl = true && this.isSetImageUrl();
+    boolean that_present_imageUrl = true && that.isSetImageUrl();
+    if (this_present_imageUrl || that_present_imageUrl) {
+      if (!(this_present_imageUrl && that_present_imageUrl))
+        return false;
+      if (!this.imageUrl.equals(that.imageUrl))
+        return false;
+    }
+
     boolean this_present_status = true && this.isSetStatus();
     boolean that_present_status = true && that.isSetStatus();
     if (this_present_status || that_present_status) {
@@ -559,6 +675,14 @@ public class TUser implements org.apache.thrift.TBase<TUser, TUser._Fields>, jav
     hashCode = hashCode * 8191 + ((isSetDisplayName()) ? 131071 : 524287);
     if (isSetDisplayName())
       hashCode = hashCode * 8191 + displayName.hashCode();
+
+    hashCode = hashCode * 8191 + ((isSetPublicId()) ? 131071 : 524287);
+    if (isSetPublicId())
+      hashCode = hashCode * 8191 + publicId.hashCode();
+
+    hashCode = hashCode * 8191 + ((isSetImageUrl()) ? 131071 : 524287);
+    if (isSetImageUrl())
+      hashCode = hashCode * 8191 + imageUrl.hashCode();
 
     hashCode = hashCode * 8191 + ((isSetStatus()) ? 131071 : 524287);
     if (isSetStatus())
@@ -619,6 +743,26 @@ public class TUser implements org.apache.thrift.TBase<TUser, TUser._Fields>, jav
     }
     if (isSetDisplayName()) {
       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.displayName, other.displayName);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = java.lang.Boolean.valueOf(isSetPublicId()).compareTo(other.isSetPublicId());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetPublicId()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.publicId, other.publicId);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = java.lang.Boolean.valueOf(isSetImageUrl()).compareTo(other.isSetImageUrl());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetImageUrl()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.imageUrl, other.imageUrl);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -706,6 +850,26 @@ public class TUser implements org.apache.thrift.TBase<TUser, TUser._Fields>, jav
         sb.append("null");
       } else {
         sb.append(this.displayName);
+      }
+      first = false;
+    }
+    if (isSetPublicId()) {
+      if (!first) sb.append(", ");
+      sb.append("publicId:");
+      if (this.publicId == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.publicId);
+      }
+      first = false;
+    }
+    if (isSetImageUrl()) {
+      if (!first) sb.append(", ");
+      sb.append("imageUrl:");
+      if (this.imageUrl == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.imageUrl);
       }
       first = false;
     }
@@ -804,6 +968,22 @@ public class TUser implements org.apache.thrift.TBase<TUser, TUser._Fields>, jav
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 5: // PUBLIC_ID
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.publicId = iprot.readString();
+              struct.setPublicIdIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 6: // IMAGE_URL
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.imageUrl = iprot.readString();
+              struct.setImageUrlIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           case 20: // STATUS
             if (schemeField.type == org.apache.thrift.protocol.TType.BYTE) {
               struct.status = iprot.readByte();
@@ -869,6 +1049,20 @@ public class TUser implements org.apache.thrift.TBase<TUser, TUser._Fields>, jav
           oprot.writeFieldEnd();
         }
       }
+      if (struct.publicId != null) {
+        if (struct.isSetPublicId()) {
+          oprot.writeFieldBegin(PUBLIC_ID_FIELD_DESC);
+          oprot.writeString(struct.publicId);
+          oprot.writeFieldEnd();
+        }
+      }
+      if (struct.imageUrl != null) {
+        if (struct.isSetImageUrl()) {
+          oprot.writeFieldBegin(IMAGE_URL_FIELD_DESC);
+          oprot.writeString(struct.imageUrl);
+          oprot.writeFieldEnd();
+        }
+      }
       if (struct.isSetStatus()) {
         oprot.writeFieldBegin(STATUS_FIELD_DESC);
         oprot.writeByte(struct.status);
@@ -914,16 +1108,22 @@ public class TUser implements org.apache.thrift.TBase<TUser, TUser._Fields>, jav
       if (struct.isSetDisplayName()) {
         optionals.set(3);
       }
-      if (struct.isSetStatus()) {
+      if (struct.isSetPublicId()) {
         optionals.set(4);
       }
-      if (struct.isSetTimeCreated()) {
+      if (struct.isSetImageUrl()) {
         optionals.set(5);
       }
-      if (struct.isSetTimeUpdated()) {
+      if (struct.isSetStatus()) {
         optionals.set(6);
       }
-      oprot.writeBitSet(optionals, 7);
+      if (struct.isSetTimeCreated()) {
+        optionals.set(7);
+      }
+      if (struct.isSetTimeUpdated()) {
+        optionals.set(8);
+      }
+      oprot.writeBitSet(optionals, 9);
       if (struct.isSetUserId()) {
         oprot.writeI32(struct.userId);
       }
@@ -935,6 +1135,12 @@ public class TUser implements org.apache.thrift.TBase<TUser, TUser._Fields>, jav
       }
       if (struct.isSetDisplayName()) {
         oprot.writeString(struct.displayName);
+      }
+      if (struct.isSetPublicId()) {
+        oprot.writeString(struct.publicId);
+      }
+      if (struct.isSetImageUrl()) {
+        oprot.writeString(struct.imageUrl);
       }
       if (struct.isSetStatus()) {
         oprot.writeByte(struct.status);
@@ -950,7 +1156,7 @@ public class TUser implements org.apache.thrift.TBase<TUser, TUser._Fields>, jav
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TUser struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(7);
+      java.util.BitSet incoming = iprot.readBitSet(9);
       if (incoming.get(0)) {
         struct.userId = iprot.readI32();
         struct.setUserIdIsSet(true);
@@ -968,14 +1174,22 @@ public class TUser implements org.apache.thrift.TBase<TUser, TUser._Fields>, jav
         struct.setDisplayNameIsSet(true);
       }
       if (incoming.get(4)) {
+        struct.publicId = iprot.readString();
+        struct.setPublicIdIsSet(true);
+      }
+      if (incoming.get(5)) {
+        struct.imageUrl = iprot.readString();
+        struct.setImageUrlIsSet(true);
+      }
+      if (incoming.get(6)) {
         struct.status = iprot.readByte();
         struct.setStatusIsSet(true);
       }
-      if (incoming.get(5)) {
+      if (incoming.get(7)) {
         struct.timeCreated = iprot.readI64();
         struct.setTimeCreatedIsSet(true);
       }
-      if (incoming.get(6)) {
+      if (incoming.get(8)) {
         struct.timeUpdated = iprot.readI64();
         struct.setTimeUpdatedIsSet(true);
       }

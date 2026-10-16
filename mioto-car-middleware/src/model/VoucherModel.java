@@ -47,13 +47,13 @@ public class VoucherModel {
         long ret = _dao.updatedVoucher(voucher);
         if(ret == 0) return new TVoucherResult(Err.NOT_FOUND, "");
         if(Err.isFail(ret)) return new TVoucherResult((int)ret, "");
+        _cache.remove((int)voucher.getVoucherId());
         TVoucherResult returnValue = this.getVoucherById(voucher.getVoucherId());
         if(Err.isFail(returnValue.getError())) return returnValue;
         
         result.setError(Err.SUCCESS);
         result.setMessage("");
         result.setValue(returnValue.getValue());
-        _cache.remove((int)voucher.getVoucherId());
         return result;
     }
     

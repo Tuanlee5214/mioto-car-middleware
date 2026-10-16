@@ -49,6 +49,7 @@ public class DistrictModel {
         long ret = _dao.updateDistrict(district);
         if(ret == 0) return new TDistrictResult(Err.NOT_FOUND, "");
         if(Err.isFail(ret)) return new TDistrictResult((int)ret, "");
+        _cache.remove((int)district.getDistrictId());
         TDistrictResult returnValue = this.getDistrictById(district.getDistrictId());
         if(Err.isFail(returnValue.getError())) return returnValue;
         
@@ -56,7 +57,6 @@ public class DistrictModel {
         result.setError(Err.SUCCESS);
         result.setMessage("");
         result.setValue(returnValue.getValue());
-        _cache.remove((int)district.getDistrictId());
         return result;
     }
     

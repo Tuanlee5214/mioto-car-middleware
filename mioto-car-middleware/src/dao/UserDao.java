@@ -24,7 +24,7 @@ public class UserDao {
 
     private static final String TABLE = "Users";
     private static final String KEY = "userId";
-    private static final String COLS = "userId,phone,email,displayName,status,timeCreated,timeUpdated";
+    private static final String COLS = "userId,phone,email,displayName,publicId,status,timeCreated,timeUpdated";
 
     private final MysqlClient _cli;
 
@@ -45,8 +45,8 @@ public class UserDao {
     
     public boolean isEmailExisted(String email, long userId)
     {
-        String sql = "SELECT 1 FROM " + TABLE + " WHERE email=? AND userId!= LIMIT 1";
-        int result = _cli.executeQuery(null, sql, email);
+        String sql = "SELECT 1 FROM " + TABLE + " WHERE email=? AND userId!=? LIMIT 1";
+        int result = _cli.executeQuery(null, sql, email, userId);
         return Err.isSuccess(result);
     }
 
@@ -114,9 +114,9 @@ public class UserDao {
     public ValueResult<Integer> updateUser(TUser user) {
         ValueResult<Integer> ret = new ValueResult<Integer>(Err.FAIL);
         String sql = "UPDATE " + TABLE
-                + " SET email=?,displayName=?,timeUpdated=?"
+                + " SET email=?,displayName=?,timeUpdated=?,publicId=?"
                 + " WHERE " + KEY + "=?";
-        ret.error = _cli.executeUpdate(sql, user.getEmail(), user.getDisplayName(), System.currentTimeMillis(), user.getUserId());
+        ret.error = _cli.executeUpdate(sql, user.getEmail(), user.getDisplayName(), System.currentTimeMillis(), user.getPublicId(), user.getUserId());
         return ret;
     }
 
@@ -126,9 +126,11 @@ public class UserDao {
         user.setPhone(rs.getString("phone"));
         user.setEmail(rs.getString("email"));
         user.setDisplayName(rs.getString("displayName"));
+        user.setPublicId(rs.getString("publicId"));
         user.setStatus(rs.getByte("status"));
         user.setTimeCreated(rs.getLong("timeCreated"));
         user.setTimeUpdated(rs.getLong("timeUpdated"));
         return user;
     }
 }
+    

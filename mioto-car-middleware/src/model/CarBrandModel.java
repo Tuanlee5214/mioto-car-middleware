@@ -49,13 +49,13 @@ public class CarBrandModel {
         TCarBrandResult result = new TCarBrandResult();
         long ret = _dao.updateCarBrand(carBrand);
         if(Err.isFail(ret)) return new TCarBrandResult((int) ret, "");
+        _cache.remove(carBrand.getCarBrandId());
         TCarBrandResult returnValue = this.getCarBrandById(carBrand.getCarBrandId());
         if(Err.isFail(returnValue.getError())) return returnValue;
         
         result.setError(Err.SUCCESS);
         result.setMessage("");
         result.setValue(returnValue.getValue());
-        _cache.remove(carBrand.getCarBrandId());
         return result;
     }
     

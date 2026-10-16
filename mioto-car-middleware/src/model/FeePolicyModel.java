@@ -48,6 +48,7 @@ public class FeePolicyModel {
         long ret = _dao.updateFeePolicy(feePolicy);
         if(ret == 0) return new TFeePolicyResult(Err.NOT_FOUND, "");
         if(Err.isFail(ret)) return new TFeePolicyResult((int)ret, "");
+        _cache.remove((int) feePolicy.getFeePolicyId());
         TFeePolicyResult returnValue = this.getFeePolicyById(feePolicy.getFeePolicyId());
         if(Err.isFail(returnValue.getError())) return returnValue;
         
@@ -55,7 +56,6 @@ public class FeePolicyModel {
         result.setMessage("");
         result.setValue(returnValue.getValue());
         
-        _cache.remove((int) feePolicy.getFeePolicyId());
         return result;
     }
     
