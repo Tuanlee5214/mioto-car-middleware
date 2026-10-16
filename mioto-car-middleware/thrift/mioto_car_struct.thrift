@@ -260,6 +260,7 @@ struct TListDistrictResult {
 struct TCarBrand {
     1 :optional i32    carBrandId,
     2 :optional string nameBrand,
+    3 :optional string iconKey,
     20:optional i64    createdAt,
     21:optional i64    updatedAt,
 }
