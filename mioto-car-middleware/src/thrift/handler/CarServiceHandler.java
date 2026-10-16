@@ -588,6 +588,18 @@ public class CarServiceHandler implements MiotoCarService.Iface {
             return new TCarImageResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
+    
+    @Override
+    public long countImagesOfCar(int carId) throws TException {
+        try {
+            return CarImageModel.Instance.countImagesOfCar(carId);
+        } 
+        catch (Exception e) {
+            _Logger.error("system error");
+            return Err.FAIL;
+        }
+        
+    }
     // ===================== CarFeature =====================
     @Override
     public TListCarFeatureViewResult getListCarFeatures(OpHandle handle, int carId) throws TException {

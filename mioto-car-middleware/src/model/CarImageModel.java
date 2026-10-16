@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 import org.apache.log4j.Logger;
 import thrift.TCarImage;
+import thrift.TCarImagePublicIdResult;
 import thrift.TListCarImageResult;
 
 /**
@@ -45,6 +46,24 @@ public class CarImageModel {
         List<TCarImage> value = ret.value != null ? ret.value : new ArrayList<TCarImage>();
         _cache.put((int) carId, copy(value));
         return success(copy(value));
+    }
+    
+    public TCarImagePublicIdResult multigetPublicId(int carId, List<Long> ids)
+    {
+        if(ids == null || ids.isEmpty()) return new TCarImagePublicIdResult(Err.BAD_REQUEST, "");
+        ValueResult<List<String>> ret = _dao.getPublicIdsByIds(carId, ids);
+        if(Err.isFail(ret.error))
+        {
+            if(Err.isNetworkError(ret.error)) return new TCarImagePublicIdResult(Err.BAD_CONNECTION, "");
+            return new TCarImagePublicIdResult(Err.FAIL, "");
+        }
+        
+        if(ret.value.isEmpty()) return new TCarImagePublicIdResult(Err.NOT_FOUND, "");
+        TCarImagePublicIdResult result = new TCarImagePublicIdResult();
+        result.setError(Err.SUCCESS);
+        result.setMessage("");
+        result.setPublicIds(new ArrayList<String>(ret.value));
+        return result;
     }
     
     public TListCarImageResult createCarImages(List<TCarImage> images, int userId) {
@@ -103,6 +122,13 @@ public class CarImageModel {
         }
         _cache.remove((int) carId);
         return ret;
+    }
+    
+    public long countImagesOfCar(long carId)
+    {
+        long result = _dao.countImagesOfCar(carId);
+        if(Err.isFail(result)) return result;
+        return result;
     }
  
     private TListCarImageResult success(List<TCarImage> value) {

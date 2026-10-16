@@ -146,6 +146,12 @@ struct TCarImageResult {
     3:optional TCarImage value,
 }
 
+struct TCarImagePublicIdResult {
+    1:required i32     error,
+    2:required string  message,
+    3:optional list<string> publicIds,
+}
+
 struct TListCarImageResult {
     1:required i32            error,
     2:required string         message,

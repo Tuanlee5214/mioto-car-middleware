@@ -366,4 +366,13 @@ service MiotoCarService {
         2: required i32 userId, 
         3: required list<i32> roleIds
     );    
+
+    i64 countImagesOfCar(
+        1: required i32               carId
+    );
+
+    mioto_car_struct.TCarImagePublicIdResult multigetPublicId(
+        1:required i32                carId,
+        2:required list<i64>          ids,
+    );
 }
