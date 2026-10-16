@@ -39,7 +39,7 @@ public class AuthModel {
     {            
         if(UserModel.Instance.isPhoneExisted(request.getPhone()))
             return new TLoginResult(Err.CONFLICT, "Số điện thoại đã tồn tại trong hệ thống");
-        if(UserModel.Instance.isEmailExisted(request.getEmail()))
+        if(UserModel.Instance.isEmailExisted(request.getEmail(), -1L))
             return new TLoginResult(Err.CONFLICT, "Email này đã tồn tại trong hệ thống");
         
         //Create user

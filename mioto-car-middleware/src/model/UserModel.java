@@ -38,8 +38,8 @@ public class UserModel {
         return _dao.isPhoneExisted(phone);
     }
     
-    public boolean isEmailExisted(String email) {
-        return _dao.isEmailExisted(email);
+    public boolean isEmailExisted(String email, long userId) {
+        return _dao.isEmailExisted(email, userId);
     }
 
     public long createUser(TUser user) {
@@ -148,7 +148,7 @@ public class UserModel {
     }
 
     public TUpdateUserResult updateUser(TUser user) {
-        if(_dao.isEmailExisted(user.getEmail()))
+        if(_dao.isEmailExisted(user.getEmail(), user.getUserId()))
             return new TUpdateUserResult(Err.CONFLICT, "Email này đã tồn tại trong hệ thống");
         
         ValueResult<Integer> ret = _dao.updateUser(user);

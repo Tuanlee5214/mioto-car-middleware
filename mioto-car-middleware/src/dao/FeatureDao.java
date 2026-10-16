@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -24,7 +24,7 @@ public class FeatureDao {
     
     private static final String TABLE   = "Features";
     private static final String KEY     = "id";
-    private static final String COLS    = "id,nameFeature,createdAt,updatedAt";
+    private static final String COLS    = "id,nameFeature,iconKey,createdAt,updatedAt";
     private final MysqlClient _cli;
     
     public FeatureDao(String name)
@@ -40,17 +40,17 @@ public class FeatureDao {
     public long createFeature(TFeature feature)
     {
         String sql = "INSERT INTO " + TABLE 
-                + " (nameFeature,createdAt,updatedAt)"
+                + " (nameFeature,iconKey,createdAt,updatedAt)"
                 + " VALUES (?,?,?)";
-        return _cli.executeInsertAndReturnKey(sql, feature.getNameFeature(), feature.getCreatedAt(), feature.getUpdatedAt());
+        return _cli.executeInsertAndReturnKey(sql, feature.getNameFeature(), feature.getIconKey(), feature.getCreatedAt(), feature.getUpdatedAt());
     }
     
     public long updatedFeature(TFeature feature)
     {
         String sql = "UPDATE " + TABLE 
-                + " SET nameFeature=?,updatedAt=?"
+                + " SET nameFeature=?,iconKey=?,updatedAt=?"
                 + " WHERE " + KEY + "=?";
-        return _cli.executeUpdate(sql, feature.getNameFeature(), feature.getUpdatedAt(), feature.getFeatureId());
+        return _cli.executeUpdate(sql, feature.getNameFeature(), feature.getIconKey(), feature.getUpdatedAt(), feature.getFeatureId());
     }
     
     public long deleteFeature(long featureId)
@@ -100,6 +100,7 @@ public class FeatureDao {
     {
         TFeature feature = new TFeature();
         feature.setFeatureId(rs.getInt("id"));
+        feature.setIconKey(rs.getString("iconKey"));
         feature.setNameFeature(rs.getString("nameFeature"));
         feature.setCreatedAt(rs.getLong("createdAt"));
         feature.setUpdatedAt(rs.getLong("updatedAt"));

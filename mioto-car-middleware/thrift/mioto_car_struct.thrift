@@ -282,6 +282,7 @@ struct TListCarBrandResult {
 struct TFeature {
     1 :optional i32    featureId,
     2 :optional string nameFeature,
+    3 :optional string iconKey,
     20:optional i64    createdAt,
     21:optional i64    updatedAt,
 }

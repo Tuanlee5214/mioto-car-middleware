@@ -43,9 +43,9 @@ public class UserDao {
         return Err.isSuccess(result);
     }
     
-    public boolean isEmailExisted(String email)
+    public boolean isEmailExisted(String email, long userId)
     {
-        String sql = "SELECT 1 FROM " + TABLE + " WHERE email=? LIMIT 1";
+        String sql = "SELECT 1 FROM " + TABLE + " WHERE email=? AND userId!= LIMIT 1";
         int result = _cli.executeQuery(null, sql, email);
         return Err.isSuccess(result);
     }
