@@ -24,7 +24,7 @@ public class CarBrandDao {
     private static final Logger _Logger = Logger.getLogger(CarBrandDao.class);
     private static final String TABLE   = "CarBrands";
     private static final String KEY     = "id";
-    private static final String COLS    = "id,nameBrand,createdAt,updatedAt";
+    private static final String COLS    = "id,nameBrand,iconKey,createdAt,updatedAt";
     
     private final MysqlClient _cli;
     public CarBrandDao(String name)
@@ -40,17 +40,17 @@ public class CarBrandDao {
     public long createCarBrand(TCarBrand carBrand)
     {
         String sql = "INSERT INTO " + TABLE 
-                + " (nameBrand,createdAt,updatedAt)"
-                + " VALUES (?,?,?)";
-        return _cli.executeInsertAndReturnKey(sql, carBrand.getNameBrand(), carBrand.getCreatedAt(), carBrand.getUpdatedAt());
+                + " (nameBrand,iconKey,createdAt,updatedAt)"
+                + " VALUES (?,?,?,?)";
+        return _cli.executeInsertAndReturnKey(sql, carBrand.getNameBrand(), carBrand.getIconKey(), carBrand.getCreatedAt(), carBrand.getUpdatedAt());
     }
     
     public long updateCarBrand(TCarBrand carBrand)
     {
         String sql = "UPDATE " + TABLE
-                + " SET nameBrand=?,updatedAt=?"
+                + " SET nameBrand=?,iconKey=?,updatedAt=?"
                 + " WHERE " + KEY + "=?";
-        return _cli.executeUpdate(sql, carBrand.getNameBrand(), carBrand.getUpdatedAt(), carBrand.getCarBrandId());
+        return _cli.executeUpdate(sql, carBrand.getNameBrand(), carBrand.getIconKey(), carBrand.getUpdatedAt(), carBrand.getCarBrandId());
     }
     
     public long deleteCarBrand(long carBrandId)
@@ -101,6 +101,7 @@ public class CarBrandDao {
         TCarBrand carBrand = new TCarBrand();
         carBrand.setCarBrandId(rs.getInt("id"));
         carBrand.setNameBrand(rs.getString("nameBrand"));
+        carBrand.setIconKey(rs.getString("iconKey"));
         carBrand.setCreatedAt(rs.getLong("createdAt"));
         carBrand.setUpdatedAt(rs.getLong("updatedAt"));
         return carBrand;

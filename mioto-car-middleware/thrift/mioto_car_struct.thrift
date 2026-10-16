@@ -40,6 +40,8 @@ struct TUser {
     2:optional string  phone,
     3:optional string  email,
     4:optional string  displayName,
+    5:optional string  publicId,
+    6:optional string  imageUrl,
     20:optional byte   status,
     21:optional i64    timeCreated,
     22:optional i64    timeUpdated,
@@ -130,6 +132,7 @@ struct TCarFeatureView {
     2:required i32       carId,
     3:required i32       featureId,
     4:required string    featureName,
+    5:required string    iconKey,
 }
 
 struct TCarImage {
@@ -259,6 +262,7 @@ struct TListDistrictResult {
 struct TCarBrand {
     1 :optional i32    carBrandId,
     2 :optional string nameBrand,
+    3 :optional string iconKey,
     20:optional i64    createdAt,
     21:optional i64    updatedAt,
 }
@@ -282,6 +286,7 @@ struct TListCarBrandResult {
 struct TFeature {
     1 :optional i32    featureId,
     2 :optional string nameFeature,
+    3 :optional string iconKey,
     20:optional i64    createdAt,
     21:optional i64    updatedAt,
 }

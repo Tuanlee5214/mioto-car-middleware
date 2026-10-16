@@ -13,6 +13,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import thrift.TListUserResult;
 import thrift.TLoginInfo;
+import thrift.TLoginResult;
 import thrift.TSessionResult;
 import thrift.TUpdateUserResult;
 import thrift.TUser;
@@ -37,8 +38,8 @@ public class UserModel {
         return _dao.isPhoneExisted(phone);
     }
     
-    public boolean isEmailExisted(String email) {
-        return _dao.isEmailExisted(email);
+    public boolean isEmailExisted(String email, long userId) {
+        return _dao.isEmailExisted(email, userId);
     }
 
     public long createUser(TUser user) {
@@ -147,16 +148,21 @@ public class UserModel {
     }
 
     public TUpdateUserResult updateUser(TUser user) {
+        if(_dao.isEmailExisted(user.getEmail(), user.getUserId()))
+            return new TUpdateUserResult(Err.CONFLICT, "Email này đã tồn tại trong hệ thống");
+        
         ValueResult<Integer> ret = _dao.updateUser(user);
         TUpdateUserResult result = new TUpdateUserResult();
         if (Err.isNetworkError(ret.error)) {
             return new TUpdateUserResult((int) ret.error, "Lỗi kết nối mạng");
         }
+        _cacheId.remove(user.getUserId());
+        TUserResult returnValue = this.getUser(user.getUserId());
+        if(Err.isFail(returnValue.getError())) return new TUpdateUserResult(returnValue.getError(), returnValue.message);
         
         result.setError((int) ret.error);
         result.setMessage("Cập nhật thành công");
-        result.setValue(new TUser(user));
-        _cacheId.remove(user.getUserId());
+        result.setValue(new TUser(returnValue.getValue()));
         return result;
     }
 

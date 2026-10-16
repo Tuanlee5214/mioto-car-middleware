@@ -48,13 +48,13 @@ public class FeedBackModel {
         long ret = _dao.updateFeedBack(feedback);
         if(ret == 0) return new TFeedBackResult(Err.NOT_FOUND, "");
         if(Err.isFail(ret)) return new TFeedBackResult((int)ret, "");
+        _cache.remove((int)feedback.getFeedbackId());
         TFeedBackResult returnValue = this.getFeedBackById(feedback.getFeedbackId());
         if(Err.isFail(returnValue.getError())) return returnValue;
         
         result.setError(Err.SUCCESS);
         result.setMessage("");
         result.setValue(returnValue.getValue());
-        _cache.remove((int)feedback.getFeedbackId());
         return result;
     }
     
