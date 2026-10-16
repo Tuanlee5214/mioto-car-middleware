@@ -33,6 +33,7 @@ import thrift.TCarDetailResult;
 import thrift.TCarFeature;
 import thrift.TCarFilterRequest;
 import thrift.TCarImage;
+import thrift.TCarImagePublicIdResult;
 import thrift.TCarImageResult;
 import thrift.TCarResult;
 import thrift.TCarUnavails;
@@ -56,6 +57,7 @@ import thrift.TListFeePolicyResult;
 import thrift.TListFeedBackResult;
 import thrift.TListProvinceResult;
 import thrift.TListRoleResult;
+import thrift.TListUserResult;
 import thrift.TListVoucherResult;
 import thrift.TLoginInfo;
 import thrift.TLoginRequest;
@@ -81,7 +83,7 @@ import thrift.TVoucherResult;
 public class CarServiceHandler implements MiotoCarService.Iface {
 
     private static final Logger _Logger = Logger.getLogger(CarServiceHandler.class);
-
+    // ===================== Auth =====================
     @Override
     public TLoginResult signup(OpHandle handle, TSignUpRequest request, TLoginInfo loginInfo) throws TException {
         try {
@@ -122,7 +124,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
             return new TSessionResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
-
+    // ===================== User =====================
     @Override
     public TUserResult getUser(OpHandle handle, int userId) throws TException {
         try {
@@ -152,7 +154,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
             return new TUserResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
-
+    // ===================== FeePolicy =====================
     @Override
     public TFeePolicyResult createFeePolicy(OpHandle handle, TFeePolicy feePolicy) throws TException {
         try {
@@ -192,7 +194,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
             return new TFeePolicyResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
-
+    // ===================== Province =====================
     @Override
     public TProvinceResult createProvince(OpHandle handle, TProvince province) throws TException {
         try {
@@ -232,7 +234,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
             return new TProvinceResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
-
+    // ===================== District =====================
     @Override
     public TDistrictResult createDistrict(OpHandle handle, TDistrict district) throws TException {
         try {
@@ -267,7 +269,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
             return new TDistrictResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
-
+    // ===================== CarBrand =====================
     @Override
     public TCarBrandResult createCarBrand(OpHandle handle, TCarBrand carBrand) throws TException {
         try {
@@ -307,7 +309,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
             return new TCarBrandResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
-
+    // ===================== Feature =====================
     @Override
     public TFeatureResult createFeature(OpHandle handle, TFeature feature) throws TException {
         try {
@@ -347,7 +349,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
             return new TFeatureResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
-
+    // ===================== FeedBack =====================
     @Override
     public TFeedBackResult createFeedBack(OpHandle handle, TFeedBack feedback) throws TException {
         try {
@@ -377,7 +379,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
             return new TFeedBackResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
-
+    // ===================== Voucher =====================
     @Override
     public TVoucherResult createVoucher(OpHandle handle, TVoucher voucher) throws TException {
         try {
@@ -417,7 +419,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
             return new TVoucherResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
-
+    // ===================== FeePolicy =====================
     @Override
     public TListFeePolicyResult getFeePolicy(OpHandle handle, String name, int count, int offset) throws TException {
         try {
@@ -427,7 +429,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
             return new TListFeePolicyResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
-
+    // ===================== Get All =====================
     @Override
     public TListProvinceResult getProvince(OpHandle handle, String provinceName, int count, int offset) throws TException {
         try {
@@ -487,7 +489,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
             return new TListVoucherResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
-
+    // ===================== Car =====================
     @Override
     public TCarResult createCar(OpHandle handle, TCar car, List<TCarImage> images, List<TCarFeature> features) throws TException {
         try {
@@ -557,7 +559,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
             return new TListCarViewResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
-
+    // ===================== CarImage =====================
     @Override
     public TListCarImageResult getCarImagesByCarId(OpHandle handle, int carId) throws TException {
         try {
@@ -587,7 +589,19 @@ public class CarServiceHandler implements MiotoCarService.Iface {
             return new TCarImageResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
-
+    
+    @Override
+    public long countImagesOfCar(int carId) throws TException {
+        try {
+            return CarImageModel.Instance.countImagesOfCar(carId);
+        } 
+        catch (Exception e) {
+            _Logger.error("system error");
+            return Err.FAIL;
+        }
+        
+    }
+    // ===================== CarFeature =====================
     @Override
     public TListCarFeatureViewResult getListCarFeatures(OpHandle handle, int carId) throws TException {
         try {
@@ -617,7 +631,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
             return new TListCarFeatureViewResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
-
+    // ===================== CarUnvails =====================
     @Override
     public TListCarUnavailsResult getListCarUnavails(OpHandle handle, int carId) throws TException {
         try {
@@ -647,7 +661,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
             return new TCarUnavailsResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
-
+    // ===================== Role =====================
     @Override
     public TRoleResult createRole(OpHandle handle, TRole role) throws TException {
         try {
@@ -691,7 +705,7 @@ public class CarServiceHandler implements MiotoCarService.Iface {
             return new TListRoleResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
-
+    // ===================== UserRole   =====================
     @Override
     public TUserRoleResult getUserRole(OpHandle handle, int userId) throws TException {
         try {
@@ -721,4 +735,27 @@ public class CarServiceHandler implements MiotoCarService.Iface {
             return new TUserRoleResult(Err.FAIL, "Lỗi hệ thống");
         }
     }
+
+    @Override
+    public TCarImagePublicIdResult multigetPublicId(int carId, List<Long> ids) throws TException {
+        try {
+            return CarImageModel.Instance.multigetPublicId(carId, ids);
+        } 
+        catch (Exception e) {
+            _Logger.error("multiget publicIds from ids", e);
+            return new TCarImagePublicIdResult(Err.FAIL, "Lỗi hệ thống");
+        }
+    }
+
+    @Override
+    public TListUserResult getAllUser(OpHandle handle, int status, int count, int offset) throws TException {
+        try {
+            return UserModel.Instance.getAllUser(status, count, offset);
+        } 
+        catch (Exception e) {
+            _Logger.error("get all car fail", e);
+            return new TListUserResult(Err.FAIL, "Lỗi hệ thống");
+        }
+    }
+
 }

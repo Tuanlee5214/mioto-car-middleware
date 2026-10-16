@@ -24,7 +24,7 @@ public class VoucherDao {
     
     private static final String TABLE = "Vouchers";
     private static final String KEY   = "id";
-    private static final String COLS  = "id,title,code,imageUrl,publicId,body,discountPercent,maxDiscount,startDate,endDate,createdAt";
+    private static final String COLS  = "id,title,code,publicId,body,discountPercent,maxDiscount,startDate,endDate,createdAt";
     
     private final MysqlClient _cli;
     public VoucherDao(String name)
@@ -40,9 +40,9 @@ public class VoucherDao {
     public long createVoucher(TVoucher voucher)
     {
         String sql = "INSERT INTO " + TABLE
-                + " (title,code,imageUrl,publicId,body,discountPercent,maxDiscount,startDate,endDate,createdAt)"
-                + " VALUES (?,?,?,?,?,?,?,?,?,?)";
-        return _cli.executeInsertAndReturnKey(sql, voucher.getTitle(), voucher.getCode(), voucher.getImageUrl(), 
+                + " (title,code,publicId,body,discountPercent,maxDiscount,startDate,endDate,createdAt)"
+                + " VALUES (?,?,?,?,?,?,?,?,?)";
+        return _cli.executeInsertAndReturnKey(sql, voucher.getTitle(), voucher.getCode(), 
                 voucher.getPublicId(), voucher.getBody(), voucher.getDiscountPercent(), voucher.getMaxDiscount(), 
                 voucher.getStartDate(), voucher.getEndDate(), voucher.getCreatedAt());
     }
@@ -50,9 +50,9 @@ public class VoucherDao {
     public long updatedVoucher(TVoucher voucher)
     {
         String sql = "UPDATE " + TABLE
-                + " SET title=?,code=?,imageUrl=?,publicId=?,body=?,discountPercent=?,maxDiscount=?,startDate=?,endDate=?"
+                + " SET title=?,code=?,publicId=?,body=?,discountPercent=?,maxDiscount=?,startDate=?,endDate=?"
                 + " WHERE " + KEY + "=?";
-        return _cli.executeUpdate(sql, voucher.getTitle(), voucher.getCode(), voucher.getImageUrl(), 
+        return _cli.executeUpdate(sql, voucher.getTitle(), voucher.getCode(), 
                 voucher.getPublicId(), voucher.getBody(), voucher.getDiscountPercent(), voucher.getMaxDiscount(), 
                 voucher.getStartDate(), voucher.getEndDate(), voucher.getVoucherId());
     }
@@ -113,7 +113,6 @@ public class VoucherDao {
         voucher.setVoucherId(rs.getInt("id"));
         voucher.setTitle(rs.getString("title"));
         voucher.setCode(rs.getString("code"));
-        voucher.setImageUrl(rs.getString("imageUrl"));
         voucher.setPublicId(rs.getString("publicId"));
         voucher.setBody(rs.getString("body"));
         voucher.setDiscountPercent(rs.getInt("discountPercent"));

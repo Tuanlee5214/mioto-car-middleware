@@ -105,16 +105,7 @@ public class CarModel {
  
     // Admin khóa / mở xe
     public TCarResult updateStatusCar(TCar car) {
-        if(car.getStatus() == TCarStatus.TC_ACTIVE.getValue())
-        {
-            long resultUser = UserModel.Instance.setIsOwnCarForUserByAdmin(car.getUserId());
-            if (Err.isFail(resultUser)) {
-                if (Err.isNotFound(resultUser)) {
-                    return new TCarResult(Err.NOT_FOUND, "Không tìm thấy thông tin chủ xe");
-                }
-                return new TCarResult(Err.FAIL, "Lỗi hệ thống");
-            }
-        }    
+
         long ret = _dao.updateStatusCar(car);
         if (ret == 0) {
             return new TCarResult((int) Err.NOT_FOUND, "Không tìm thấy xe");

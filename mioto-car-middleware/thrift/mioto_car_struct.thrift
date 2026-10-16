@@ -40,8 +40,6 @@ struct TUser {
     2:optional string  phone,
     3:optional string  email,
     4:optional string  displayName,
-    5:optional string  role,
-    6:optional bool    isOwnCar,
     20:optional byte   status,
     21:optional i64    timeCreated,
     22:optional i64    timeUpdated,
@@ -123,7 +121,8 @@ struct TCarView {
   3: optional string districtName,
   4: optional string provinceName,
   5: optional string ownerName,
-  6: optional string thumbnailUrl,
+  6: optional string publicId,
+  7: optional string imageUrl,
 }
 
 struct TCarFeatureView {
@@ -146,6 +145,12 @@ struct TCarImageResult {
     1:required i32     error,
     2:required string  message,
     3:optional TCarImage value,
+}
+
+struct TCarImagePublicIdResult {
+    1:required i32     error,
+    2:required string  message,
+    3:optional list<string> publicIds,
 }
 
 struct TListCarImageResult {
@@ -403,6 +408,12 @@ struct TUserResult {
     3:optional TUser value,
 }
 
+struct TListUserResult {
+    1:required i32   error,
+    2:required string message,
+    3:optional list<TUser> value,
+}
+
 struct TUserPwdResult {
     1:required i32   error,
     2:required string message,
@@ -437,6 +448,7 @@ struct TSessionResult {
 struct TRole {
     1:optional i32 roleId, 
     2:optional string name,
+    3:optional string displayName,
 }
 
 struct TRoleResult {

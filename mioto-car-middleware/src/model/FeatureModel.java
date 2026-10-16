@@ -20,7 +20,7 @@ import thrift.TListFeatureResult;
  * @author tuanlee
  */
 public class FeatureModel {
-        private static final Logger _Logger = Logger.getLogger(FeatureModel.class);
+    private static final Logger _Logger = Logger.getLogger(FeatureModel.class);
     
     public static final FeatureModel Instance = new FeatureModel();
     private final FeatureDao _dao = new FeatureDao("mioto");
