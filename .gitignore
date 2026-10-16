@@ -23,3 +23,9 @@ conf/production.ini
 conf/*.local.ini
 *.pem
 *.key
+/mioto-car-middleware/JavaApplication7/nbproject/private/
+/mioto-car-middleware/nbproject/private/
+/mioto-car-webservice/nbproject/private/
+
+**/conf/development.ini
+**/conf/development.log4j.ini
