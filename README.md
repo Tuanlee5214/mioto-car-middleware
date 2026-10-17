@@ -1,6 +1,6 @@
 # mioto-car-middleware
 
-Service xử lý business logic của Mioto Car, expose ra ngoài qua Thrift (không phải REST). Đây là chỗ duy nhất trong hệ thống được phép chạm vào MySQL - webservice hay bất kỳ client nào khác đều phải đi qua Thrift client, không query DB trực tiếp.
+Service nghiệp vụ của Mioto Car - chạy Thrift server chứ không phải REST. Đây là chỗ duy nhất được chạm vào MySQL, service khác như `mioto-car-webservice` muốn lấy dữ liệu đều phải gọi qua Thrift, không được query thẳng vào DB.
 
 ## Luồng chạy
 
@@ -11,7 +11,7 @@ Thrift client (webservice...)
 ThriftServer (TThreadPoolServer)
       │
 CarServiceHandler implements MiotoCarService.Iface
-      │  (mọi method catch Exception, log lại, trả Err.FAIL - không bao giờ ném raw exception ra ngoài)
+      │   (mọi method catch Exception, log lại, trả Err.FAIL - không ném raw exception ra ngoài)
       ▼
 *Model (nghiệp vụ, cache, check cross-entity)
       │
@@ -20,22 +20,19 @@ CarServiceHandler implements MiotoCarService.Iface
 MysqlClient → SimpleConnectionPool → MySQL
 ```
 
-Vài chỗ đáng nói:
+`SimpleConnectionPool` (`src/db/`) là connection pool tự viết, có timeout khi hết slot, claim slot trước khi mở connection thật để không giữ lock lúc đang làm I/O, tự bỏ connection chết. Có test stress nhiều thread trong `test/db/SimpleConnectionPoolTest.java`.
 
-- `SimpleConnectionPool` (`src/db/`) là connection pool tự viết, có timeout khi hết slot, claim slot trước khi mở connection thật để không giữ lock lúc đang làm I/O, tự bỏ connection chết. Có test stress nhiều thread trong `test/db/SimpleConnectionPoolTest.java`.
-- `SimpleCache<K,V>` (`src/cache/`) là cache LRU + TTL in-memory, dùng ở tầng Model cho mấy entity đọc nhiều ghi ít kiểu voucher, fee-policy, car-unavail.
-- `genjava/` là code Thrift tự generate, đừng sửa tay trong đó - muốn đổi API thì sửa file `.thrift` rồi generate lại.
+`SimpleCache<K,V>` (`src/cache/`) là cache LRU + TTL in-memory, dùng ở tầng Model cho mấy entity đọc nhiều ghi ít kiểu voucher, fee-policy, car-unavail.
+
+`genjava/` là code Thrift tự generate, đừng sửa tay trong đó - muốn đổi API thì sửa file `.thrift` rồi generate lại.
 
 ## Cần gì để chạy
 
-- JDK 8+
-- MySQL với schema đã tạo sẵn
-- Thrift compiler nếu cần regenerate code sau khi sửa `.thrift`
-- Project dùng NetBeans (`nbproject/`) nhưng build bằng `ant` được luôn, không cần mở IDE
+Cần JDK 8 trở lên, MySQL đã tạo sẵn schema, và Thrift compiler nếu có sửa file `.thrift`. Project tạo bằng NetBeans nhưng build bằng `ant` là đủ, không cần mở IDE.
 
 ## Config
 
-Repo hiện chưa có sẵn `conf/`, cần tự tạo 2 file trước khi chạy.
+Repo chưa có sẵn `conf/`, cần tự tạo 2 file trước khi chạy.
 
 `conf/development.log4j.ini`:
 ```ini
@@ -45,7 +42,7 @@ log4j.appender.STDOUT.layout=org.apache.log4j.PatternLayout
 log4j.appender.STDOUT.layout.ConversionPattern=%5p [%t] %d{HH:mm:ss} %C{1}:%L - %m%n
 ```
 
-`conf/development.ini` (format `[Class@name]`, đọc bởi `util.Config`):
+`conf/development.ini`:
 ```ini
 [SimpleConnectionPool@mioto]
 driver=com.mysql.cj.jdbc.Driver
@@ -70,7 +67,7 @@ port=10101
 num-thread=4
 ```
 
-Lưu ý: TTL của `SimpleCache@ratelimit` nên >= window dùng trong `RateLimiter.allow()` bên webservice, không thì counter bị cache tự xoá trước khi window kết thúc, rate limit coi như reset sớm.
+TTL của `SimpleCache@ratelimit` nên để lớn hơn hoặc bằng window mà `RateLimiter.allow()` bên webservice dùng, không thì counter bị cache tự xoá trước khi hết window, coi như rate limit reset sớm hơn dự tính.
 
 ## Chạy
 
@@ -79,7 +76,7 @@ ant build
 java -cp "build/classes:lib/*" -Dappenv=development -Dconf=conf app.EServiceDeamon
 ```
 
-Mặc định lắng nghe port 10101, `TBinaryProtocol` + `TThreadPoolServer`.
+Mặc định port 10101, `TBinaryProtocol` + `TThreadPoolServer`.
 
 ## Cấu trúc
 
@@ -100,6 +97,8 @@ thrift/             # file .thrift, nguồn chân lý của API
 
 ## Đang biết nhưng chưa sửa
 
-- `PwdUtil.hash()` dùng SHA-256 + salt, chưa có work factor nên vẫn yếu trước brute-force GPU dù đã salt. Nên đổi sang BCrypt/Argon2.
-- Rate limit phụ thuộc TTL của cache phải khớp với window truyền vào `allow()` - hai cái này đang cấu hình độc lập, dễ lệch khi sửa config mà quên sửa cả hai.
-- Chưa check overlap thời gian khi tạo `CarUnavails` mới cho cùng một xe.
+`PwdUtil.hash()` dùng SHA-256 + salt, chưa có work factor nên vẫn yếu trước brute-force GPU dù đã salt. Nên đổi sang BCrypt hoặc Argon2.
+
+Rate limit phụ thuộc TTL của cache phải khớp với window truyền vào `allow()` - hai cái này đang cấu hình độc lập, dễ lệch nhau khi sửa config mà quên sửa cả hai.
+
+Chưa có check overlap thời gian khi tạo `CarUnavails` mới cho cùng một xe.
